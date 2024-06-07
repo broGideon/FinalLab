@@ -1,0 +1,31 @@
+﻿<Window x:Class="FinalLab.View.PatientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        WindowStyle="None" 
+        Height="450"
+        Width="800">
+    <Grid>
+        <Border Background="Transparent" Height="30" VerticalAlignment="Top" MouseLeftButtonDown="MoveWindow">
+            <Grid>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <ui:Button Style="{DynamicResource ButtonBar}" Width="30" Click="RollUpButton_Click">
+                        <ui:SymbolIcon Symbol="LineHorizontal120"/>
+                    </ui:Button>
+                    <ui:Button Style="{DynamicResource ButtonBar}" Width="30" Click="UnwrapButton_Click">
+                        <ui:SymbolIcon Symbol="Maximize20"/>
+                    </ui:Button>
+                    <ui:Button Style="{DynamicResource CloseButton}" Width="30" Click="CloseButton_Click">
+                        <ui:SymbolIcon Symbol="Dismiss48"/>
+                    </ui:Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Margin="0,30,0,0">
+                        
+        </Grid>
+    </Grid>
+</Window>
