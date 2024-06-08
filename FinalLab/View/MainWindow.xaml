@@ -9,23 +9,27 @@
         Height="450"
         Width="800">
         <Grid>
-                <Border Background="Transparent" Height="30" VerticalAlignment="Top" MouseLeftButtonDown="MoveWindow">
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
                         <Grid>
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                                        <ui:Button Style="{DynamicResource ButtonBar}" Width="30" Click="RollUpButton_Click">
+                                        <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
                                                 <ui:SymbolIcon Symbol="LineHorizontal120"/>
                                         </ui:Button>
-                                        <ui:Button Style="{DynamicResource ButtonBar}" Width="30" Click="UnwrapButton_Click">
+                                        <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
                                                 <ui:SymbolIcon Symbol="Maximize20"/>
                                         </ui:Button>
-                                        <ui:Button Style="{DynamicResource CloseButton}" Width="30" Click="CloseButton_Click">
+                                        <ui:Button Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
                                                 <ui:SymbolIcon Symbol="Dismiss48"/>
                                         </ui:Button>
                                 </StackPanel>
                         </Grid>
                 </Border>
-                <Grid Margin="0,30,0,0">
-                        
+                <Grid Grid.Row="1">
+                        <!--Здесь вся верстка-->
                 </Grid>
         </Grid>
 </Window>
