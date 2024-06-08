@@ -6,6 +6,8 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         WindowStyle="None" 
+        AllowsTransparency="True"
+        Background="{DynamicResource PrimaryBackground}"
         Height="450"
         Width="800">
     <Grid>

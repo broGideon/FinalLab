@@ -8,7 +8,7 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        Theme = Settings.Default.Theme;
+        //Theme = Settings.Default.Theme;
     }
 
     private static string _theme;
