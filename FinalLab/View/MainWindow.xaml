@@ -29,8 +29,9 @@
                                 </StackPanel>
                         </Grid>
                 </Border>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Background="{DynamicResource PrimaryBackground}">
                         <!--Здесь вся верстка-->
+                        <ComboBox Style="{DynamicResource ClearComboBoxStyle}"></ComboBox>
                 </Grid>
         </Grid>
 </Window>
