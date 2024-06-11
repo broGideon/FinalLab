@@ -7,13 +7,15 @@ namespace FinalLab.View;
 public partial class DoctorWindow : Window
 {
     private DoctorViewModel _viewModel;
+
     public DoctorWindow()
     {
         InitializeComponent();
         _viewModel = new DoctorViewModel();
         DataContext = _viewModel;
+
     }
-    
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Close();
