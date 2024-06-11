@@ -36,4 +36,9 @@ public partial class AdministratorWindow : Window
     {
         WindowState = WindowState.Minimized;
     }
+
+    private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    {
+
+    }
 }
