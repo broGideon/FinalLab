@@ -11,7 +11,7 @@ public static class ApiHelper
 {
     private static string _url = "http://93.185.159.39:5000/api";
     
-    public static T? Get<T>(string model, int id = 0) 
+    public static T? Get<T>(string model, long id = 0) 
     {
         HttpClient client = new HttpClient();
         string request = id == 0 ? $"{model}" : $"{model}/{id}";
