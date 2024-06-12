@@ -38,19 +38,3 @@ public partial class MainWindow : Window
         WindowState = WindowState.Minimized;
     }
 }
-
-public class TextBox : System.Windows.Controls.TextBox
-{
-    public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
-        nameof(PlaceholderText),
-        typeof(string),
-        typeof(TextBox),
-        new PropertyMetadata(string.Empty)
-        );
-    
-    public string PlaceholderText
-    {
-        get => (string)GetValue(PlaceholderTextProperty);
-        set => SetValue(PlaceholderTextProperty, value);
-    }
-}

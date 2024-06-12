@@ -25,7 +25,6 @@ public partial class App : Application
             Current.Resources.MergedDictionaries.Insert(0, dick);
 
             Settings.Default.Theme = value;
-            App.Theme = "Dark";
             Settings.Default.Save();
         }
     }
