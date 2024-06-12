@@ -4,9 +4,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:FinalLab.View.Pages"
+       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
-      Title="AuthorizationDoctorPage" Height="450" Width="800">
+      Title="MainWindow" Height="220" Width="400"  Background="{DynamicResource PrimaryBackground}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0" Fill="{DynamicResource Focusing}" Margin="0,0,0,110" Grid.RowSpan="2"/>
+        <ui:Button Margin="10,154,219,0" Grid.Row="1" VerticalAlignment="Top" Width="171" Height="26" Style="{DynamicResource FocusingButton}" Content="Войти"/>
+        <ui:Button Margin="216,154,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" Height="26" Style="{DynamicResource FocusingButton}" Content="Я пациент"/>
+        <ui:PasswordBox Margin="10,119,10,47" Grid.Row="1" Style="{DynamicResource ClearTextbox}" PlaceholderText="Пароль"/>
+        <TextBlock Margin="174,4,174,144" Background="{DynamicResource Focusing}"  TextAlignment="Center" Text="ЕМИАС" Grid.Row="1" Foreground="{DynamicResource PrimaryBackground}"/>
+        <TextBlock Margin="46,25,46,110" Grid.Row="1" TextWrapping="Wrap"  Background="{DynamicResource Focusing}" TextAlignment="Center" Text="Единая медицинская информационно-аналитическая система" Foreground="{DynamicResource PrimaryBackground}"/>
+        <ui:TextBox Margin="10,90,10,76" Grid.Row="1" Style="{DynamicResource ClearTextbox}" PlaceholderText="Номер сотрудника"/>
+
+
+
     </Grid>
 </Page>
