@@ -7,30 +7,113 @@
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True"
-        Height="450"
-        Width="800">
+        Height="600"
+        Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-            <Grid>
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
-                        <ui:SymbolIcon Symbol="LineHorizontal120"/>
-                    </ui:Button>
-                    <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
-                        <ui:SymbolIcon Symbol="Maximize20"/>
-                    </ui:Button>
-                    <ui:Button Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
-                        <ui:SymbolIcon Symbol="Dismiss48"/>
-                    </ui:Button>
-                </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="293"/>
+                <ColumnDefinition  Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.Column="1" Background="Transparent" MouseLeftButtonDown="MoveWindow">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
+                            <ui:SymbolIcon Symbol="LineHorizontal120"/>
+                        </ui:Button>
+                        <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
+                            <ui:SymbolIcon Symbol="Maximize20"/>
+                        </ui:Button>
+                        <ui:Button Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
+                            <ui:SymbolIcon Symbol="Dismiss48"/>
+                        </ui:Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="0" Background="{DynamicResource Focusing}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text=" ЕМИАС" Foreground="{DynamicResource PrimaryBackground }" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Grid.Column="1" Text="в. 1.0 " Foreground="{DynamicResource PrimaryBackground }" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" Width="56" FontWeight="Bold"/>
+
             </Grid>
-        </Border>
+        </Grid>
+       
         <Grid Grid.Row="1">
-            <!--Здесь вся верстка-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <TreeView  Grid.Column="0"  Background="{DynamicResource Focusing}">
+                <TreeViewItem Header="Главная" Foreground="{DynamicResource PrimaryBackground }">
+                    <TreeViewItem Header="Записи и направления" />
+                    <TreeViewItem Header="Рецепты" />
+                    <TreeViewItem Header="Диспансеризация" />
+                </TreeViewItem>
+                <TreeViewItem Header="Медкарта" Foreground="{DynamicResource PrimaryBackground }">
+                    <TreeViewItem Header="Приёмы" />
+                    <TreeViewItem Header="Анализы" />
+                    <TreeViewItem Header="Исследования" />
+                </TreeViewItem>
+            </TreeView>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" Text="   Запись" Foreground="{DynamicResource PrimaryForeground}"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1" Background="#FFD9D9D9">
+                    <ListBox/>
+                </ScrollViewer>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Действующие записи" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="23" Foreground="{DynamicResource PrimaryForeground }"/>
+                    <TextBlock Grid.Column="1" Text="Записи с:" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Column="2" Text="Записи по:" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="2" Margin="0,0,10,0"/>
+                </Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="3" Background="#FFD9D9D9">
+                    <ListBox/>
+                </ScrollViewer>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Архивные записи    " VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="23" Foreground="{DynamicResource PrimaryForeground }"/>
+                    <TextBlock Grid.Column="1" Text="Записи с:" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Column="2" Text="Записи по:" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="2" Margin="0,0,10,0"/>
+                </Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="5" Background="#FFD9D9D9">
+                    <ListBox/>
+                </ScrollViewer>
+                <ui:Button Grid.Row="6" Height="40" Style="{DynamicResource FocusingButton}">
+                    <ui:Button.Content>
+                        <TextBlock FontSize="24">Записаться на прием</TextBlock>
+                    </ui:Button.Content>
+                </ui:Button>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
