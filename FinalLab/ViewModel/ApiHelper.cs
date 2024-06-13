@@ -20,7 +20,7 @@ public static class ApiHelper
         return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
     }
     
-    public static bool Put(string json, string model, int id)
+    public static bool Put(string json, string model, long id)
     {
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
@@ -38,7 +38,7 @@ public static class ApiHelper
         else return false;
     }
 
-    public static bool Delete(string model, int id)
+    public static bool Delete(string model, long id)
     {
         HttpClient client = new HttpClient();
         HttpResponseMessage response = client.DeleteAsync($"{_url}/{model}/{id}").Result;

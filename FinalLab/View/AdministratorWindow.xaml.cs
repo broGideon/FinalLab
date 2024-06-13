@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using FinalLab.View.Pages;
 using FinalLab.ViewModel;
 
 namespace FinalLab.View;
@@ -12,6 +14,8 @@ public partial class AdministratorWindow : Window
         InitializeComponent();
         _viewModel = new AdministratorViewModel();
         DataContext = _viewModel;
+        PageFrame.Content = new UserForm(_viewModel);
+        _viewModel.SwitchForm += (_, _) => SwitchRole();
     }
     
     private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -37,8 +41,27 @@ public partial class AdministratorWindow : Window
         WindowState = WindowState.Minimized;
     }
 
-    private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    private void SwitchRole()
     {
+        if (RoleComboBox.SelectedItem == "Пользователь")
+            PageFrame.Content = new UserForm(_viewModel);
+        else if (RoleComboBox.SelectedItem == "Доктор")
+            PageFrame.Content = new DoctorForm(_viewModel);
+        else
+            PageFrame.Content = new AdminForm(_viewModel);
+    }
 
+    private void CloseWindow(object sender, RoutedEventArgs e)
+    {
+        MainWindow window = new MainWindow();
+        Close();
+    }
+
+    private void SwitchTheme(object sender, RoutedEventArgs e)
+    {
+        if (App.Theme == "Light")
+            App.Theme = "Dark";
+        else
+            App.Theme = "Light";
     }
 }

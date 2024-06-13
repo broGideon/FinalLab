@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True"
+        ResizeMode="NoResize"
         Background="{DynamicResource Focusing}"
         WindowStartupLocation="CenterScreen"
         Height="220" 
@@ -42,10 +42,26 @@
                                         <RowDefinition Height="25"/>
                                         <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" TextAlignment="Center" Text="ЕМИАС" Foreground="#FFFFFF" FontFamily="{StaticResource Inter}" FontSize="20" FontWeight="Bold"/>
-                                <TextBlock Grid.Row="1" Margin="20, 0" TextWrapping="Wrap" TextAlignment="Center" Text="Единая медицинская информационно-аналитическая система" Foreground="#FFFFFF" FontFamily="{StaticResource Inter}" FontSize="16"/>
+                                <TextBlock Grid.Row="0" 
+                                           TextAlignment="Center" 
+                                           Text="ЕМИАС" 
+                                           Foreground="#FFFFFF" 
+                                           FontFamily="{StaticResource Inter}" 
+                                           FontSize="20" FontWeight="Bold"/>
+                                <TextBlock 
+                                        Grid.Row="1" 
+                                        Margin="20, 0" 
+                                        TextWrapping="Wrap" 
+                                        TextAlignment="Center" 
+                                        Text="Единая медицинская информационно-аналитическая система" 
+                                        Foreground="#FFFFFF" 
+                                        FontFamily="{StaticResource Inter}" 
+                                        FontSize="16"/>
                         </Grid>
-                        <Frame Grid.Row="1" x:Name="PageFrame"/>
+                        <Frame 
+                                Grid.Row="1" 
+                                x:Name="PageFrame" 
+                                Background="{DynamicResource PrimaryBackground}"/>
                 </Grid>
         </Grid>
 </Window>
