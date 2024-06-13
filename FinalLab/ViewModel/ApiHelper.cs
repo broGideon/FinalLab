@@ -20,29 +20,29 @@ public static class ApiHelper
         return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
     }
     
-    public static T? Put<T>(string json, string model, int id)
+    public static bool Put(string json, string model, int id)
     {
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PutAsync($"{_url}/{model}/{id}", body).Result;
-        if (response.StatusCode != HttpStatusCode.OK) return default;
-        return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+        if (response.StatusCode == HttpStatusCode.Created) return true;
+        else return false;
     }
 
-    public static T? Post<T>(string json, string model)
+    public static bool Post(string json, string model)
     {
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PostAsync($"{_url}/{model}", body).Result;
-        if (response.StatusCode != HttpStatusCode.OK) return default;
-        return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+        if (response.StatusCode == HttpStatusCode.NoContent) return true;
+        else return false;
     }
 
-    public static T? Delete<T>(string model, int id)
+    public static bool Delete(string model, int id)
     {
         HttpClient client = new HttpClient();
         HttpResponseMessage response = client.DeleteAsync($"{_url}/{model}/{id}").Result;
-        if (response.StatusCode != HttpStatusCode.OK) return default;
-        return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+        if (response.StatusCode == HttpStatusCode.NoContent) return true;
+        else return false;
     }
 }

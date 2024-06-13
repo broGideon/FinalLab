@@ -5,23 +5,62 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:FinalLab.View.Pages"
        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      mc:Ignorable="d"
-      Title="MainWindow" Height="220" Width="400"  Background="{DynamicResource PrimaryBackground}">
+       xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+       mc:Ignorable="d"
+      Title="MainWindow" 
+      Height="Auto" 
+      Width="Auto"  
+      Background="{DynamicResource PrimaryBackground}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="26"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Rectangle Grid.Row="0" Fill="{DynamicResource Focusing}" Margin="0,0,0,110" Grid.RowSpan="2"/>
-        <ui:Button Margin="10,154,219,0" Grid.Row="1" VerticalAlignment="Top" Width="171" Height="26" Style="{DynamicResource FocusingButton}" Content="Войти"/>
-        <ui:Button Margin="216,154,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" Height="26" Style="{DynamicResource FocusingButton}" Content="Я пациент"/>
-        <ui:PasswordBox Margin="10,119,10,47" Grid.Row="1" Style="{DynamicResource ClearTextbox}" PlaceholderText="Пароль"/>
-        <TextBlock Margin="174,4,174,144" Background="{DynamicResource Focusing}"  TextAlignment="Center" Text="ЕМИАС" Grid.Row="1" Foreground="{DynamicResource PrimaryBackground}"/>
-        <TextBlock Margin="46,25,46,110" Grid.Row="1" TextWrapping="Wrap"  Background="{DynamicResource Focusing}" TextAlignment="Center" Text="Единая медицинская информационно-аналитическая система" Foreground="{DynamicResource PrimaryBackground}"/>
-        <ui:TextBox Margin="10,90,10,76" Grid.Row="1" Style="{DynamicResource ClearTextbox}" PlaceholderText="Номер сотрудника"/>
-
-
-
+        <ui:TextBox 
+            Grid.Row="1" 
+            Margin="15, 0" 
+            Foreground="{DynamicResource PrimaryForeground}" 
+            Style="{DynamicResource ClearTextbox}" 
+            PlaceholderText="Номер сотрудника" 
+            FontFamily="{StaticResource Inter}"
+            Text="{Binding Login}"/>
+        <ui:PasswordBox Grid.Row="3" Margin="15, 0" Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ClearTextbox}" PlaceholderText="Пароль" FontFamily="{StaticResource Inter}">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="PasswordChanged">
+                    <b:CallMethodAction
+                        TargetObject="{Binding}"
+                        MethodName="PasswordChanged"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </ui:PasswordBox>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ui:Button Grid.Column="0"  Width="177"  Style="{DynamicResource FocusingButton}" Content="Войти" FontSize="14" FontFamily="{StaticResource Inter}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:CallMethodAction
+                            TargetObject="{Binding}"
+                            MethodName="AuthPersonal"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ui:Button>
+            <ui:Button Grid.Column="1" Width="177" Style="{DynamicResource FocusingButton}" Content="Я пациент" FontSize="14" FontFamily="{StaticResource Inter}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Click">
+                        <b:CallMethodAction
+                            TargetObject="{Binding}"
+                            MethodName="SwitchPageMethod"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ui:Button>
+        </Grid> 
     </Grid>
 </Page>

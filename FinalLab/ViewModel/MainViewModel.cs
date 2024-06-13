@@ -2,6 +2,7 @@
 using FinalLab.Model;
 using SecondLibPractice;
 using Wpf.Ui.Controls;
+using MessageBox = System.Windows.MessageBox;
 
 namespace FinalLab.ViewModel;
 
@@ -12,6 +13,7 @@ public class MainViewModel : BindingHelper
     public event EventHandler OpenClientWindow; 
     public event EventHandler OpenDoctorWindow; 
     public event EventHandler OpenAdminWindow; 
+    public event EventHandler SwitchPage; 
     
     private string _password;
 
@@ -88,5 +90,10 @@ public class MainViewModel : BindingHelper
         }
 
         Error = "Такаго аккаунта нет";
+    }
+
+    public void SwitchPageMethod()
+    {
+        SwitchPage(this, EventArgs.Empty);
     }
 }
