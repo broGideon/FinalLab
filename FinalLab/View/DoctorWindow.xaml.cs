@@ -22,7 +22,10 @@ public partial class DoctorWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        DragMove();
+        if (e.LeftButton == MouseButtonState.Pressed)
+        {
+            this.DragMove();
+        }
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -36,5 +39,20 @@ public partial class DoctorWindow : Window
     private void RollUpButton_Click(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
+    }
+
+    private void SwitchTheme(object sender, RoutedEventArgs e)
+    {
+        if (App.Theme == "Dark")
+            App.Theme = "Light";
+        else
+            App.Theme = "Dark";
+    }
+
+    private void CloseWindow(object sender, RoutedEventArgs e)
+    {
+        MainWindow window = new MainWindow();
+        window.Show();
+        Close();
     }
 }

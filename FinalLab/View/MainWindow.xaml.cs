@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using FinalLab.Model;
 using FinalLab.View;
+using FinalLab.View.Pages;
 using FinalLab.ViewModel;
 using Spire.Pdf.Exporting.XPS.Schema;
 using Wpf.Ui.Controls;
@@ -15,9 +17,12 @@ public partial class MainWindow : Window
         InitializeComponent();
         _viewModel = new MainViewModel();
         DataContext = _viewModel;
+        PageFrame.Content = new AuthorizationClientPage(_viewModel);
         _viewModel.OpenAdminWindow += (_, _) => OpenAdmin();
         _viewModel.OpenClientWindow += (_, _) => OpenPatient();
         _viewModel.OpenDoctorWindow += (_, _) => OpenDoctor();
+        _viewModel.SwitchPage += (_, _) => SwithPage();
+        _viewModel.SwitchPage += (_, _) => BeginAnimation();
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -27,7 +32,10 @@ public partial class MainWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        DragMove();
+        if (e.LeftButton == MouseButtonState.Pressed)
+        {
+            this.DragMove();
+        }
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -63,4 +71,22 @@ public partial class MainWindow : Window
         window.Show();
         Close();
     }
+
+    private void SwithPage()
+    {
+        if (PageFrame.Content.GetType() == typeof(AuthorizationClientPage))
+            PageFrame.Content = new AuthorizationDoctorPage(_viewModel);
+        else
+            PageFrame.Content = new AuthorizationClientPage(_viewModel);
+    }
+    
+    private void BeginAnimation()
+    {
+        var opacityAnim = new DoubleAnimation();
+        opacityAnim.From = 0;
+        opacityAnim.To = 1;
+        opacityAnim.Duration = TimeSpan.FromSeconds(0.5);
+        PageFrame.BeginAnimation(OpacityProperty, opacityAnim);
+    }
+
 }

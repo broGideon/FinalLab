@@ -4,26 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True"
-        Height="450"
-        Width="800">
-        <Window.Resources>
-        </Window.Resources>
+        ResizeMode="NoResize"
+        Background="{DynamicResource Focusing}"
+        WindowStartupLocation="CenterScreen"
+        Height="220" 
+        Width="400">
         <Grid>
                 <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
+                <Border Grid.Row="0" BorderThickness="0" Background="{StaticResource Focusing}" MouseLeftButtonDown="MoveWindow">
                         <Grid>
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                         <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
                                                 <ui:SymbolIcon Symbol="LineHorizontal120"/>
                                         </ui:Button>
-                                        <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
+                                        <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click" Background="Transparent" IsEnabled="False">
                                                 <ui:SymbolIcon Symbol="Maximize20"/>
                                         </ui:Button>
                                         <ui:Button Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
@@ -33,7 +33,35 @@
                         </Grid>
                 </Border>
                 <Grid Grid.Row="1">
-                        <!--Здесь вся верстка-->
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="75"/>
+                                <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" 
+                                           TextAlignment="Center" 
+                                           Text="ЕМИАС" 
+                                           Foreground="#FFFFFF" 
+                                           FontFamily="{StaticResource Inter}" 
+                                           FontSize="20" FontWeight="Bold"/>
+                                <TextBlock 
+                                        Grid.Row="1" 
+                                        Margin="20, 0" 
+                                        TextWrapping="Wrap" 
+                                        TextAlignment="Center" 
+                                        Text="Единая медицинская информационно-аналитическая система" 
+                                        Foreground="#FFFFFF" 
+                                        FontFamily="{StaticResource Inter}" 
+                                        FontSize="16"/>
+                        </Grid>
+                        <Frame 
+                                Grid.Row="1" 
+                                x:Name="PageFrame" 
+                                Background="{DynamicResource PrimaryBackground}"/>
                 </Grid>
         </Grid>
 </Window>

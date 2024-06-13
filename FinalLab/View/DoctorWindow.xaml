@@ -7,18 +7,33 @@
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True"
+        ResizeMode="CanResize"
         Height="1350"
         Width="800">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="0"
+            ResizeBorderThickness="5"
+            GlassFrameThickness="0"
+            CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-            <Grid>
-                <TextBlock HorizontalAlignment="Left" Width="350">
-
-                </TextBlock>
+            <Grid Background="{DynamicResource Focusing}">
+                <Grid HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ЕМИАС — Администратор" VerticalAlignment="Center" Foreground="#FFFFFF" FontWeight="Bold" Margin="6, 0"/>
+                    <ui:Button Style="{StaticResource ButtonBar}" Grid.Column="1" Click="SwitchTheme">
+                        <ui:SymbolIcon Symbol="WeatherMoon28"/>
+                    </ui:Button>
+                </Grid>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
                         <ui:SymbolIcon Symbol="LineHorizontal120"/>
@@ -32,22 +47,22 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{DynamicResource PrimaryBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Background="{DynamicResource SecondaryBackground}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="26*"/>
                     <RowDefinition Height="21*"/>
                 </Grid.RowDefinitions>
-                <DatePicker Background="#FFD9D9D9" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Style="{DynamicResource ClearDatePicker}"/>
+                <DatePicker VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Style="{DynamicResource ClearDatePicker}"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1" Background="#FFD9D9D9">
                     <ListBox/>
                 </ScrollViewer>
-                <ui:Button Grid.Column="0" Grid.Row="2" Height="30" VerticalAlignment="Top" Style="{DynamicResource AttentionButton}" Click="CloseButton_Click">
+                <ui:Button Grid.Column="0" Grid.Row="2" Height="30" VerticalAlignment="Top" Style="{DynamicResource AttentionButton}" Click="CloseWindow">
                     <ui:Button.Content>
                         Выйти из аккаунта
                     </ui:Button.Content>
@@ -118,7 +133,7 @@
                     <CheckBox Grid.Column="0"/>
                     <TextBlock Grid.Column="1" Text="Анализ:" VerticalAlignment="Center"/>
                 </Grid>
-                <RichTextBox Grid.Row="15">
+                <RichTextBox Grid.Row="15" Background="{DynamicResource PrimaryBackground}" Foreground="{DynamicResource PrimaryForeground}">
                 </RichTextBox>
                 <Grid Grid.Row="16">
                     <Grid.ColumnDefinitions>

@@ -4,11 +4,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStyle="None" 
         AllowsTransparency="True"
+        ResizeMode="CanResize"
+        Background="{DynamicResource PrimaryBackground}"
         Height="450"
-        Width="800">
+        Width="970">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="0"
+            ResizeBorderThickness="5"
+            GlassFrameThickness="0"
+            CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,6 +26,16 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
             <Grid Background="{DynamicResource Focusing}">
+                <Grid HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ЕМИАС — Администратор" VerticalAlignment="Center" Foreground="#FFFFFF" FontWeight="Bold" Margin="6, 0"/>
+                    <ui:Button Style="{StaticResource ButtonBar}" Grid.Column="1" Click="SwitchTheme">
+                        <ui:SymbolIcon Symbol="WeatherMoon28"/>
+                    </ui:Button>
+                </Grid>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
                         <ui:SymbolIcon Symbol="LineHorizontal120"/>
@@ -29,45 +49,78 @@
                 </StackPanel>
             </Grid>
         </Border>
+        
         <Grid Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid MinHeight="420" MinWidth="970">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.7*"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid FontFamily="{StaticResource Inter}" Grid.Column="0" IsReadOnly="True" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryForeground}"  ItemsSource="{Binding Obj}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <b:CallMethodAction
+                                    TargetObject="{Binding}"
+                                    MethodName="SelectionDataGrid"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </DataGrid>
 
-                <DataGrid Background="{DynamicResource SecondaryBackground}" Margin="0,10,0,0" Grid.Column="0"/>
+                    <Grid Grid.Column="1" Margin="5,9,5,6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                <Grid Grid.Column="1" Margin="10,10,10,10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                        <ComboBox x:Name="RoleComboBox" FontFamily="{StaticResource Inter}" Grid.Row="0" ItemsSource="{Binding Items}" Style="{DynamicResource ClearComboBoxStyle}" Margin="0,0,0,2" SelectedItem="{Binding SelectedRole}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="SelectionChanged">
+                                    <b:CallMethodAction
+                                        TargetObject="{Binding}"
+                                        MethodName="SelectionRole"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </ComboBox>
+                        <Rectangle Fill="{DynamicResource Focusing}" Height="1" Margin="10,3,10,3" HorizontalAlignment="Stretch" Grid.Row="1"/>
+                        <Frame x:Name="PageFrame" Grid.Row="2"/>
 
-                    <ComboBox BorderBrush="DarkGray" Style="{DynamicResource ClearComboBoxStyle}" Margin="0,0,0,2" HorizontalAlignment="Stretch" Text="Роль пользователя"/>
-                    <Rectangle Fill="{DynamicResource Focusing}" Height="1" Margin="0,0,0,2" HorizontalAlignment="Stretch" Grid.Row="1"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Номер полиса" Margin="0,0,0,5" HorizontalAlignment="Stretch" Grid.Row="2"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Фамилия" Margin="0,0,0,5" Grid.Row="3"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Имя" Margin="0,0,0,5" Grid.Row="4"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Отчество" Margin="0,0,0,5" Grid.Row="5"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Дата рождения" Margin="0,0,0,5" Grid.Row="6"/>
-                    <ui:TextBox BorderBrush="DarkGray" Style="{DynamicResource ClearTextbox}" PlaceholderText="Адрес прописки" Margin="0,0,0,60" Grid.Row="7"/>
-
-                    <StackPanel Orientation="Vertical" Grid.Row="8">
-                        <Button Margin="0,0,0,5" VerticalAlignment="Top" Height="30" Width="246" Background="{DynamicResource Attention}" Content="Добавить запись" Foreground="White" />
-                        <Button Margin="0,0,0,5" VerticalAlignment="Top" Height="30" Width="246" Background="{DynamicResource ResourceKey=Focusing}" Content="Изменить запись" Foreground="White"/>
-                        <Button Margin="0,0,0,5" VerticalAlignment="Top" Height="30" Width="246" Background="{DynamicResource ResourceKey=Focusing}" Content="Удалить запись" Foreground="White"/>
-                        <Button Margin="0,0,0,0" VerticalAlignment="Top" Height="30" Width="246" Background="{DynamicResource ResourceKey=Focusing}" Content="Выйти из аккаунта" Foreground="White"/>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="4">
+                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Padding="0, 10"  Margin="0,0,0,5" Content="Добавить запись">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction
+                                            TargetObject="{Binding}"
+                                            MethodName="Add"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </ui:Button>
+                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Margin="0,0,0,5" Content="Изменить запись">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction
+                                            TargetObject="{Binding}"
+                                            MethodName="Update"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </ui:Button>
+                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Margin="0,0,0,5" Content="Удалить запись">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Click">
+                                        <b:CallMethodAction
+                                            TargetObject="{Binding}"
+                                            MethodName="Delete"/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </ui:Button>
+                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource AttentionButton}"  Click="CloseWindow" Content="Выйти из аккаунта"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
