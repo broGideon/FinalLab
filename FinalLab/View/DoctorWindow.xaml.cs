@@ -13,7 +13,6 @@ public partial class DoctorWindow : Window
         InitializeComponent();
         _viewModel = new DoctorViewModel();
         DataContext = _viewModel;
-
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)
