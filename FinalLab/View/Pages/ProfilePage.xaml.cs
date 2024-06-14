@@ -4,9 +4,9 @@ using FinalLab.ViewModel;
 
 namespace FinalLab.View.Pages;
 
-public partial class SettingsPage
+public partial class ProfilePage
 {
-    public SettingsPage(PatientViewModel viewModel)
+    public ProfilePage(PatientViewModel viewModel)
     {
         InitializeComponent();
         DataContext = viewModel;

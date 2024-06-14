@@ -24,7 +24,7 @@ public partial class PatientWindow : Window
 
     private void OpenSettings(object sender, RoutedEventArgs e)
     {
-        PageFrame.Content = new SettingsPage(_viewModel);
+        PageFrame.Content = new ProfilePage(_viewModel);
     }
 
     private void OpenHomePatient(object sender, MouseButtonEventArgs e)
@@ -34,16 +34,16 @@ public partial class PatientWindow : Window
 
     private void OpenAppointments(object sender, MouseButtonEventArgs e)
     {
-        //PageFrame.Content = new
+        PageFrame.Content = new AppointmentPage();
     }
 
     private void OpenAnalyzes(object sender, MouseButtonEventArgs e)
     {
-        //PageFrame.Content = new
+        PageFrame.Content = new AnalyzePage();
     }
 
     private void OpenResearches(object sender, MouseButtonEventArgs e)
     {
-        //PageFrame.Content = new
+        PageFrame.Content = new ResearchePage();
     }
 }
