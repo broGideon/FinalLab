@@ -16,31 +16,34 @@ public partial class PatientWindow : Window
         DataContext = _viewModel;
         PageFrame.Content = new HomePatientPage(_viewModel);
     }
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
         DragMove();
     }
 
-    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (WindowState == WindowState.Normal)
-            WindowState = WindowState.Maximized;
-        else
-            WindowState = WindowState.Normal;
-    }
-
-    private void RollUpButton_Click(object sender, RoutedEventArgs e)
-    {
-        WindowState = WindowState.Minimized;
-    }
-
     private void OpenSettings(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        PageFrame.Content = new SettingsPage(_viewModel);
+    }
+
+    private void OpenHomePatient(object sender, MouseButtonEventArgs e)
+    {
+        PageFrame.Content = new HomePatientPage(_viewModel);
+    }
+
+    private void OpenAppointments(object sender, MouseButtonEventArgs e)
+    {
+        //PageFrame.Content = new
+    }
+
+    private void OpenAnalyzes(object sender, MouseButtonEventArgs e)
+    {
+        //PageFrame.Content = new
+    }
+
+    private void OpenResearches(object sender, MouseButtonEventArgs e)
+    {
+        //PageFrame.Content = new
     }
 }
