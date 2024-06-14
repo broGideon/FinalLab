@@ -1,28 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinalLab.View.Cards
 {
-    /// <summary>
-    /// Логика взаимодействия для ReferralView.xaml
-    /// </summary>
-    public partial class ReferralView : Page
+    public partial class ReferralView
     {
-        public ReferralView()
+        private string _speciality;
+        public string Speciality
+        {
+            get => _speciality;
+            set
+            {
+                _speciality = "Направление к специалисту: " + value;
+            }
+        }
+        public int IdSpeciality;
+        public event EventHandler DeleteSpeciality;
+        public ReferralView(int idSpeciality, string speciality)
         {
             InitializeComponent();
+            DataContext = this;
+            Speciality = speciality;
+
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            DeleteSpeciality(this, EventArgs.Empty);
         }
     }
 }

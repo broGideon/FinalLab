@@ -1,28 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinalLab.View.Cards
 {
-    /// <summary>
-    /// Логика взаимодействия для ClientsView.xaml
-    /// </summary>
-    public partial class ClientsView : Page
+    public partial class ClientsView
     {
-        public ClientsView()
+        public string FIO { get; set; }
+        
+        public string Time { get; set; }
+
+        public long OMS;
+
+        private event EventHandler StartReception;
+        
+        public ClientsView(string FIO, string time, long OMS)
         {
             InitializeComponent();
+            DataContext = this;
+            this.FIO = FIO;
+            Time = time;
+            this.OMS = OMS;
+        }
+
+        private void Start(object sender, RoutedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            ContainerButton.Children.Clear();
+            TextBlock textBlock = new Wpf.Ui.Controls.TextBlock();
+            textBlock.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e8eaed"));
+            textBlock.SetResourceReference(TextBlock.ForegroundProperty, "PrimaryForeground");
+            textBlock.TextAlignment = TextAlignment.Center;
+            textBlock.Text = "Запись завершена";
+            ContainerButton.ColumnDefinitions.Clear();
+            ContainerButton.Children.Add(textBlock);
         }
     }
 }

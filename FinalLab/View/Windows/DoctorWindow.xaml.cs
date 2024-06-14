@@ -8,11 +8,14 @@ public partial class DoctorWindow : Window
 {
     private DoctorViewModel _viewModel;
 
-    public DoctorWindow()
+    public DoctorWindow(int id)
     {
         InitializeComponent();
-        _viewModel = new DoctorViewModel();
+        _viewModel = new DoctorViewModel(id);
         DataContext = _viewModel;
+        SpecialitiesComboBox.DisplayMemberPath = "NameSpecialities";
+        AnalyzeRTB.Document = _viewModel.AnalyzeRTB;
+        ResearchRTB.Document = _viewModel.ResearchRTB;
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)

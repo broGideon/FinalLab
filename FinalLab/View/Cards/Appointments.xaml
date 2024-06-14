@@ -29,16 +29,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ui:Button Grid.Column="0" Width="350" Height="40" Style="{DynamicResource FocusingButton}">
-                <ui:Button.Content>
-                    <TextBlock FontSize="24">Перенести</TextBlock>
-                </ui:Button.Content>
-            </ui:Button>
-            <ui:Button Grid.Column="1" Width="350" Height="40" Style="{DynamicResource AttentionButton}">
-                <ui:Button.Content>
-                    <TextBlock FontSize="24">Отменить</TextBlock>
-                </ui:Button.Content>
-            </ui:Button>
+            <ui:Button Grid.Column="0" Width="350" Height="40" Content="Перенести" Style="{DynamicResource FocusingButton}"/>
+            <ui:Button Grid.Column="1" Width="350" Height="40" Content="Отменить" Style="{DynamicResource AttentionButton}"/>
         </Grid>
     </Grid>
 </Page>

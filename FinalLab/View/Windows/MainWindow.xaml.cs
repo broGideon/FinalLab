@@ -67,7 +67,7 @@ public partial class MainWindow : Window
     
     private void OpenDoctor()
     {
-        DoctorWindow window = new DoctorWindow();
+        DoctorWindow window = new DoctorWindow(Convert.ToInt32(_viewModel.Login));
         window.Show();
         Close();
     }
