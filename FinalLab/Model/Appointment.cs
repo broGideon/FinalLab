@@ -2,6 +2,20 @@
 
 public class Appointment
 {
+
+    public Appointment(int idAppointment, DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId, int statusId)
+    {
+        IdAppointment = idAppointment;
+        AppointmentDate = appointmentDate;
+        Oms = oms;
+        StatusId = statusId;
+        DoctorId = doctorId;
+    }
+
+    public Appointment()
+    {
+        
+    }
     public int? IdAppointment { get; set; }
 
     public DateOnly AppointmentDate { get; set; }

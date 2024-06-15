@@ -1,10 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Net.Http.Headers;
-using System.Windows;
-using System.Security.Policy;
+using System.Text.Json;
 using Newtonsoft.Json;
+
 namespace FinalLab.ViewModel;
 
 public static class ApiHelper

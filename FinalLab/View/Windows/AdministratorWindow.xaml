@@ -25,14 +25,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-            <Grid Background="{DynamicResource Focusing}">
+        <Border Grid.Row="0" Background="{DynamicResource Focusing}" Padding="3" MouseLeftButtonDown="MoveWindow">
+            <Grid>
                 <Grid HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="ЕМИАС — Администратор" VerticalAlignment="Center" Foreground="#FFFFFF" FontWeight="Bold" Margin="6, 0"/>
+                    <TextBlock 
+                        Text="ЕМИАС — Администратор"
+                        VerticalAlignment="Center" 
+                        Foreground="#FFFFFF" 
+                        FontSize="20"
+                        FontWeight="Bold" 
+                        FontFamily="{StaticResource Inter}"
+                        Margin="6, 0"/>
                     <ui:Button Style="{StaticResource ButtonBar}" Grid.Column="1" Click="SwitchTheme">
                         <ui:SymbolIcon Symbol="WeatherMoon28"/>
                     </ui:Button>
