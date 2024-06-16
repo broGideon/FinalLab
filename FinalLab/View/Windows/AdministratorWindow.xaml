@@ -25,14 +25,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-            <Grid Background="{DynamicResource Focusing}">
+        <Border Grid.Row="0" Background="{DynamicResource Focusing}" Padding="3" MouseLeftButtonDown="MoveWindow">
+            <Grid>
                 <Grid HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="ЕМИАС — Администратор" VerticalAlignment="Center" Foreground="#FFFFFF" FontWeight="Bold" Margin="6, 0"/>
+                    <TextBlock 
+                        Text="ЕМИАС — Администратор"
+                        VerticalAlignment="Center" 
+                        Foreground="#FFFFFF" 
+                        FontSize="20"
+                        FontWeight="Bold" 
+                        FontFamily="{StaticResource Inter}"
+                        Margin="6, 0"/>
                     <ui:Button Style="{StaticResource ButtonBar}" Grid.Column="1" Click="SwitchTheme">
                         <ui:SymbolIcon Symbol="WeatherMoon28"/>
                     </ui:Button>
@@ -55,10 +62,16 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid MinHeight="420" MinWidth="970">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2.7*"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid FontFamily="{StaticResource Inter}" Grid.Column="0" IsReadOnly="True" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryForeground}"  ItemsSource="{Binding Obj}">
+                    <DataGrid 
+                        Grid.Column="0" 
+                        IsReadOnly="True" 
+                        FontFamily="{StaticResource Inter}" 
+                        Background="{DynamicResource SecondaryBackground}" 
+                        Foreground="{DynamicResource PrimaryForeground}"  
+                        ItemsSource="{Binding Obj}">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="SelectionChanged">
                                 <b:CallMethodAction
@@ -73,11 +86,18 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.5*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <ComboBox x:Name="RoleComboBox" FontFamily="{StaticResource Inter}" Grid.Row="0" ItemsSource="{Binding Items}" Style="{DynamicResource ClearComboBoxStyle}" Margin="0,0,0,2" SelectedItem="{Binding SelectedRole}">
+                        <ComboBox 
+                            Grid.Row="0" 
+                            x:Name="RoleComboBox" 
+                            FontFamily="{StaticResource Inter}" 
+                            ItemsSource="{Binding Items}" 
+                            Style="{DynamicResource ClearComboBoxStyle}" 
+                            Margin="0,0,0,2" 
+                            SelectedItem="{Binding SelectedRole}">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="SelectionChanged">
                                     <b:CallMethodAction
@@ -86,11 +106,21 @@
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </ComboBox>
-                        <Rectangle Fill="{DynamicResource Focusing}" Height="1" Margin="10,3,10,3" HorizontalAlignment="Stretch" Grid.Row="1"/>
+                        <Rectangle
+                            Grid.Row="1"
+                            Fill="{DynamicResource Focusing}" 
+                            Height="1" 
+                            Margin="10,3,10,3" 
+                            HorizontalAlignment="Stretch"/>
+                        
                         <Frame x:Name="PageFrame" Grid.Row="2"/>
 
                         <StackPanel Orientation="Vertical" Grid.Row="4">
-                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Padding="0, 10"  Margin="0,0,0,5" Content="Добавить запись">
+                            <ui:Button 
+                                FontFamily="{StaticResource Inter}" 
+                                Style="{DynamicResource FocusingButton}" 
+                                Margin="0,0,0,5" 
+                                Content="Добавить запись">
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="Click">
                                         <b:CallMethodAction
@@ -99,7 +129,11 @@
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </ui:Button>
-                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Margin="0,0,0,5" Content="Изменить запись">
+                            <ui:Button 
+                                FontFamily="{StaticResource Inter}" 
+                                Style="{DynamicResource FocusingButton}"
+                                Margin="0,0,0,5" 
+                                Content="Изменить запись">
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="Click">
                                         <b:CallMethodAction
@@ -108,7 +142,11 @@
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </ui:Button>
-                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Margin="0,0,0,5" Content="Удалить запись">
+                            <ui:Button 
+                                FontFamily="{StaticResource Inter}" 
+                                Style="{DynamicResource FocusingButton}" 
+                                Margin="0,0,0,5" 
+                                Content="Удалить запись">
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="Click">
                                         <b:CallMethodAction
@@ -117,7 +155,11 @@
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </ui:Button>
-                            <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource AttentionButton}"  Click="CloseWindow" Content="Выйти из аккаунта"/>
+                            <ui:Button 
+                                FontFamily="{StaticResource Inter}" 
+                                Style="{DynamicResource AttentionButton}" 
+                                Click="CloseWindow" 
+                                Content="Выйти из аккаунта"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

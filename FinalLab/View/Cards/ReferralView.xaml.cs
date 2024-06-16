@@ -21,7 +21,7 @@ namespace FinalLab.View.Cards
             InitializeComponent();
             DataContext = this;
             Speciality = speciality;
-
+            IdSpeciality = idSpeciality;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

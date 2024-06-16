@@ -1,10 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Net.Http.Headers;
-using System.Windows;
-using System.Security.Policy;
+using System.Text.Json;
 using Newtonsoft.Json;
+
 namespace FinalLab.ViewModel;
 
 public static class ApiHelper
@@ -25,7 +24,7 @@ public static class ApiHelper
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PutAsync($"{_url}/{model}/{id}", body).Result;
-        if (response.StatusCode == HttpStatusCode.Created) return true;
+        if (response.StatusCode == HttpStatusCode.NoContent) return true;
         else return false;
     }
 
@@ -34,7 +33,7 @@ public static class ApiHelper
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PostAsync($"{_url}/{model}", body).Result;
-        if (response.StatusCode == HttpStatusCode.NoContent) return true;
+        if (response.StatusCode == HttpStatusCode.Created) return true;
         else return false;
     }
 

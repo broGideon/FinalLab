@@ -13,23 +13,32 @@ namespace FinalLab.View.Cards
 
         public long OMS;
 
-        private event EventHandler StartReception;
+        public int IdAppointment;
+
+        public event EventHandler StartReception;
+        public event EventHandler CancelRecception;
         
-        public ClientsView(string FIO, string time, long OMS)
+        public ClientsView(string FIO, string time, long OMS, int idAppointment)
         {
             InitializeComponent();
             DataContext = this;
             this.FIO = FIO;
             Time = time;
             this.OMS = OMS;
+            IdAppointment = idAppointment;
         }
 
         private void Start(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
+            StartReception(this, EventArgs.Empty);
         }
 
-        private void Cancel(object sender, RoutedEventArgs e)
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            Cancel();
+        }
+
+        public void Cancel()
         {
             ContainerButton.Children.Clear();
             TextBlock textBlock = new Wpf.Ui.Controls.TextBlock();
@@ -39,6 +48,7 @@ namespace FinalLab.View.Cards
             textBlock.Text = "Запись завершена";
             ContainerButton.ColumnDefinitions.Clear();
             ContainerButton.Children.Add(textBlock);
+            CancelRecception(this, EventArgs.Empty);
         }
     }
 }

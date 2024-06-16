@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using FinalLab.View.Windows;
 using FinalLab.ViewModel;
+using Wpf.Ui.Controls;
 
 namespace FinalLab.View;
 
@@ -13,9 +15,11 @@ public partial class DoctorWindow : Window
         InitializeComponent();
         _viewModel = new DoctorViewModel(id);
         DataContext = _viewModel;
-        SpecialitiesComboBox.DisplayMemberPath = "NameSpecialities";
-        AnalyzeRTB.Document = _viewModel.AnalyzeRTB;
-        ResearchRTB.Document = _viewModel.ResearchRTB;
+        PageFrame.Content = new DortorPage(_viewModel);
+        if (App.Theme == "Dark")
+            IconTheme.Symbol = SymbolRegular.WeatherSunny32;
+        else
+            IconTheme.Symbol = SymbolRegular.WeatherMoon28;
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -25,10 +29,7 @@ public partial class DoctorWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            this.DragMove();
-        }
+        this.DragMove();
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -47,9 +48,15 @@ public partial class DoctorWindow : Window
     private void SwitchTheme(object sender, RoutedEventArgs e)
     {
         if (App.Theme == "Dark")
+        {
             App.Theme = "Light";
+            IconTheme.Symbol = SymbolRegular.WeatherMoon28;
+        }
         else
+        {
             App.Theme = "Dark";
+            IconTheme.Symbol = SymbolRegular.WeatherSunny32;
+        }
     }
 
     private void CloseWindow(object sender, RoutedEventArgs e)
