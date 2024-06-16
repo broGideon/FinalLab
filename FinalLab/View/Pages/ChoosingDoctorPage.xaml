@@ -93,7 +93,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ToggleButton Grid.Column="0" 
+                    
                 </Grid>
             </Grid>
         </Grid>
