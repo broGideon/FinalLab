@@ -43,10 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModel\Pages\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Page Update="View\Windows\AdministratorWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -89,13 +85,7 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
       <None Remove="Model\Images\dentist.png" />
-      <Resource Include="Model\Images\dentist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\doctor.png" />
-      <Resource Include="Model\Images\doctor.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\document.png" />
       <Resource Include="Model\Images\document.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -105,39 +95,55 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
       <None Remove="Model\Images\gynecologist.png" />
-      <Resource Include="Model\Images\gynecologist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\ophthalmologist.png" />
-      <Resource Include="Model\Images\ophthalmologist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\otorhinolaryngologist.png" />
-      <Resource Include="Model\Images\otorhinolaryngologist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\surgeon.png" />
-      <Resource Include="Model\Images\surgeon.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\traumatologist.png" />
-      <Resource Include="Model\Images\traumatologist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\vaccine.png" />
       <Resource Include="Model\Images\vaccine.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
       <None Remove="Model\Images\cardiologist.png" />
-      <Resource Include="Model\Images\cardiologist.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Model\Images\oncologist.png" />
-      <Resource Include="Model\Images\oncologist.png">
+      <None Remove="Model\Images\psychologist.png" />
+      <None Remove="Model\Images\10.png" />
+      <Resource Include="Model\Images\10.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
-      <None Remove="Model\Images\psychologist.png" />
-      <Resource Include="Model\Images\psychologist.png">
+      <None Remove="Model\Images\9.png" />
+      <Resource Include="Model\Images\9.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\8.png" />
+      <Resource Include="Model\Images\8.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\7.png" />
+      <Resource Include="Model\Images\7.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\6.png" />
+      <Resource Include="Model\Images\6.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\5.png" />
+      <Resource Include="Model\Images\5.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\4.png" />
+      <Resource Include="Model\Images\4.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\3.png" />
+      <Resource Include="Model\Images\3.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\2.png" />
+      <Resource Include="Model\Images\2.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\1.png" />
+      <Resource Include="Model\Images\1.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>

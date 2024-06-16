@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,13 +11,10 @@ using SecondLibPractice;
 using Spire.Doc;
 using Image = System.Drawing.Image;
 using Spire.Doc.Documents;
-using static Spire.Doc.Documents.BorderStyle;
 using HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment;
 using Paragraph = Spire.Doc.Documents.Paragraph;
 using Section = Spire.Doc.Section;
 using Table = Spire.Doc.Table;
-using TableCell = Spire.Doc.TableCell;
-using TableRow = Spire.Doc.TableRow;
 
 namespace FinalLab.ViewModel;
 
@@ -307,7 +303,7 @@ public class DoctorViewModel : BindingHelper
         ReloadPage(this, EventArgs.Empty);
     }
 
-    private async Task AddAppointmentDocument(int id)
+    private async Task AddAppointmentDocument(int? id)
     {
         Document doc = new Document();
         Section section = doc.AddSection();
@@ -358,26 +354,26 @@ public class DoctorViewModel : BindingHelper
         ApiHelper.Post(jsonAppointmentDocument, "AppointmentDocuments");
     }
 
-    private async Task AddAnalysDocument(int id)
+    private async Task AddAnalysDocument(int? id)
     {
         var range = new TextRange(AnalyzeRTB.ContentStart, AnalyzeRTB.ContentEnd);
         var fs = new FileStream("analyzeBuffer.rtf", FileMode.Create);
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
         string analyze =  File.ReadAllText("analyzeBuffer.rtf");
-        var analysDocument = new AnalysDocument(id, analyze, NameAnalyze);
+        var analysDocument = new AnalysDocument((int)id, analyze, NameAnalyze);
         string jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
         ApiHelper.Post(jsonAnalysDocument, "AnalysDocuments");
     }
 
-    private async Task AddResearchDocuments(int id)
+    private async Task AddResearchDocuments(int? id)
     {
         var range = new TextRange(ResearchRTB.ContentStart, ResearchRTB.ContentEnd);
         var fs = new FileStream("researchBuffer.rtf", FileMode.Create);
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
         string research =  File.ReadAllText("researchBuffer.rtf");
-        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch));
+        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch, _image));
         ApiHelper.Post(jsonResearchDocument, "ResearchDocuments");
     }
 

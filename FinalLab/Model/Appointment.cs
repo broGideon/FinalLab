@@ -16,7 +16,7 @@ public class Appointment
     {
         
     }
-    public int IdAppointment { get; set; }
+    public int? IdAppointment { get; set; }
 
     public DateOnly AppointmentDate { get; set; }
 

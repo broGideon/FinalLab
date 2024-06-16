@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace FinalLab.View.Cards
+namespace FinalLab.View.Cards;
+
+public partial class Data
 {
-    /// <summary>
-    /// Логика взаимодействия для Data.xaml
-    /// </summary>
-    public partial class Data : Page
+    public string MonthAndYear { get; set; }
+    
+    public ObservableCollection<Appointments> ElementCurrents { get; set; }
+    public ObservableCollection<RecordsArchive> ElementArchives { get; set; }
+    public Data(string monthAndYear, ObservableCollection<Appointments> elementCurrents)
     {
-        public Data()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = this;
+        MonthAndYear = monthAndYear;
+        ElementCurrents = elementCurrents;
+        MainGrid.Children.Remove(MainGrid.Children[1]);
+    }
+    
+    public Data(string monthAndYear, ObservableCollection<RecordsArchive> elementArchives)
+    {
+        InitializeComponent();
+        DataContext = this;
+        MonthAndYear = monthAndYear;
+        ElementArchives = elementArchives;
+        MainGrid.Children.Remove(MainGrid.Children[2]);
     }
 }

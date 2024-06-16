@@ -8,34 +8,6 @@
       mc:Ignorable="d"
       Title="AnalyzePage" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderThickness="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                    <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
-                        <ui:SymbolIcon Symbol="LineHorizontal120"/>
-                    </ui:Button>
-                    <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
-                        <ui:SymbolIcon Symbol="Maximize20"/>
-                    </ui:Button>
-                    <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
-                        <ui:SymbolIcon Symbol="Dismiss48"/>
-                    </ui:Button>
-                </StackPanel>
-                <TextBlock
-                    Grid.Column="0" 
-                    FontSize="22" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Left" 
-                    Text="Анализы" 
-                    Foreground="{DynamicResource PrimaryForeground}"/>
-            </Grid>
-        </Border>
+        
     </Grid>
 </Page>

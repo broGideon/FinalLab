@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        WindowStyle="None" 
-        AllowsTransparency="True"
         ResizeMode="NoResize"
         Background="{DynamicResource Focusing}"
         WindowStartupLocation="CenterScreen"
         Height="220" 
         Width="400">
+        <WindowChrome.WindowChrome>
+                <WindowChrome
+                        CaptionHeight="0"
+                        ResizeBorderThickness="5"
+                        GlassFrameThickness="0"
+                        CornerRadius="0"/>
+        </WindowChrome.WindowChrome>
         <Grid>
                 <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

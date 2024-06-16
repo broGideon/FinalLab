@@ -14,12 +14,7 @@ public partial class PatientWindow : Window
         InitializeComponent();
         _viewModel = new PatientViewModel();
         DataContext = _viewModel;
-        PageFrame.Content = new HomePatientPage(_viewModel);
-    }
-
-    private void MoveWindow(object sender, MouseButtonEventArgs e)
-    {
-        DragMove();
+        PageFrame.Content = new HomePatientPage();
     }
 
     private void OpenSettings(object sender, RoutedEventArgs e)
@@ -29,7 +24,7 @@ public partial class PatientWindow : Window
 
     private void OpenHomePatient(object sender, MouseButtonEventArgs e)
     {
-        PageFrame.Content = new HomePatientPage(_viewModel);
+        PageFrame.Content = new HomePatientPage();
     }
 
     private void OpenAppointments(object sender, MouseButtonEventArgs e)
@@ -45,5 +40,28 @@ public partial class PatientWindow : Window
     private void OpenResearches(object sender, MouseButtonEventArgs e)
     {
         PageFrame.Content = new ResearchePage();
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void MoveWindow(object sender, MouseButtonEventArgs e)
+    {
+        this.DragMove();
+    }
+
+    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Normal)
+            WindowState = WindowState.Maximized;
+        else
+            WindowState = WindowState.Normal;
+    }
+
+    private void RollUpButton_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
     }
 }
