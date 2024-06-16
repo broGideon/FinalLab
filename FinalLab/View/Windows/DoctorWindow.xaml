@@ -89,7 +89,6 @@
                         </b:Interaction.Triggers>
                     </DatePicker>
                     <ScrollViewer Grid.Column="1" Grid.Row="3">
-                            
                         <ListBox  ItemsSource="{Binding Appointments}">
                             <ListBox.Resources>
                                 <Style TargetType="ListBoxItem">

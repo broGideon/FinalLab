@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿namespace FinalLab.View.Cards;
 
-namespace FinalLab.View.Cards
+public partial class Data
 {
-    /// <summary>
-    /// Логика взаимодействия для Data.xaml
-    /// </summary>
-    public partial class Data : Page
+    public string MonthAndYear { get; set; }
+    
+    public List<Appointments> ElementCurrents { get; set; }
+    public List<RecordsArchive> ElementArchives { get; set; }
+    public Data(string monthAndYear, List<Appointments> elementCurrents)
     {
-        public Data()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = this;
+        MonthAndYear = monthAndYear;
+        ElementCurrents = elementCurrents;
+    }
+    
+    public Data(string monthAndYear, List<RecordsArchive> elementArchives)
+    {
+        InitializeComponent();
+        DataContext = this;
+        MonthAndYear = monthAndYear;
+        ElementArchives = elementArchives;
     }
 }

@@ -1,28 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿namespace FinalLab.View.Cards;
 
-namespace FinalLab.View.Cards
+public partial class BankCard 
 {
-    /// <summary>
-    /// Логика взаимодействия для BankCard.xaml
-    /// </summary>
-    public partial class BankCard : Page
+    public BankCard()
     {
-        public BankCard()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
+

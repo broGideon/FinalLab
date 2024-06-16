@@ -303,7 +303,7 @@ public class DoctorViewModel : BindingHelper
         ReloadPage(this, EventArgs.Empty);
     }
 
-    private async Task AddAppointmentDocument(int id)
+    private async Task AddAppointmentDocument(int? id)
     {
         Document doc = new Document();
         Section section = doc.AddSection();
@@ -354,19 +354,19 @@ public class DoctorViewModel : BindingHelper
         ApiHelper.Post(jsonAppointmentDocument, "AppointmentDocuments");
     }
 
-    private async Task AddAnalysDocument(int id)
+    private async Task AddAnalysDocument(int? id)
     {
         var range = new TextRange(AnalyzeRTB.ContentStart, AnalyzeRTB.ContentEnd);
         var fs = new FileStream("analyzeBuffer.rtf", FileMode.Create);
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
         string analyze =  File.ReadAllText("analyzeBuffer.rtf");
-        var analysDocument = new AnalysDocument(id, analyze, NameAnalyze);
+        var analysDocument = new AnalysDocument((int)id, analyze, NameAnalyze);
         string jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
         ApiHelper.Post(jsonAnalysDocument, "AnalysDocuments");
     }
 
-    private async Task AddResearchDocuments(int id)
+    private async Task AddResearchDocuments(int? id)
     {
         var range = new TextRange(ResearchRTB.ContentStart, ResearchRTB.ContentEnd);
         var fs = new FileStream("researchBuffer.rtf", FileMode.Create);

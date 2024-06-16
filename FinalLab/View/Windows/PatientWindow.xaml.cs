@@ -17,11 +17,6 @@ public partial class PatientWindow : Window
         PageFrame.Content = new HomePatientPage();
     }
 
-    private void MoveWindow(object sender, MouseButtonEventArgs e)
-    {
-        DragMove();
-    }
-
     private void OpenSettings(object sender, RoutedEventArgs e)
     {
         PageFrame.Content = new ProfilePage(_viewModel);
@@ -45,5 +40,28 @@ public partial class PatientWindow : Window
     private void OpenResearches(object sender, MouseButtonEventArgs e)
     {
         PageFrame.Content = new ResearchePage();
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void MoveWindow(object sender, MouseButtonEventArgs e)
+    {
+        this.DragMove();
+    }
+
+    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Normal)
+            WindowState = WindowState.Maximized;
+        else
+            WindowState = WindowState.Normal;
+    }
+
+    private void RollUpButton_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
     }
 }
