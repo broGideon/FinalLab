@@ -54,6 +54,7 @@ public partial class AdministratorWindow : Window
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
         MainWindow window = new MainWindow();
+        window.Show();
         Close();
     }
 

@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        WindowStyle="None" 
-        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource PrimaryBackground}"
         ResizeMode="CanResize"
@@ -115,7 +113,7 @@
                         Click="CloseWindow"/>
                 </Grid>
                 </Grid>
-                <ScrollViewer Grid.Column="2" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2" >
                     <Frame Name="PageFrame"/>
                 </ScrollViewer>
             </Grid>

@@ -14,7 +14,7 @@ public partial class PatientWindow : Window
         InitializeComponent();
         _viewModel = new PatientViewModel();
         DataContext = _viewModel;
-        PageFrame.Content = new HomePatientPage(_viewModel);
+        PageFrame.Content = new HomePatientPage();
     }
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
@@ -29,7 +29,7 @@ public partial class PatientWindow : Window
 
     private void OpenHomePatient(object sender, MouseButtonEventArgs e)
     {
-        PageFrame.Content = new HomePatientPage(_viewModel);
+        PageFrame.Content = new HomePatientPage();
     }
 
     private void OpenAppointments(object sender, MouseButtonEventArgs e)

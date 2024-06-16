@@ -6,8 +6,8 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
       Background="{DynamicResource PrimaryBackground}"
-      Height="520" 
-      Width="800">
+      Height="Auto" 
+      Width="Auto">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -78,11 +78,9 @@
                         <ui:TextBox Style="{DynamicResource ClearTextbox}" FontSize="14" Foreground="{DynamicResource PrimaryForeground }">
                         </ui:TextBox>
                     </Grid>
-                    <Grid Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left">
-                        <ui:Button  Background="{DynamicResource Focusing}"  Click="RollUpButton_Click" Width="35">
-                            <ui:SymbolIcon Symbol="Copy20" Foreground="White"/>
-                        </ui:Button>
-                    </Grid>
+                    <ui:Button Grid.Column="1" Margin="10, 0" Foreground="White" Background="{DynamicResource Focusing}"  Style="{DynamicResource ButtonBar}">
+                        <ui:SymbolIcon Symbol="Copy20"/>
+                    </ui:Button>
                 </Grid>
             </Grid>
         </Grid>

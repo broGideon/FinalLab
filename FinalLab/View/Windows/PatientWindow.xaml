@@ -5,8 +5,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        WindowStyle="None" 
-        AllowsTransparency="True"
         Background="{DynamicResource PrimaryBackground}"
         WindowStartupLocation="CenterScreen"
         Height="860"
@@ -33,7 +31,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0, 8">
                 <Border Background="Transparent" MouseLeftButtonDown="MoveWindow">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -48,14 +46,14 @@
             <Separator Grid.Row="1" Background="#FFFFFF" Height="2" Margin="6, 0"/>
             <TreeView Grid.Row="2" FontFamily="{StaticResource Inter}" BorderThickness="0"  Background="{DynamicResource Focusing}">
                 <TreeViewItem Header="Главная" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Записи и направления" MouseUp="OpenHomePatient"/>
-                    <TreeViewItem Header="Рецепты"/>
-                    <TreeViewItem Header="Диспансеризация" />
+                    <TreeViewItem Header="Записи и направления" MouseUp="OpenHomePatient" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Рецепты" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Диспансеризация" Foreground="#FFFFFF"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Медкарта" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Приёмы" MouseUp="OpenAppointments"/>
-                    <TreeViewItem Header="Анализы" MouseUp="OpenAnalyzes"/>
-                    <TreeViewItem Header="Исследования" MouseUp="OpenResearches"/>
+                    <TreeViewItem Header="Приёмы" MouseUp="OpenAppointments" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Анализы" MouseUp="OpenAnalyzes" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Исследования" MouseUp="OpenResearches" Foreground="#FFFFFF"/>
                 </TreeViewItem>
             </TreeView>
             <Separator Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Background="#FFFFFF" Height="2" Margin="6, 0"/>
@@ -73,8 +71,6 @@
                 
             </Grid>
         </Grid>
-        <ScrollViewer Grid.Column="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Frame x:Name="PageFrame"/>
-        </ScrollViewer>
+        <Frame x:Name="PageFrame" Grid.Column="2" Grid.RowSpan="3"/>
     </Grid>
 </Window>

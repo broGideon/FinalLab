@@ -6,14 +6,44 @@
       xmlns:local="clr-namespace:FinalLab.View.Cards"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
-
-    <Grid  Background="{DynamicResource PrimaryBackground }">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" VerticalAlignment="Center" FontSize="16"  Foreground="{DynamicResource PrimaryForeground}"/>
-        <Image></Image>
-    </Grid>
+      Height="89" 
+      Width="124"
+      Background="{DynamicResource PrimaryBackground}">
+    <UserControl.Resources>
+        <Style x:Key="ClearButton" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+    <Button Style="{StaticResource ClearButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="47"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="47"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="34"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image 
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Source="{Binding ImagePath}"/>
+            <TextBlock 
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource Inter}"
+                FontSize="16"  
+                Text="{Binding NameRole}"
+                Foreground="{DynamicResource PrimaryForeground}"/>
+        </Grid>
+    </Button>
 </UserControl>

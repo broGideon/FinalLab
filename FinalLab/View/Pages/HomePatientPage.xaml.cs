@@ -2,15 +2,16 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using FinalLab.ViewModel;
+using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
 public partial class HomePatientPage : Page
 {
-    public HomePatientPage(PatientViewModel _viewModel)
+    public HomePatientPage()
     {
         InitializeComponent();
-        DataContext = _viewModel;
+        DataContext = new HomePatientViewModel();
     }
     
     private void CloseButton_Click(object sender, RoutedEventArgs e)
