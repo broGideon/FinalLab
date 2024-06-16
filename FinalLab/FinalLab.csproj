@@ -84,6 +84,62 @@
       <Resource Include="AppIcon.ico">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Model\Images\covid.png" />
+      <Resource Include="Model\Images\covid.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\dentist.png" />
+      <Resource Include="Model\Images\dentist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\doctor.png" />
+      <Resource Include="Model\Images\doctor.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\document.png" />
+      <Resource Include="Model\Images\document.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\emergency.png" />
+      <Resource Include="Model\Images\emergency.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\gynecologist.png" />
+      <Resource Include="Model\Images\gynecologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\ophthalmologist.png" />
+      <Resource Include="Model\Images\ophthalmologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\otorhinolaryngologist.png" />
+      <Resource Include="Model\Images\otorhinolaryngologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\surgeon.png" />
+      <Resource Include="Model\Images\surgeon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\traumatologist.png" />
+      <Resource Include="Model\Images\traumatologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\vaccine.png" />
+      <Resource Include="Model\Images\vaccine.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\cardiologist.png" />
+      <Resource Include="Model\Images\cardiologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\oncologist.png" />
+      <Resource Include="Model\Images\oncologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Model\Images\psychologist.png" />
+      <Resource Include="Model\Images\psychologist.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

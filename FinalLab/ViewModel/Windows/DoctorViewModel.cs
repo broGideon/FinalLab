@@ -25,7 +25,8 @@ namespace FinalLab.ViewModel;
 public class DoctorViewModel : BindingHelper
 {
     #region MyRegion
-    
+
+    public event EventHandler ReloadPage;
     public FlowDocument AnalyzeRTB { get; set; }
 
     public FlowDocument ResearchRTB { get; set; }
@@ -54,7 +55,7 @@ public class DoctorViewModel : BindingHelper
         set => SetField(ref _selectSpeciality, value);
     }
 
-    private ObservableCollection<ReferralView?> _directions = new ObservableCollection<ReferralView?>();
+    private ObservableCollection<ReferralView?> _directions;
 
     public ObservableCollection<ReferralView?> Directions
     {
@@ -144,6 +145,22 @@ public class DoctorViewModel : BindingHelper
         set => SetField(ref _analyzeIsActive, value);
     }
 
+    private string _nameAnalyze;
+
+    public string NameAnalyze
+    {
+        get => _nameAnalyze;
+        set => SetField(ref _nameAnalyze, value);
+    }
+    
+    private string _nameResearch;
+
+    public string NameResearch
+    {
+        get => _nameResearch;
+        set => SetField(ref _nameResearch, value);
+    }
+
     private Doctor _doctor;
 
     public DoctorViewModel(int idDoctor)
@@ -154,13 +171,15 @@ public class DoctorViewModel : BindingHelper
         ResearchRTB = new();
         _doctor = ApiHelper.Get<Doctor>("Doctors", idDoctor);
         User = $"{_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}";
+        Directions = new();
     }
 
     private DateOnly _currentDate;
 
     private byte[] _image;
-    #endregion
 
+    private ClientsView _currentClientView;
+    #endregion
     public void AddDirections()
     {
         if (SelectSpeciality != null)
@@ -211,7 +230,84 @@ public class DoctorViewModel : BindingHelper
         }
     }
 
-    public void Cancel()
+    public async void Cancel()
+    {
+        var currentAppointment = ApiHelper.Get<Appointment>("Appointments", _currentClientView.IdAppointment);
+        _ = AddAppointmentDocument(currentAppointment.IdAppointment);
+        
+        if (AnalyzeIsActive)
+        {
+            _ = AddAnalysDocument(currentAppointment.IdAppointment);
+        }
+
+        if (ResearchIsActive)
+        {
+            _ = AddResearchDocuments(currentAppointment.IdAppointment);
+        }
+        
+        currentAppointment.StatusId = 4;
+        string jsonAppointment = JsonConvert.SerializeObject(currentAppointment);
+        ApiHelper.Put(jsonAppointment, "Appointments", (long)currentAppointment.IdAppointment);
+        
+        await AddPatientDirections();
+        
+        _currentClientView.Cancel();
+        ClearPage();
+    }
+
+    public void Start(object sender, EventArgs args)
+    {
+        ClearPage();
+        _currentClientView = sender as ClientsView;
+        PatientFIO = _currentClientView.FIO;
+        PatientOMS = _currentClientView.OMS.ToString();
+        var doc = new Document();
+        doc.LoadFromFile("../../../Document/Document1.docx");
+        doc.SaveToFile("analyzeBuffer.rtf", FileFormat.Rtf);
+        var range = new TextRange(AnalyzeRTB.ContentStart, AnalyzeRTB.ContentEnd);
+        var fs = new FileStream("analyzeBuffer.rtf", FileMode.Open);
+        range.Load(fs, DataFormats.Rtf);
+        fs.Close();
+        File.Delete("analyzeBuffer.rtf");
+        doc.LoadFromFile("../../../Document/Document2.docx");
+        doc.SaveToFile("researchBuffer.rtf", FileFormat.Rtf);
+        range = new TextRange(ResearchRTB.ContentStart, ResearchRTB.ContentEnd);
+        fs = new FileStream("researchBuffer.rtf", FileMode.Open);
+        range.Load(fs, DataFormats.Rtf);
+        fs.Close();
+        File.Delete("researchBuffer.rtf");
+    }
+
+    private void CancelRecception(object sender, EventArgs args)
+    {
+        var clientsView = sender as ClientsView; 
+        string json = JsonConvert.SerializeObject(new Appointment(clientsView.IdAppointment, _currentDate, TimeOnly.Parse(clientsView.Time), clientsView.OMS, _idDoctor, 4));
+        ApiHelper.Put(json, "Appointments", clientsView.IdAppointment);
+        ClearPage();
+    }
+
+    private void ClearPage()
+    {
+        AnalyzeRTB = new();
+        ResearchRTB = new();
+        AnalyzeIsActive = false;
+        ResearchIsActive = false;
+        Complaints = string.Empty;
+        Osmotor = String.Empty;
+        PrimaryDiagnosis = string.Empty;
+        SecondaryDiagnosis = string.Empty;
+        Recommendations = string.Empty;
+        NameAnalyze = string.Empty;
+        NameResearch = string.Empty;
+        PatientFIO = string.Empty;
+        PatientOMS = string.Empty;
+        SelectSpeciality = null;
+        _image = null;
+        Directions.Clear();
+        ReloadPage(this, EventArgs.Empty);
+    }
+
+    private async Task AddAppointmentDocument(int id)
     {
         Document doc = new Document();
         Section section = doc.AddSection();
@@ -257,35 +353,40 @@ public class DoctorViewModel : BindingHelper
         string reception = File.ReadAllText("receptionBuffer.rtf");
         File.Delete("receptionBuffer.rtf");
         
-        
+        var appointmentDocument = new AppointmentDocument(id, reception, $"Осмотр {Specialities[_idDoctor-1].NameSpecialities}");
+        string jsonAppointmentDocument = JsonConvert.SerializeObject(appointmentDocument);
+        ApiHelper.Post(jsonAppointmentDocument, "AppointmentDocuments");
     }
 
-    public void Start(object sender, EventArgs args)
+    private async Task AddAnalysDocument(int id)
     {
-        var clientsView = sender as ClientsView;
-        PatientFIO = clientsView.FIO;
-        PatientOMS = clientsView.OMS.ToString();
-        var doc = new Document();
-        doc.LoadFromFile("../../../Document/Document1.docx");
-        doc.SaveToFile("analyzeBuffer.rtf", FileFormat.Rtf);
         var range = new TextRange(AnalyzeRTB.ContentStart, AnalyzeRTB.ContentEnd);
-        var fs = new FileStream("analyzeBuffer.rtf", FileMode.Open);
-        range.Load(fs, DataFormats.Rtf);
+        var fs = new FileStream("analyzeBuffer.rtf", FileMode.Create);
+        range.Save(fs, DataFormats.Rtf);
         fs.Close();
-        File.Delete("analyzeBuffer.rtf");
-        doc.LoadFromFile("../../../Document/Document2.docx");
-        doc.SaveToFile("researchBuffer.rtf", FileFormat.Rtf);
-        range = new TextRange(ResearchRTB.ContentStart, ResearchRTB.ContentEnd);
-        fs = new FileStream("researchBuffer.rtf", FileMode.Open);
-        range.Load(fs, DataFormats.Rtf);
-        fs.Close();
-        File.Delete("researchBuffer.rtf");
+        string analyze =  File.ReadAllText("analyzeBuffer.rtf");
+        var analysDocument = new AnalysDocument(id, analyze, NameAnalyze);
+        string jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
+        ApiHelper.Post(jsonAnalysDocument, "AnalysDocuments");
     }
 
-    private void CancelRecception(object sender, EventArgs args)
+    private async Task AddResearchDocuments(int id)
     {
-        var clientsView = sender as ClientsView; 
-        string json = JsonConvert.SerializeObject(new Appointment(clientsView.IdAppointment, _currentDate, TimeOnly.Parse(clientsView.Time), clientsView.OMS, _idDoctor, 4));
-        ApiHelper.Put(json, "Appointments", clientsView.IdAppointment);
+        var range = new TextRange(ResearchRTB.ContentStart, ResearchRTB.ContentEnd);
+        var fs = new FileStream("researchBuffer.rtf", FileMode.Create);
+        range.Save(fs, DataFormats.Rtf);
+        fs.Close();
+        string research =  File.ReadAllText("researchBuffer.rtf");
+        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch));
+        ApiHelper.Post(jsonResearchDocument, "ResearchDocuments");
+    }
+
+    private async Task AddPatientDirections()
+    {
+        foreach (var direction in Directions)
+        {
+            string json = JsonConvert.SerializeObject(new Direction(direction.IdSpeciality, Convert.ToInt64(PatientOMS)));
+            ApiHelper.Post(json, "Directions");
+        }
     }
 }

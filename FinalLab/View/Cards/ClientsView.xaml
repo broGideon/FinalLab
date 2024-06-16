@@ -58,7 +58,7 @@
                 FontSize="12" 
                 Grid.Column="2" 
                 Content="Отменить запись"
-                Click="Cancel"/>
+                Click="CancelClick"/>
         </Grid>
     </Grid>
 </UserControl>

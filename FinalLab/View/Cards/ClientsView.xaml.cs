@@ -33,7 +33,12 @@ namespace FinalLab.View.Cards
             StartReception(this, EventArgs.Empty);
         }
 
-        public void Cancel(object sender, RoutedEventArgs e)
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            Cancel();
+        }
+
+        public void Cancel()
         {
             ContainerButton.Children.Clear();
             TextBlock textBlock = new Wpf.Ui.Controls.TextBlock();

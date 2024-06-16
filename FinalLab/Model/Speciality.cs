@@ -6,5 +6,5 @@ public class Speciality
 
     public string NameSpecialities { get; set; } = null!;
 
-    public string PathImage { get; set; } = null!;
+    public int NumberImage { get; set; }
 }

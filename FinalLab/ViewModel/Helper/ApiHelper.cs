@@ -24,7 +24,7 @@ public static class ApiHelper
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PutAsync($"{_url}/{model}/{id}", body).Result;
-        if (response.StatusCode == HttpStatusCode.Created) return true;
+        if (response.StatusCode == HttpStatusCode.NoContent) return true;
         else return false;
     }
 
@@ -33,7 +33,7 @@ public static class ApiHelper
         HttpClient client = new HttpClient();
         HttpContent body = new StringContent(json, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PostAsync($"{_url}/{model}", body).Result;
-        if (response.StatusCode == HttpStatusCode.NoContent) return true;
+        if (response.StatusCode == HttpStatusCode.Created) return true;
         else return false;
     }
 
