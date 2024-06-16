@@ -5,6 +5,9 @@
     <Compile Update="View\Cards\Appointments.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Cards\BankCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Cards\ClientsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +26,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\Cards\Appointments.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\BankCard.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Cards\ClientsView.xaml">
