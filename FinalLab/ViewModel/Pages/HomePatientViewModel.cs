@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Data;
 using FinalLab.Model;
 using FinalLab.View.Cards;
 using SecondLibPractice;
+using Spire.Pdf.Exporting.XPS.Schema;
 
 namespace FinalLab.ViewModel.Pages;
 
@@ -33,14 +35,19 @@ public class HomePatientViewModel : BindingHelper
         get => _archivedRecords;
         set => SetField(ref _archivedRecords, value);
     }
-    
 
-    #endregion
+    private DateOnly _selectionDateCurrentFrom;
+    private DateOnly _selectionDateCurrentTo;
+    private DateOnly _selectionDateArchivesFrom;
+    private DateOnly _selectionDateArchivesTo;
+
     public HomePatientViewModel()
     {
         _ = LoadSpecialities();
-        _ = LoadAppointments();
+        _ = LoadCurrentAppointments();
+        _ = LoadArchivesAppointments();
     }
+    #endregion
 
     private async Task LoadSpecialities()
     {
@@ -52,65 +59,90 @@ public class HomePatientViewModel : BindingHelper
         }
     }
 
-    private async Task LoadAppointments()
+    private async Task LoadCurrentAppointments()
     {
         List<Appointment>? appointments = ApiHelper.Get<List<Appointment>>("Appointments");
-        List<Appointments> monthAppointments = new();
-        List<RecordsArchive> recordsArchives = new();
+        ObservableCollection<Appointments> monthAppointments = new();
         int month = appointments[0].AppointmentDate.Month;
         foreach (var appointment in appointments!)
         {
-            Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-            string speciality = ApiHelper.Get<Speciality>("Specialities", doctor!.IdDoctor)!.NameSpecialities;
-            Patient patient = ApiHelper.Get<Patient>("Patients", (long)appointment.Oms!)!;
-            if (month == appointment.AppointmentDate.Month)
+            if ((appointment.AppointmentDate > _selectionDateCurrentFrom &&
+                appointment.AppointmentDate > _selectionDateCurrentTo) ||
+                (_selectionDateCurrentFrom == DateOnly.MinValue && _selectionDateCurrentTo == DateOnly.MinValue))
             {
-                if (appointment.StatusId != 4)
+                Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
+                string speciality = ApiHelper.Get<Speciality>("Specialities", doctor!.IdDoctor)!.NameSpecialities;
+                Patient patient = ApiHelper.Get<Patient>("Patients", (long)appointment.Oms!)!;
+                if (month == appointment.AppointmentDate.Month)
                 {
-                   var elem = new Appointments(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
-                   monthAppointments.Add(elem);
-                   elem.Delete += (sender, args) => Delete(sender, args);
-                   elem.Move += (sender, args) => Move(sender, args);
+                    if (appointment.StatusId != 4)
+                    {
+                       var elem = new Appointments(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
+                       monthAppointments.Add(elem);
+                       elem.Delete += (sender, args) => Delete(sender, args);
+                       elem.Move += (sender, args) => Move(sender, args);
+                    }
                 }
-                else
+                else if (month != appointment.AppointmentDate.Month && appointments.Count-1 != appointments.IndexOf(appointment))
                 {
-                    var elem = new RecordsArchive(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
-                    recordsArchives.Add(elem);
-                    elem.Delete += (sender, args) => Delete(sender, args);
-                    elem.Repeat += (sender, args) => Repeat(sender, args);
+                    month = appointment.AppointmentDate.Month;
+                    CurrentRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), new ObservableCollection<Appointments>(monthAppointments)));
+                    monthAppointments.Clear();
+                    if (appointment.StatusId != 4)
+                    {
+                        var elem = new Appointments(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
+                        monthAppointments.Add(elem);
+                        elem.Delete += (sender, args) => Delete(sender, args);
+                        elem.Move += (sender, args) => Move(sender, args);
+                    }
                 }
             }
-            else if (month != appointment.AppointmentDate.Month && appointments.Count-1 != appointments.IndexOf(appointment))
+            if (appointments.Count - 1 == appointments.IndexOf(appointment))
+                if (monthAppointments.Count != 0) CurrentRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), new ObservableCollection<Appointments>(monthAppointments)));
+        }
+    }
+    
+     private async Task LoadArchivesAppointments()
+    {
+        List<Appointment>? appointments = ApiHelper.Get<List<Appointment>>("Appointments");
+        ObservableCollection<RecordsArchive> recordsArchives = new();
+        int month = appointments[0].AppointmentDate.Month;
+        foreach (var appointment in appointments!)
+        {
+            if ((appointment.AppointmentDate > _selectionDateArchivesFrom &&
+                appointment.AppointmentDate > _selectionDateArchivesTo) ||
+                (_selectionDateArchivesFrom == DateOnly.MinValue && _selectionDateArchivesTo == DateOnly.MinValue))
             {
-                month = appointment.AppointmentDate.Month;
-                if (monthAppointments.Count != 0)
+                Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
+                string speciality = ApiHelper.Get<Speciality>("Specialities", doctor!.IdDoctor)!.NameSpecialities;
+                Patient patient = ApiHelper.Get<Patient>("Patients", (long)appointment.Oms!)!;
+                if (month == appointment.AppointmentDate.Month)
                 {
-                    CurrentRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), monthAppointments.ToList()));
-                    monthAppointments.Clear();
+                    if (appointment.StatusId == 4)
+                    {
+                        var elem = new RecordsArchive(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
+                        recordsArchives.Add(elem);
+                        elem.Delete += (sender, args) => Delete(sender, args);
+                        elem.Repeat += (sender, args) => Repeat(sender, args);
+                    }
                 }
-                if (recordsArchives.Count != 0)
+                else if (month != appointment.AppointmentDate.Month && appointments.Count-1 != appointments.IndexOf(appointment))
                 {
-                    ArchivedRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), recordsArchives.ToList()));
+                    month = appointment.AppointmentDate.Month;
+                    ArchivedRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), new ObservableCollection<RecordsArchive>(recordsArchives)));
                     recordsArchives.Clear();
-                }
-                if (appointment.StatusId != 4)
-                {
-                    var elem = new Appointments(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
-                    elem.Delete += (sender, args) => Delete(sender, args);
-                    elem.Move += (sender, args) => Move(sender, args);
-                }
-                else
-                {
-                    var elem = new RecordsArchive(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
-                    recordsArchives.Add(elem);
-                    elem.Delete += (sender, args) => Delete(sender, args);
-                    elem.Repeat += (sender, args) => Repeat(sender, args);
+                    if (appointment.StatusId == 4)
+                    {
+                        var elem = new RecordsArchive(speciality, $"{patient.Surname} {patient.FirstName} {patient.Patronymic}", appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor, (int)appointment.IdAppointment!);
+                        recordsArchives.Add(elem);
+                        elem.Delete += (sender, args) => Delete(sender, args);
+                        elem.Repeat += (sender, args) => Repeat(sender, args);
+                    } 
                 }
             }
             if (appointments.Count - 1 == appointments.IndexOf(appointment))
             {
-                if (monthAppointments.Count != 0) CurrentRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), monthAppointments.ToList()));
-                if (recordsArchives.Count != 0) ArchivedRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), recordsArchives.ToList()));
+                if (recordsArchives.Count != 0) ArchivedRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), new ObservableCollection<RecordsArchive>(recordsArchives)));
             }
         }
     }
@@ -124,9 +156,19 @@ public class HomePatientViewModel : BindingHelper
     {
         int id;
         if (sender is Appointments)
+        {
             id = (sender as Appointments).IdAppointment;
+            foreach (var item in CurrentRecords)
+                if (item.ElementCurrents.Remove(sender as Appointments))
+                    break;
+        }
         else
+        {
             id = (sender as RecordsArchive).IdAppointment;
+            foreach (var item in ArchivedRecords)
+                if (item.ElementArchives.Remove(sender as RecordsArchive))
+                    break;
+        }
         
         ApiHelper.Delete("AnalysDocuments", id);
         ApiHelper.Delete("ResearchDocuments", id);
@@ -137,5 +179,28 @@ public class HomePatientViewModel : BindingHelper
     private void Repeat(object sender, EventArgs args)
     {
         
+    }
+
+    public void SelectedDateCurrentFrom(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectionDateCurrentFrom = DateOnly.FromDateTime((DateTime)((sender as DatePicker)!).SelectedDate!);
+        _ = LoadCurrentAppointments();
+    }
+    
+    public void SelectedDateCurrentTo(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectionDateCurrentTo = DateOnly.FromDateTime((DateTime)((sender as DatePicker)!).SelectedDate!);
+        _ = LoadCurrentAppointments();
+    }
+    
+    public void SelectedDateArchivesFrom(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectionDateArchivesFrom = DateOnly.FromDateTime((DateTime)((sender as DatePicker)!).SelectedDate!);
+        _ = LoadCurrentAppointments();
+    }
+    
+    public void SelectedDateArchivesTo(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectionDateArchivesTo = DateOnly.FromDateTime((DateTime)((sender as DatePicker)!).SelectedDate!);
     }
 }

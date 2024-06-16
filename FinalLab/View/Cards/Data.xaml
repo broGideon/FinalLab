@@ -10,7 +10,7 @@
       Height="Auto"
       Width="371">
 
-    <Grid Margin="10">
+    <Grid x:Name="MainGrid" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="Auto"/>
@@ -23,7 +23,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Left" 
             Text="{Binding MonthAndYear}"/>
-            <ListBox Grid.Row="1" ItemsSource="{Binding ElementCurrents}">
+            <ListBox Grid.Row="1" ItemsSource="{Binding ElementArchives}">
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Margin" Value="0, 6"/>
@@ -33,7 +33,7 @@
                     </Style>
                 </ListBox.Resources>
             </ListBox>
-            <ListBox Grid.Row="1" ItemsSource="{Binding ElementArchives}">
+            <ListBox Grid.Row="1" ItemsSource="{Binding ElementCurrents}">
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Margin" Value="0, 6"/>
