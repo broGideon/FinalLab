@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,13 +11,10 @@ using SecondLibPractice;
 using Spire.Doc;
 using Image = System.Drawing.Image;
 using Spire.Doc.Documents;
-using static Spire.Doc.Documents.BorderStyle;
 using HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment;
 using Paragraph = Spire.Doc.Documents.Paragraph;
 using Section = Spire.Doc.Section;
 using Table = Spire.Doc.Table;
-using TableCell = Spire.Doc.TableCell;
-using TableRow = Spire.Doc.TableRow;
 
 namespace FinalLab.ViewModel;
 
@@ -377,7 +373,7 @@ public class DoctorViewModel : BindingHelper
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
         string research =  File.ReadAllText("researchBuffer.rtf");
-        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch));
+        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch, _image));
         ApiHelper.Post(jsonResearchDocument, "ResearchDocuments");
     }
 

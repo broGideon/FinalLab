@@ -46,7 +46,6 @@
                             HorizontalAlignment="Left" 
                             Text=" " 
                             Foreground="{DynamicResource PrimaryForeground}"/>
-                        
                   </Grid>
             </Border>
             <Grid Grid.Row="1">
