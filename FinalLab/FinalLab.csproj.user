@@ -5,7 +5,11 @@
     <Compile Update="View\Cards\Appointments.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
+    <Compile Update="View\Cards\ChoosingDoctorView.xaml.cs">
+=======
     <Compile Update="View\Cards\BankCard.xaml.cs">
+>>>>>>> origin/dev
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Cards\ClientsView.xaml.cs">
@@ -28,7 +32,11 @@
     <Page Update="View\Cards\Appointments.xaml">
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
+    <Page Update="View\Cards\ChoosingDoctorView.xaml">
+=======
     <Page Update="View\Cards\BankCard.xaml">
+>>>>>>> origin/dev
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Cards\ClientsView.xaml">

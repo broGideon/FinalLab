@@ -6,18 +6,22 @@
       xmlns:local="clr-namespace:FinalLab.View.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
+      Background="{DynamicResource PrimaryBackground}"
       Title="ChoosingDoctorPage" Height="450" Width="800">
-      <Grid>
+
+    <Grid>
             <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
+                  <RowDefinition/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" BorderThickness="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
                   <Grid>
                         <Grid.ColumnDefinitions>
                               <ColumnDefinition Width="3*"/>
-                              <ColumnDefinition Width="*"/>
+                              <ColumnDefinition Width="3*"/>
+                             <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
                               <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
                                     <ui:SymbolIcon Symbol="LineHorizontal120"/>
                               </ui:Button>
@@ -35,7 +39,63 @@
                               HorizontalAlignment="Left" 
                               Text="Выбор специалиста - " 
                               Foreground="{DynamicResource PrimaryForeground}"/>
+                        <TextBlock
+                            Grid.Column="1" 
+                            FontSize="22" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Left" 
+                            Text=" " 
+                            Foreground="{DynamicResource PrimaryForeground}"/>
+                        
                   </Grid>
             </Border>
-      </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0">
+                    <ListBox.Resources>
+                    </ListBox.Resources>
+                </ListBox>
+                <ui:Button Grid.Row="1" FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Padding="0, 10"  Margin="10,10,10,10" Content="Назад">
+                </ui:Button>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ui:Button Grid.Row="10" FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Padding="0, 10"  Margin="10,10,10,10" Content="Записаться на прием"/>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left" Foreground="{DynamicResource PrimaryForeground}"/>
+                <TextBlock Grid.Row="1" Text="Текущая неделя" VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Left" Foreground="{DynamicResource PrimaryForeground}"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>
