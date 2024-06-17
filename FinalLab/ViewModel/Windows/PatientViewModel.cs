@@ -16,6 +16,15 @@ public class PatientViewModel : BindingHelper
         get => _patients;
         set => SetField(ref _patients, value);
     }
+
+    private Patient _currentPatient;
+
+    public Patient CurrentPatient
+    {
+        get => _currentPatient;
+        set => SetField(ref _currentPatient, value);
+    }
+    
     public PatientViewModel()
     {
         Patients = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers)!;

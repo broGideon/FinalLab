@@ -72,7 +72,9 @@ public class ResearcheViewModel : BindingHelper
 
     public ResearcheViewModel()
     {
-        _oms = ((Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PatientsComboBox.SelectedItem as Patient)!).Oms;
+        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        _oms = (window.PatientsComboBox.SelectedItem as Patient).Oms;
+        window.WindowTextBlock.Text = "Исследования";
         RTB = new();
         LoadCards();
     }

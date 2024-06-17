@@ -6,8 +6,8 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
       Background="{DynamicResource PrimaryBackground}"
-      Height="815" 
-      Width="1150">
+      Height="Auto" 
+      Width="Auto">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,99 +16,227 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition />
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="0.4*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="11"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="0" Background="{DynamicResource SecondaryBackground}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="21"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Stretch"
+                                FontSize="20" 
+                                Foreground="{DynamicResource PrimaryForeground}"
+                                Text="7777 0000 0000 0000"/>
+                            <TextBlock 
+                                Grid.Column="1" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Stretch" 
+                                FontSize="20" 
+                                Foreground="{DynamicResource PrimaryForeground}"
+                                Text="AHAHHAHAHAHAHHAHHAHHAHA"/>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" 
+                                FontSize="16" 
+                                Text="Название полиса"
+                                Foreground="{DynamicResource SecondaryForeground}"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                FontSize="16"
+                                Text="Дата рождения"
+                                Foreground="{DynamicResource SecondaryForeground}"/>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                FontSize="20"
+                                Text="{Binding Nickname}"
+                                Foreground="{DynamicResource PrimaryForeground}"/>
+                            <TextBlock 
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                FontSize="20"
+                                Text="{Binding Date}"
+                                Foreground="{DynamicResource PrimaryForeground}"/>
+                        </Grid>
+                        <TextBlock
+                            Grid.Row="4"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            FontSize="16"
+                            Text="Выдан: АКЦИОНЕРНОЕ ОБЩЕСТВО “СТРАХОВАЯ КОМПАНИЯ “СОГАЗ-МЕД”"
+                            Foreground="{DynamicResource SecondaryForeground}"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
+                        <RowDefinition Height="0.7*"/>
                         <RowDefinition/>
+                        <RowDefinition Height="0.7*"/>
                         <RowDefinition/>
+                        <RowDefinition Height="0.7*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <ui:TextBox 
                         Grid.Row="0" 
-                        VerticalAlignment="Center"
                         Style="{DynamicResource ClearTextbox}" />
-                    <ui:TextBox
-                        Grid.Row="1"
-                        VerticalAlignment="Center"
-                        Style="{DynamicResource ClearTextbox}"/>
                     <ui:TextBox
                         Grid.Row="2"
-                        VerticalAlignment="Center"
+                        Style="{DynamicResource ClearTextbox}"/>
+                    <ui:TextBox
+                        Grid.Row="4"
                         Style="{DynamicResource ClearTextbox}" />
-                    <Grid Grid.Row="3" VerticalAlignment="Center">
+                    <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <ui:TextBox 
                             Grid.Column="0"
                             Style="{DynamicResource ClearTextbox}" />
-                        <ui:Button x:Name="Copy" Grid.Column="1" Foreground="White" Width="{Binding ElementName=Copy, Path=Height}" Background="{DynamicResource Focusing}"  Style="{DynamicResource ButtonBar}">
+                        <ui:Button 
+                            x:Name="Copy"
+                            Grid.Column="2"
+                            Foreground="White"
+                            Background="{DynamicResource Focusing}" 
+                            Style="{DynamicResource ButtonBar}">
                             <ui:SymbolIcon Symbol="Copy20"/>
                         </ui:Button>
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1">
-                <TextBlock Text="Тема приложения:" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="14" Foreground="{DynamicResource SecondaryForeground }"/>
-            </Grid>
-            <Grid Grid.Row="2">
-                <ComboBox FontFamily="{StaticResource Inter}" Style="{DynamicResource ClearComboBoxStyle}" Margin="0,0,0,2" SelectedItem="{Binding SelectedRole}"/>
-            </Grid>
-            <Grid Grid.Row="3" Background="{DynamicResource SecondaryBackground}" Margin="0,0,0,10">
+            <TextBlock 
+                Grid.Row="1"
+                Text="Тема приложения:"
+                FontSize="16"
+                Margin="0, 10, 0, 0"
+                HorizontalAlignment="Left"
+                FontFamily="{StaticResource Inter}" 
+                Foreground="{DynamicResource SecondaryForeground }"/>
+            <ComboBox 
+                Grid.Row="3"
+                VerticalAlignment="Stretch"
+                FontFamily="{StaticResource Inter}" 
+                Style="{DynamicResource ClearComboBoxStyle}" 
+                SelectedItem="{Binding SelectedTheme}"/>
+            <Grid Grid.Row="4" Background="{DynamicResource SecondaryBackground}" Margin="0,7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <TextBlock Text="  +7 495-539-30-00" VerticalAlignment="Center" FontSize="16" Foreground="{DynamicResource Focusing}"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <TextBlock Text="Единая служба записи, круглосуточно    "  VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryForeground}"/>
-                </Grid>
+                <TextBlock
+                    Grid.Column="0"
+                    Text="+7 495-539-30-00" 
+                    VerticalAlignment="Center" 
+                    FontSize="16" 
+                    Foreground="{DynamicResource Focusing}"/>
+                <TextBlock
+                    Grid.Column="1"
+                    Text="Единая служба записи, круглосуточно"  
+                    VerticalAlignment="Center" 
+                    FontSize="16" 
+                    HorizontalAlignment="Right" 
+                    Foreground="{DynamicResource PrimaryForeground}"/>
             </Grid>
-            <Grid Grid.Row="4" Background="{DynamicResource SecondaryBackground}" Margin="0,0,0,0">
+            <Grid Grid.Row="5" Background="{DynamicResource SecondaryBackground}" Margin="0, 7">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <TextBlock Text="  +7 495 051" VerticalAlignment="Center" FontSize="16" Foreground="{DynamicResource Focusing}"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <TextBlock Text="Единая служба психологической помощи, круглосуточно.Или &#xA;                                    позвоните по городскому на номер 051" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryForeground}"/>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="5" VerticalAlignment="Bottom">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.4*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="10,0,10,0">
-                    <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Content="Сохранить изменения"/>
-                </Grid>
-                <Grid Grid.Column="1" Margin="10,0,10,0">
-                    <ui:Button FontFamily="{StaticResource Inter}" FontSize="14" Style="{DynamicResource FocusingButton}" Content="Добавить новый аккаунт"/>
-                </Grid>
-                <Grid Grid.Column="2" Margin="10,0,10,0">
-                    <ui:Button 
-                        FontFamily="{StaticResource Inter}" 
-                        FontSize="14" Style="{DynamicResource AttentionButton}" 
-                        Content="Выйти из аккаунта" 
-                        Click="CancelAccount"/>
-                </Grid>
+                <TextBlock
+                    Grid.Column="0"
+                    Text="+7 495 051"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="{DynamicResource Focusing}"/>
+                <TextBlock 
+                    Grid.Column="1" 
+                    Text="Единая служба психологической помощи, круглосуточно.Или позвоните по городскому на номер 051" 
+                    VerticalAlignment="Center" 
+                    FontSize="16" 
+                    TextWrapping="Wrap"
+                    TextAlignment="Right" 
+                    Foreground="{DynamicResource PrimaryForeground}"/>
+            </Grid>
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    FontSize="16"
+                    FontFamily="{StaticResource Inter}"
+                    Style="{DynamicResource FocusingButton}"
+                    Content="Сохранить изменения"/>
+                <ui:Button
+                    Grid.Column="1"
+                    Margin="10,0,10,0"
+                    FontSize="16"
+                    FontFamily="{StaticResource Inter}"
+                    Style="{DynamicResource FocusingButton}"
+                    Content="Добавить новый аккаунт"/>
+                <ui:Button
+                    Grid.Column="2" 
+                    Margin="10,0,0,0"
+                    FontSize="16"
+                    FontFamily="{StaticResource Inter}" 
+                    Style="{DynamicResource AttentionButton}" 
+                    Content="Выйти из аккаунта" 
+                    Click="CancelAccount"/>
             </Grid>
         </Grid>
     </Grid>
