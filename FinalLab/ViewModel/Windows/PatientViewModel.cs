@@ -1,4 +1,5 @@
-﻿using FinalLab.Model;
+﻿using System.Windows.Controls;
+using FinalLab.Model;
 using FinalLab.Properties;
 using Newtonsoft.Json;
 using SecondLibPractice;
@@ -28,10 +29,12 @@ public class PatientViewModel : BindingHelper
     public PatientViewModel()
     {
         Patients = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers)!;
+        CurrentPatient = Patients[0];
     }
 
-    public void SelectionPatient()
+    public void SelectionPatient(object sender, SelectionChangedEventArgs e)
     {
+        CurrentPatient = (((sender as ComboBox)!).SelectedItem as Patient)!;
         SwitchUsers(this, EventArgs.Empty);
     }
 }

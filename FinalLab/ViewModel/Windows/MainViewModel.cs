@@ -70,14 +70,12 @@ public class MainViewModel : BindingHelper
         else
         {
             if (string.IsNullOrEmpty(Settings.Default.CurrentUsers))
-            {
                 Settings.Default.CurrentUsers = JsonConvert.SerializeObject(new List<Patient>{client});
-            }
-            
             else
             {
                 var users = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers);
-                users!.Add(client);
+                if (!users.Exists(item => item.Oms == oms))
+                    users!.Add(client);
                 Settings.Default.CurrentUsers = JsonConvert.SerializeObject(users);
             }
             Settings.Default.Save();

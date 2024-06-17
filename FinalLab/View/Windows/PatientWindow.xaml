@@ -70,7 +70,7 @@
                     Style="{DynamicResource MenuComboBox}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Foreground="#FFFFFF" Margin="2" Text="{Binding FirstName}" />
+                            <TextBlock Foreground="#FFFFFF" Margin="2" Text="{Binding FirstName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                     <b:Interaction.Triggers>
