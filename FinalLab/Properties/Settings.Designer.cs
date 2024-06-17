@@ -33,5 +33,17 @@ namespace FinalLab.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CurrentUsers {
+            get {
+                return ((string)(this["CurrentUsers"]));
+            }
+            set {
+                this["CurrentUsers"] = value;
+            }
+        }
     }
 }

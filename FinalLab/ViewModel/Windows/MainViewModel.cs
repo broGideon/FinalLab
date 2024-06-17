@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System.Net.Http.Json;
+using System.Text.Json.Nodes;
+using System.Windows;
 using FinalLab.Model;
+using FinalLab.Properties;
+using Newtonsoft.Json;
 using SecondLibPractice;
 using Wpf.Ui.Controls;
 using MessageBox = System.Windows.MessageBox;
@@ -45,6 +49,7 @@ public class MainViewModel : BindingHelper
     {
         _password = (sender as PasswordBox).Password;
     }
+    
     #endregion
 
     public void AuthClient()
@@ -63,7 +68,21 @@ public class MainViewModel : BindingHelper
             return;
         }
         else
+        {
+            if (string.IsNullOrEmpty(Settings.Default.CurrentUsers))
+            {
+                Settings.Default.CurrentUsers = JsonConvert.SerializeObject(new List<Patient>{client});
+            }
+            
+            else
+            {
+                var users = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers);
+                users!.Add(client);
+                Settings.Default.CurrentUsers = JsonConvert.SerializeObject(users);
+            }
+            Settings.Default.Save();
             OpenClientWindow(this, EventArgs.Empty);
+        }
     }
     
     public void AuthPersonal()

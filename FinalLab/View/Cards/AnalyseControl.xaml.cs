@@ -1,27 +1,26 @@
 ﻿using System.Windows;
 
 namespace FinalLab.View.Cards;
-public partial class Appointments_Control
+
+public partial class AnalyseControl
 {
-    public string NameResearch { get; set; }
-    
-    public string FIO { get; set; }
+    public string AnalyseName { get; set; }
     
     public string Date { get; set; }
-    
-    public string Address { get; set; }
+
+    public string Address;
 
     public int IdAppointment;
 
     public event EventHandler Click;
-    public Appointments_Control(string nameResearch, string fio, string date, string address, int idAppointment)
+    public AnalyseControl(string analyseName, string date, int idAppointment, string address)
     {
         InitializeComponent();
-        NameResearch = nameResearch;
-        FIO = fio;
+        DataContext = this;
+        AnalyseName = analyseName;
         Date = date;
-        Address = address;
         IdAppointment = idAppointment;
+        Address = address;
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

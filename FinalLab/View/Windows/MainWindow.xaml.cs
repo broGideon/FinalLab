@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using FinalLab.Model;
+using FinalLab.Properties;
 using FinalLab.View;
 using FinalLab.View.Pages;
 using FinalLab.ViewModel;
@@ -15,6 +16,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        if (!string.IsNullOrEmpty(Settings.Default.CurrentUsers))
+        {
+            //OpenPatient();
+            //return;
+        }
         _viewModel = new MainViewModel();
         DataContext = _viewModel;
         PageFrame.Content = new AuthorizationClientPage(_viewModel);

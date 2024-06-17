@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -364,6 +365,7 @@ public class DoctorViewModel : BindingHelper
         var analysDocument = new AnalysDocument((int)id, analyze, NameAnalyze);
         string jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
         ApiHelper.Post(jsonAnalysDocument, "AnalysDocuments");
+        File.Delete("analyzeBuffer.rtf");
     }
 
     private async Task AddResearchDocuments(int? id)
@@ -375,6 +377,7 @@ public class DoctorViewModel : BindingHelper
         string research =  File.ReadAllText("researchBuffer.rtf");
         string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch, _image));
         ApiHelper.Post(jsonResearchDocument, "ResearchDocuments");
+        File.Delete("researchBuffer.rtf");
     }
 
     private async Task AddPatientDirections()

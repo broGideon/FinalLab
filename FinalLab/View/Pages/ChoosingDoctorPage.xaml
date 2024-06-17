@@ -10,45 +10,12 @@
       Title="ChoosingDoctorPage" Height="450" Width="800">
 
     <Grid>
-            <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto"/>
-                  <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Border Grid.Row="0" BorderThickness="0" Background="Transparent" MouseLeftButtonDown="MoveWindow">
-                  <Grid>
-                        <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="3*"/>
-                              <ColumnDefinition Width="3*"/>
-                             <ColumnDefinition Width="5*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
-                              <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
-                                    <ui:SymbolIcon Symbol="LineHorizontal120"/>
-                              </ui:Button>
-                              <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
-                                    <ui:SymbolIcon Symbol="Maximize20"/>
-                              </ui:Button>
-                              <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
-                                    <ui:SymbolIcon Symbol="Dismiss48"/>
-                              </ui:Button>
-                        </StackPanel>
-                        <TextBlock
-                              Grid.Column="0" 
-                              FontSize="22" 
-                              VerticalAlignment="Center" 
-                              HorizontalAlignment="Left" 
-                              Text="Выбор специалиста - " 
-                              Foreground="{DynamicResource PrimaryForeground}"/>
-                        <TextBlock
-                            Grid.Column="1" 
-                            FontSize="22" 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Left" 
-                            Text=" " 
-                            Foreground="{DynamicResource PrimaryForeground}"/>
-                  </Grid>
-            </Border>
-            <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            
+        <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="2*"/>

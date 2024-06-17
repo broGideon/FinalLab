@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using FinalLab.View.Pages;
 using FinalLab.ViewModel;
+using FinalLab.ViewModel.Windows;
 
 namespace FinalLab.View;
 
@@ -13,8 +14,10 @@ public partial class PatientWindow : Window
     {
         InitializeComponent();
         _viewModel = new PatientViewModel();
+        _viewModel.SwitchUsers += (sender, args) => OpenHomePatient(sender, args);
         DataContext = _viewModel;
-        PageFrame.Content = new HomePatientPage();
+        PatientsComboBox.SelectedIndex = 0;
+        //PageFrame.Content = new HomePatientPage();
     }
 
     private void OpenSettings(object sender, RoutedEventArgs e)
@@ -22,7 +25,7 @@ public partial class PatientWindow : Window
         PageFrame.Content = new ProfilePage(_viewModel);
     }
 
-    private void OpenHomePatient(object sender, MouseButtonEventArgs e)
+    private void OpenHomePatient(object sender, EventArgs e)
     {
         PageFrame.Content = new HomePatientPage();
     }
