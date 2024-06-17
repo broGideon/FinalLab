@@ -6,8 +6,43 @@
       xmlns:local="clr-namespace:FinalLab.View.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
-      Title="AnalyzePage" Height="450" Width="800">
+      Title="AnalyzePage" Height="450" Width="800"
+      Background="{DynamicResource PrimaryBackground}">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="{DynamicResource SecondaryBackground}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox Grid.Row="1" ItemsSource="{Binding ElementCurrents}">
+                    <ListBox.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Margin" Value="0, 6"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Left" FontFamily="{StaticResource Inter}" FontSize="20" TextWrapping="Wrap">Определение антигена Coronavirus (SARS-CoV-2 качественно)</TextBlock>
+                <TextBlock Grid.Row="0" TextAlignment="Right" FontFamily="{StaticResource Inter}" FontSize="14" Grid.ColumnSpan="2" VerticalAlignment="Center">Москва, Профсоюзная улица, д. 111А<LineBreak/>13 мая 2023 г.</TextBlock>
+            </Grid>
+            <ui:RichTextBox Grid.Row="3"></ui:RichTextBox>
+        </Grid>
     </Grid>
 </Page>

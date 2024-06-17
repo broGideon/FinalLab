@@ -6,8 +6,54 @@
       xmlns:local="clr-namespace:FinalLab.View.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
-      Title="AppointmentPage" Height="450" Width="800">
+      Title="AppointmentPage" Height="450" Width="800"
+      Background="{DynamicResource PrimaryBackground}">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="{DynamicResource SecondaryBackground}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox Grid.Row="1" ItemsSource="{Binding ElementCurrents}">
+                    <ListBox.Resources>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Margin" Value="0, 6"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"></RowDefinition>
+                <RowDefinition Height="22"></RowDefinition>
+                <RowDefinition Height="22"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="20" FontFamily="{StaticResource Inter}">Осмотр травматолога-ортопеда</TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="14" FontFamily="{StaticResource Inter}">Врач:</TextBlock>
+                <TextBlock Grid.Column="1" FontSize="14" FontFamily="{StaticResource Inter}" TextAlignment="Right">Москва, Каширское ш. д. 62</TextBlock>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="14" FontFamily="{StaticResource Inter}">Сударева Е.Ю.</TextBlock>
+                <TextBlock Grid.Column="1" FontSize="14" FontFamily="{StaticResource Inter}" TextAlignment="Right">12 декабря 2022 г.</TextBlock>
+            </Grid>
+        </Grid>
+        <ui:RichTextBox Grid.Row="4"></ui:RichTextBox>
     </Grid>
 </Page>
