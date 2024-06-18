@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d"
       Background="{DynamicResource PrimaryBackground}"
       Height="Auto" 
@@ -74,6 +75,7 @@
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Stretch" 
                                 FontSize="20" 
+                                Margin="4, 0"
                                 Foreground="{DynamicResource PrimaryForeground}"
                                 Text="{Binding CurrentPatient.FirstName}"/>
                             <TextBlock 
@@ -145,12 +147,18 @@
                     </Grid.RowDefinitions>
                     <ui:TextBox 
                         Grid.Row="0" 
+                        Text="{Binding CurrentPatient.Phone}"
+                        PlaceholderText="Номер телефона"
                         Style="{DynamicResource ClearTextbox}" />
                     <ui:TextBox
                         Grid.Row="2"
+                        Text="{Binding CurrentPatient.Email}"
+                        PlaceholderText="Электронная почта"
                         Style="{DynamicResource ClearTextbox}"/>
                     <ui:TextBox
                         Grid.Row="4"
+                        Text="{Binding CurrentPatient.AddressPatient}"
+                        PlaceholderText="Адрес прописки"
                         Style="{DynamicResource ClearTextbox}" />
                     <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
@@ -160,6 +168,8 @@
                         </Grid.ColumnDefinitions>
                         <ui:TextBox 
                             Grid.Column="0"
+                            Text="{Binding CurrentPatient.LivingAddress}"
+                            PlaceholderText="Адрес фактического проживания"
                             Style="{DynamicResource ClearTextbox}" />
                         <ui:Button 
                             x:Name="Copy"
@@ -181,11 +191,21 @@
                 FontFamily="{StaticResource Inter}" 
                 Foreground="{DynamicResource SecondaryForeground }"/>
             <ComboBox 
+                x:Name="ThemeComboBox"
                 Grid.Row="3"
                 VerticalAlignment="Stretch"
                 FontFamily="{StaticResource Inter}" 
                 Style="{DynamicResource ClearComboBoxStyle}" 
-                SelectedItem="{Binding SelectedTheme}"/>
+                SelectedItem="{Binding CurrentTheme}"
+                ItemsSource="{Binding Themes}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:CallMethodAction
+                            TargetObject="{Binding}"
+                            MethodName="SelectionTheme"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ComboBox>
             <Grid Grid.Row="4" Background="{DynamicResource SecondaryBackground}" Margin="0,7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
