@@ -27,24 +27,34 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="28"/>
                 </Grid.RowDefinitions>
-                <ListBox Grid.Row="0">
-                    <ListBox.Resources>
-                    </ListBox.Resources>
-                </ListBox>
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="0, 0, 0, 10" Background="{DynamicResource SecondaryBackground}">
+                        <ListBox ItemsSource="{Binding Doctors}">
+                            <ListBox.Resources>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Margin" Value="0, 10"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListBox.Resources>
+                        </ListBox>
+                    </Grid>
+                </ScrollViewer>
                 <ui:Button 
                     Grid.Row="1" 
                     FontFamily="{StaticResource Inter}"
-                    FontSize="14" Style="{DynamicResource FocusingButton}" 
+                    FontSize="16" Style="{DynamicResource FocusingButton}" 
                     Content="Назад"
                     Click="Back"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.6*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="0.5*"/>
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -54,34 +64,53 @@
                 </Grid.RowDefinitions>
                 <ui:Button 
                     Grid.Row="10" 
+                    FontSize="16"
                     FontFamily="{StaticResource Inter}" 
-                    FontSize="14" 
                     Style="{DynamicResource FocusingButton}" 
                     Content="Записаться на прием"/>
                 <TextBlock 
                     Grid.Row="0"
-                    FontSize="16" 
-                    HorizontalAlignment="Left" 
-                    Text="AHAHHA"
+                    FontSize="20" 
+                    Text="{Binding FioDoctor}"
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource PrimaryForeground}"/>
                 <TextBlock 
                     Grid.Row="1" 
                     Text="Текущая неделя"
-                    FontSize="14" 
-                    HorizontalAlignment="Left" 
                     Foreground="{DynamicResource PrimaryForeground}"/>
                 <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto">
                     <Grid>
                         <ItemsControl 
-                            ItemsSource="{Binding SpecialCards}">
+                            ItemsSource="{Binding CurrentWeek}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <UniformGrid  Rows="1"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemContainerStyle>
                                 <Style>
-                                    <Setter Property="FrameworkElement.Margin" Value="7,0"/>
+                                    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ItemsControl>   
+                    </Grid>
+                </ScrollViewer>
+                <TextBlock 
+                    Grid.Row="3"
+                    Text="Следующая неделя"
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground}"/>
+                <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto">
+                    <Grid>
+                        <ItemsControl 
+                            ItemsSource="{Binding NextWeek}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid  Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
                                     <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
                                 </Style>
                             </ItemsControl.ItemContainerStyle>
