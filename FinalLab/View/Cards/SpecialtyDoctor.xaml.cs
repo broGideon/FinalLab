@@ -1,4 +1,6 @@
-﻿namespace FinalLab.View.Cards;
+﻿using System.Windows;
+
+namespace FinalLab.View.Cards;
 public partial class SpecialtyDoctor
 {
     private string _imagePath;
@@ -17,6 +19,11 @@ public partial class SpecialtyDoctor
         DataContext = this;
         ImagePath = imagePath;
         NameRole = nameRole;
+    }
+
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 }
 

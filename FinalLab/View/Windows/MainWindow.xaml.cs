@@ -6,20 +6,23 @@ using FinalLab.Properties;
 using FinalLab.View;
 using FinalLab.View.Pages;
 using FinalLab.ViewModel;
-using Spire.Pdf.Exporting.XPS.Schema;
-using Wpf.Ui.Controls;
 namespace FinalLab;
 
 public partial class MainWindow : Window
 {
     private MainViewModel _viewModel;
-    public MainWindow()
+
+    public MainWindow() : this(false) 
+    {
+        
+    }
+    public MainWindow(bool addAccount = false)
     {
         InitializeComponent();
-        if (!string.IsNullOrEmpty(Settings.Default.CurrentUsers))
+        if (!string.IsNullOrEmpty(Settings.Default.CurrentUsers) && !addAccount)
         {
-            //OpenPatient();
-            //return;
+            OpenPatient();
+            return;
         }
         _viewModel = new MainViewModel();
         DataContext = _viewModel;
@@ -94,5 +97,4 @@ public partial class MainWindow : Window
         opacityAnim.Duration = TimeSpan.FromSeconds(0.5);
         PageFrame.BeginAnimation(OpacityProperty, opacityAnim);
     }
-
 }

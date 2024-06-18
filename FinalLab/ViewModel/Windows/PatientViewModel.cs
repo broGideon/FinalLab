@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 using FinalLab.Model;
 using FinalLab.Properties;
 using Newtonsoft.Json;
@@ -10,11 +12,11 @@ public class PatientViewModel : BindingHelper
 {
     public List<string> Themes { get; set; } = new List<string> { "Светлая", "Темная"};
     
-    private List<Patient> _patients = null!;
-
     public event EventHandler SwitchUsers;
 
-    public List<Patient> Patients
+    private ObservableCollection<Patient> _patients = null!;
+
+    public ObservableCollection<Patient> Patients
     {
         get => _patients;
         set => SetField(ref _patients, value);
@@ -35,10 +37,12 @@ public class PatientViewModel : BindingHelper
         get => _currentTheme;
         set => SetField(ref _currentTheme, value);
     }
+
+    public event EventHandler Close;
     
     public PatientViewModel()
     {
-        Patients = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers)!;
+        Patients = JsonConvert.DeserializeObject<ObservableCollection<Patient>>(Settings.Default.CurrentUsers)!;
         CurrentPatient = Patients[0];
         if (App.Theme == "Light")
             CurrentTheme = "Светлая";
@@ -58,5 +62,39 @@ public class PatientViewModel : BindingHelper
             App.Theme = "Light";
         else
             App.Theme = "Dark";
+    }
+
+    public void CancelAccount()
+    {
+        if (Patients.Count == 1)
+        {
+            Settings.Default.CurrentUsers = String.Empty;   
+            Settings.Default.Save();
+            Close(this, EventArgs.Empty);
+            return;
+        }
+
+        var patient = CurrentPatient;
+        if (Patients.IndexOf(patient) == 0)
+            CurrentPatient = Patients[1];
+        else
+            CurrentPatient = Patients[0];
+        Patients.Remove(patient);
+        Settings.Default.CurrentUsers = JsonConvert.SerializeObject(Patients);
+        Settings.Default.Save();
+    }
+
+    public void Update()
+    {
+        if (!string.IsNullOrEmpty(CurrentPatient.Email) && !string.IsNullOrEmpty(CurrentPatient.Phone) &&
+            !string.IsNullOrEmpty(CurrentPatient.AddressPatient) && !string.IsNullOrEmpty(CurrentPatient.LivingAddress))
+            ApiHelper.Put(JsonConvert.SerializeObject(CurrentPatient), "Patients", CurrentPatient.Oms);
+        else
+            MessageBox.Show("Все поля должны быть заполнены");
+    }
+
+    public void Copy()
+    {
+        CurrentPatient.LivingAddress = CurrentPatient.AddressPatient;
     }
 }

@@ -172,11 +172,17 @@
                             PlaceholderText="Адрес фактического проживания"
                             Style="{DynamicResource ClearTextbox}" />
                         <ui:Button 
-                            x:Name="Copy"
                             Grid.Column="2"
                             Foreground="White"
                             Background="{DynamicResource Focusing}" 
                             Style="{DynamicResource ButtonBar}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:CallMethodAction
+                                        TargetObject="{Binding}"
+                                        MethodName="Copy"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
                             <ui:SymbolIcon Symbol="Copy20"/>
                         </ui:Button>
                     </Grid>
@@ -257,22 +263,38 @@
                     FontSize="16"
                     FontFamily="{StaticResource Inter}"
                     Style="{DynamicResource FocusingButton}"
-                    Content="Сохранить изменения"/>
+                    Content="Сохранить изменения">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="Update"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ui:Button>
                 <ui:Button
                     Grid.Column="1"
                     Margin="10,0,10,0"
                     FontSize="16"
                     FontFamily="{StaticResource Inter}"
                     Style="{DynamicResource FocusingButton}"
-                    Content="Добавить новый аккаунт"/>
+                    Content="Добавить новый аккаунт"
+                    Click="AddAccount"/>
                 <ui:Button
                     Grid.Column="2" 
                     Margin="10,0,0,0"
                     FontSize="16"
                     FontFamily="{StaticResource Inter}" 
                     Style="{DynamicResource AttentionButton}" 
-                    Content="Выйти из аккаунта" 
-                    Click="CancelAccount"/>
+                    Content="Выйти из аккаунта">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="CancelAccount"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ui:Button>
             </Grid>
         </Grid>
     </Grid>

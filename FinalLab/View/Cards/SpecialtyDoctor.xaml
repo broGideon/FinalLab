@@ -19,7 +19,7 @@
             <Setter Property="Padding" Value="0"/>
         </Style>
     </UserControl.Resources>
-    <Button Style="{StaticResource ClearButton}">
+    <Button Style="{StaticResource ClearButton}" Click="ButtonBase_OnClick">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>

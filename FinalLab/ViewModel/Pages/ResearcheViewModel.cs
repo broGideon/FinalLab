@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows;
 using System.Windows.Documents;
 using FinalLab.Model;

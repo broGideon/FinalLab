@@ -1,14 +1,13 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
-public partial class RecordPage : Page
+public partial class RecordPage
 {
     public RecordPage()
     {
         InitializeComponent();
+        DataContext = new RecordViewModel();
     }
     
 }

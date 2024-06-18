@@ -13,5 +13,10 @@ public partial class HomePatientPage : Page
         InitializeComponent();
         DataContext = new HomePatientViewModel();
     }
-    
+
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        window.PageFrame.Content = new RecordPage();
+    }
 }

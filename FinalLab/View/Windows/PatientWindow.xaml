@@ -67,6 +67,7 @@
                     x:Name="PatientsComboBox"
                     Grid.Column="1" 
                     ItemsSource="{Binding Patients}"
+                    SelectedItem="{Binding CurrentPatient}"
                     Style="{DynamicResource MenuComboBox}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -111,6 +112,7 @@
                     </StackPanel>
                     <TextBlock
                         Grid.Column="0" 
+                        Margin="10, 0"
                         x:Name="WindowTextBlock"
                         FontSize="22" 
                         VerticalAlignment="Center" 

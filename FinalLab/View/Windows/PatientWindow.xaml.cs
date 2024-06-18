@@ -17,7 +17,6 @@ public partial class PatientWindow : Window
         _viewModel = new PatientViewModel();
         _viewModel.SwitchUsers += (sender, args) => OpenHomePatient(sender, args);
         DataContext = _viewModel;
-        PatientsComboBox.SelectedIndex = 0;
         //PageFrame.Content = new HomePatientPage();
     }
 

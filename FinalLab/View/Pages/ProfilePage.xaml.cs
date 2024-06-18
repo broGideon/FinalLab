@@ -13,15 +13,22 @@ public partial class ProfilePage
     {
         InitializeComponent();
         DataContext = viewModel;
+        viewModel.Close += (_, _) => Close();
     }
 
-    private void CancelAccount(object sender, RoutedEventArgs e)
+    private void Close()
     {
-        //var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
         MainWindow mainWindow = new MainWindow();
-        Settings.Default.CurrentUsers = string.Empty;
-        Settings.Default.Save();
-        //mainWindow.Show();
-        //window.Close();
+        mainWindow.Show();
+        window.Close();
+    }
+
+    private void AddAccount(object sender, RoutedEventArgs e)
+    {
+        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        MainWindow mainWindow = new MainWindow(true);
+        mainWindow.Show();
+        window.Close();
     }
 }

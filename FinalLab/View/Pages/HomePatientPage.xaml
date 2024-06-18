@@ -19,7 +19,7 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                     <RowDefinition Height="13"/>
-                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="116"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -91,7 +91,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemContainerStyle>
                             <Style>
-                                <Setter Property="FrameworkElement.Margin" Value="11,0"/>
+                                <Setter Property="FrameworkElement.Margin" Value="5,0"/>
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </ItemsControl>
@@ -142,13 +142,18 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemContainerStyle>
                             <Style>
-                                <Setter Property="FrameworkElement.Margin" Value="11,0"/>
+                                <Setter Property="FrameworkElement.Margin" Value="5,0"/>
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </ItemsControl>
                 </Grid>
             </ScrollViewer>
-            <ui:Button Grid.Row="7" Style="{DynamicResource FocusingButton}" Content="Записаться на прием" FontSize="16"/>
+            <ui:Button 
+                Grid.Row="7"
+                Style="{DynamicResource FocusingButton}"
+                Content="Записаться на прием"
+                FontSize="16"
+                Click="ButtonBase_OnClick"/>
         </Grid>
     </Grid>
 </Page>
