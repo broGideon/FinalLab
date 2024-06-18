@@ -13,15 +13,6 @@ public partial class ProfilePage
     {
         InitializeComponent();
         DataContext = viewModel;
-        viewModel.Close += (_, _) => Close();
-    }
-
-    private void Close()
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.Show();
-        window.Close();
     }
 
     private void AddAccount(object sender, RoutedEventArgs e)

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using FinalLab.Model;
 using FinalLab.View;
 using FinalLab.View.Cards;
+using FinalLab.View.Pages;
 using SecondLibPractice;
 
 namespace FinalLab.ViewModel.Pages;
@@ -60,7 +61,8 @@ public class HomePatientViewModel : BindingHelper
         List<Speciality>? specialities = ApiHelper.Get<List<Speciality>>("Specialities");
         foreach (var item in directionsSorted!)
         {
-            SpecialtyDoctor specialtyDoctor = new SpecialtyDoctor(specialities![(int)(item.SpecialityId-1)!].NumberImage.ToString(), specialities[(int)(item.SpecialityId-1)!].NameSpecialities);
+            SpecialtyDoctor specialtyDoctor = new SpecialtyDoctor(specialities![(int)(item.SpecialityId-1)!].NumberImage.ToString(), specialities[(int)(item.SpecialityId-1)!].NameSpecialities, (int)item.SpecialityId!);
+            specialtyDoctor.Click += (sender, args) => RecordingDirection(sender, args);
             SpecialtyDoctorCards.Add(specialtyDoctor);
         }
     }
@@ -145,11 +147,6 @@ public class HomePatientViewModel : BindingHelper
                 ArchivedRecords.Add(new Data(appointment.AppointmentDate.ToString("MMMM yyyy"), new ObservableCollection<RecordsArchive>(recordsArchives)));
         }
     }
-
-    private void Move(object sender, EventArgs args)
-    {
-        
-    }
     
     private void Delete(object sender, EventArgs args)
     {
@@ -177,7 +174,22 @@ public class HomePatientViewModel : BindingHelper
 
     private void Repeat(object sender, EventArgs args)
     {
-        
+        var card = sender as RecordsArchive;
+        var doctor = ApiHelper.Get<Doctor>("Doctors", (long)card!.IdDoctor);
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content = new ChoosingDoctorPage((int)doctor!.SpecialityId!, card!.IdDoctor);
+    }
+    
+    private void Move(object sender, EventArgs args)
+    {
+        var card = sender as Appointments;
+        var doctor = ApiHelper.Get<Doctor>("Doctors", (long)card!.IdDoctor);
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content = new ChoosingDoctorPage((int)doctor!.SpecialityId!, card!.IdDoctor, card.IdAppointment);
+    }
+
+    private void RecordingDirection(object sender, EventArgs args)
+    {
+        var card = sender as SpecialtyDoctor;
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content = new ChoosingDoctorPage(card!.IdSpeciality);
     }
 
     public async void SelectedDateCurrentFrom(object? sender, SelectionChangedEventArgs e)

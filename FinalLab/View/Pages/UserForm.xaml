@@ -15,11 +15,47 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.Oms}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Номер полиса" Grid.Row="0"/>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.Surname}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Фамилия" Grid.Row="1"/>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.FirstName}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Имя" Grid.Row="2"/>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.Patronymic}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Отчество" Grid.Row="3"/>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.BirthDay}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Дата рождения" Grid.Row="4"/>
-        <ui:TextBox FontFamily="{StaticResource Inter}" Text="{Binding PatientItem.AddressPatient}" Style="{DynamicResource ClearTextbox}" Margin="0, 2" PlaceholderText="Адрес прописки" Grid.Row="5"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.Oms}" 
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2" 
+            PlaceholderText="Номер полиса" 
+            Grid.Row="0"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.Surname}"
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2"
+            PlaceholderText="Фамилия"
+            Grid.Row="1"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.FirstName}" 
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2" 
+            PlaceholderText="Имя" 
+            Grid.Row="2"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.Patronymic}" 
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2" 
+            PlaceholderText="Отчество" 
+            Grid.Row="3"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.BirthDay}" 
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2" 
+            PlaceholderText="Дата рождения" 
+            Grid.Row="4"/>
+        <ui:TextBox 
+            FontFamily="{StaticResource Inter}" 
+            Text="{Binding PatientItem.AddressPatient}" 
+            Style="{DynamicResource ClearTextbox}" 
+            Margin="0, 2"
+            PlaceholderText="Адрес прописки" 
+            Grid.Row="5"/>
     </Grid>
 </Page>

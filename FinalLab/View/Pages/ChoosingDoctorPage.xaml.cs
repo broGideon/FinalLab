@@ -1,43 +1,18 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
-public partial class ChoosingDoctorPage : Page
+public partial class ChoosingDoctorPage
 {
-    public ChoosingDoctorPage()
+    public ChoosingDoctorPage(int idSpeciality, int idDoctor = -1, int idAppointment = -1)
     {
         InitializeComponent();
-    }
-    
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        window.Close();
+        DataContext = new ChoosingDoctorViewModel(idSpeciality, idDoctor, idAppointment);
     }
 
-    private void MoveWindow(object sender, MouseButtonEventArgs e)
+    private void Back(object sender, RoutedEventArgs e)
     {
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-            window.DragMove();
-        }
-    }
-
-    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        if (window.WindowState == WindowState.Normal)
-            window.WindowState = WindowState.Maximized;
-        else
-            window.WindowState = WindowState.Normal;
-    }
-
-    private void RollUpButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        window.WindowState = WindowState.Minimized;
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.GoBack();
     }
 }

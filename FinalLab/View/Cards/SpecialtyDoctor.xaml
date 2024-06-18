@@ -37,6 +37,8 @@
                 VerticalAlignment="Center"
                 FontFamily="{StaticResource Inter}"
                 FontSize="16"  
+                TextWrapping="Wrap"
+                TextAlignment="Center"
                 FontWeight="Normal"
                 Text="{Binding NameRole}"
                 Foreground="{DynamicResource PrimaryForeground}"/>

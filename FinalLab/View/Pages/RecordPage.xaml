@@ -1,12 +1,8 @@
 ﻿<Page x:Class="FinalLab.View.Pages.RecordPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:FinalLab.View.Pages"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      mc:Ignorable="d"
-      Height="Auto" Width="Auto" 
+      Height="Auto" 
+      Width="Auto" 
       Background="{DynamicResource PrimaryBackground}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -29,11 +25,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Margin="0,10,0,5" Text="ОРВИ / COVID19" FontSize="20"/>
-                <ScrollViewer Grid.Row="1">
-                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,10">
+                <TextBlock 
+                    Grid.Row="0" 
+                    Margin="0,10,0,5" 
+                    Text="ОРВИ / COVID19" 
+                    FontSize="20"/>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,0">
                         <ItemsControl 
-                            Margin="0, 15" 
+                            Margin="0, 10, 0, 20" 
                             ItemsSource="{Binding SpecialCards}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -54,9 +54,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Margin="0,10,0,5" Text="Специальность" FontSize="20"/>
-                <ScrollViewer Grid.Row="1">
-                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,10">
+                <TextBlock 
+                    Grid.Row="0" 
+                    Margin="0,10,0,5" 
+                    Text="Специальность" 
+                    FontSize="20"/>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,0">
                         <ItemsControl 
                             Margin="0, 15" 
                             ItemsSource="{Binding SpecialitesCards}">
@@ -79,9 +83,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Margin="0,10,0,5" Text="Направления" FontSize="20"/>
-                <ScrollViewer Grid.Row="1">
-                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,10">
+                <TextBlock 
+                    Grid.Row="0" 
+                    Margin="0,10,0,5" 
+                    Text="Направления" 
+                    FontSize="20"/>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,0">
                         <ItemsControl 
                             Margin="0, 15" 
                             ItemsSource="{Binding DirectionsCards}">
@@ -104,9 +112,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Margin="0,10,0,5" Text="Цели обращения" FontSize="20"/>
-                <ScrollViewer Grid.Row="1">
-                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,10">
+                <TextBlock 
+                    Grid.Row="0" 
+                    Margin="0,10,0,5" 
+                    Text="Цели обращения" 
+                    FontSize="20"/>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                    <Grid Background="{DynamicResource SecondaryBackground}" Margin="0,5,0,0">
                         <ItemsControl 
                             Margin="0, 15" 
                             ItemsSource="{Binding PurposeCards}">

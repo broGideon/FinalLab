@@ -13,17 +13,22 @@ public partial class SpecialtyDoctor
     
     public string NameRole { get; set; }
 
-    public SpecialtyDoctor(string imagePath, string nameRole)
+    public event EventHandler Click;
+
+    public int IdSpeciality;
+
+    public SpecialtyDoctor(string imagePath, string nameRole, int idSpeciality)
     {
         InitializeComponent();
         DataContext = this;
         ImagePath = imagePath;
         NameRole = nameRole;
+        IdSpeciality = idSpeciality;
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        Click(this, EventArgs.Empty);
     }
 }
 

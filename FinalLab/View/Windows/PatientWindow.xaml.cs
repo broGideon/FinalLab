@@ -16,6 +16,7 @@ public partial class PatientWindow : Window
         InitializeComponent();
         _viewModel = new PatientViewModel();
         _viewModel.SwitchUsers += (sender, args) => OpenHomePatient(sender, args);
+        _viewModel.Close += (_, _) => ExitUser();
         DataContext = _viewModel;
         //PageFrame.Content = new HomePatientPage();
     }
@@ -66,5 +67,13 @@ public partial class PatientWindow : Window
     private void RollUpButton_Click(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
+    }
+    
+    private void ExitUser()
+    {
+        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        window.Close();
     }
 }

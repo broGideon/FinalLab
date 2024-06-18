@@ -7,16 +7,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Themes;component/Light.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Window">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+            </Style>
+            <Style TargetType="Page">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+            </Style>
+            <Style TargetType="UserControl">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
-    <Style TargetType="Window">
-        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
-    </Style>
-    <Style TargetType="Page">
-        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
-    </Style>
-    <Style TargetType="UserControl">
-        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
-    </Style>
-
 </Application>
