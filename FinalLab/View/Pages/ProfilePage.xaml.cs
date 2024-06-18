@@ -1,6 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using FinalLab.Properties;
 using FinalLab.ViewModel;
+using FinalLab.ViewModel.Windows;
 
 namespace FinalLab.View.Pages;
 
@@ -11,34 +14,12 @@ public partial class ProfilePage
         InitializeComponent();
         DataContext = viewModel;
     }
-    
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
+
+    private void AddAccount(object sender, RoutedEventArgs e)
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
+        MainWindow mainWindow = new MainWindow(true);
+        mainWindow.Show();
         window.Close();
-    }
-
-    private void MoveWindow(object sender, MouseButtonEventArgs e)
-    {
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-            window.DragMove();
-        }
-    }
-
-    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        if (window.WindowState == WindowState.Normal)
-            window.WindowState = WindowState.Maximized;
-        else
-            window.WindowState = WindowState.Normal;
-    }
-
-    private void RollUpButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        window.WindowState = WindowState.Minimized;
     }
 }

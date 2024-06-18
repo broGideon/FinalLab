@@ -1,6 +1,8 @@
-﻿namespace FinalLab.Model;
+﻿using SecondLibPractice;
 
-public class Patient
+namespace FinalLab.Model;
+
+public class Patient : BindingHelper
 {
     public long Oms { get; set; }
 
@@ -14,7 +16,13 @@ public class Patient
 
     public string AddressPatient { get; set; } = null!;
 
-    public string? LivingAddress { get; set; }
+    private string? _livingAddress;
+
+    public string? LivingAddress
+    {
+        get => _livingAddress; 
+        set => SetField(ref _livingAddress, value);
+    }
 
     public string? Phone { get; set; }
 

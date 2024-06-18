@@ -1,43 +1,16 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
-public partial class AppointmentPage : Page
+public partial class AppointmentPage
 {
+    private AppointmentViewModel _viewModel;
     public AppointmentPage()
     {
         InitializeComponent();
+        _viewModel = new AppointmentViewModel();
+        DataContext = _viewModel;
+        RTB.Document = _viewModel.RTB;
     }
     
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        window.Close();
-    }
-
-    private void MoveWindow(object sender, MouseButtonEventArgs e)
-    {
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-            window.DragMove();
-        }
-    }
-
-    private void UnwrapButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        if (window.WindowState == WindowState.Normal)
-            window.WindowState = WindowState.Maximized;
-        else
-            window.WindowState = WindowState.Normal;
-    }
-
-    private void RollUpButton_Click(object sender, RoutedEventArgs e)
-    {
-        var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        window.WindowState = WindowState.Minimized;
-    }
 }

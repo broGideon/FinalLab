@@ -11,7 +11,6 @@ public partial class RecordsArchive
     public int IdDoctor;
 
     public int IdAppointment;
-    
     public event EventHandler Repeat;
     public event EventHandler Delete;
     public RecordsArchive(string nameDoctor, string fio, string day, string address,  int idDoctor, int idAppointment)

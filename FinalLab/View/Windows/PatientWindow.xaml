@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Background="{DynamicResource PrimaryBackground}"
         WindowStartupLocation="CenterScreen"
@@ -29,9 +30,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0, 8">
+            <Grid Grid.Row="0">
                 <Border Background="Transparent" MouseLeftButtonDown="MoveWindow">
-                    <Grid>
+                    <Grid  Margin="0, 8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -44,7 +45,7 @@
             <Separator Grid.Row="1" Background="#FFFFFF" Height="2" Margin="6, 0"/>
             <TreeView Grid.Row="2" FontFamily="{StaticResource Inter}" BorderThickness="0"  Background="{DynamicResource Focusing}">
                 <TreeViewItem Header="Главная" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Записи и направления" MouseUp="OpenHomePatient" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Записи и направления" MouseUp="OpenMakeAppointmentPatient" Foreground="#FFFFFF"/>
                     <TreeViewItem Header="Рецепты" Foreground="#FFFFFF"/>
                     <TreeViewItem Header="Диспансеризация" Foreground="#FFFFFF"/>
                 </TreeViewItem>
@@ -62,7 +63,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Полис ОМС: " FontFamily="{StaticResource Inter}" FontSize="14" Foreground="#FFFFFF"/>
-                <ComboBox Grid.Column="1" Style="{DynamicResource MenuComboBox}" BorderThickness="0" FontSize="14" BorderBrush="Transparent"/>
+                <ComboBox 
+                    x:Name="PatientsComboBox"
+                    Grid.Column="1" 
+                    ItemsSource="{Binding Patients}"
+                    SelectedItem="{Binding CurrentPatient}"
+                    Style="{DynamicResource MenuComboBox}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="#FFFFFF" Margin="2" Text="{Binding FirstName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectionChanged">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="SelectionPatient"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ComboBox>
                 <ui:Button Grid.Column="2" HorizontalAlignment="Right" Foreground="#FFFFFF" Style="{DynamicResource ButtonBar}" Click="OpenSettings">
                     <Image Width="24" Source="../../../Model/Images/settings.png"/>
                 </ui:Button>
@@ -74,8 +93,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" BorderThickness="0" MouseLeftButtonDown="MoveWindow">
-                <Grid Margin="25, 4">
+            <Border Grid.Row="0" Background="Transparent" BorderThickness="0" MouseLeftButtonDown="MoveWindow">
+                <Grid Margin="16, 4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
@@ -93,10 +112,11 @@
                     </StackPanel>
                     <TextBlock
                         Grid.Column="0" 
+                        Margin="10, 0"
+                        x:Name="WindowTextBlock"
                         FontSize="22" 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Left" 
-                        Text="Запись" 
                         Foreground="{DynamicResource PrimaryForeground}"/>
                 </Grid>
             </Border>
