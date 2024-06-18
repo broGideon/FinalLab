@@ -11,6 +11,14 @@ public class Appointment
         StatusId = statusId;
         DoctorId = doctorId;
     }
+    
+    public Appointment(DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId, int statusId)
+    {
+        AppointmentDate = appointmentDate;
+        Oms = oms;
+        StatusId = statusId;
+        DoctorId = doctorId;
+    }
 
     public Appointment()
     {

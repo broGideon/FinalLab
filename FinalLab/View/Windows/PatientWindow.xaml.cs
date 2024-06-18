@@ -18,7 +18,7 @@ public partial class PatientWindow : Window
         _viewModel.SwitchUsers += (sender, args) => OpenHomePatient(sender, args);
         _viewModel.Close += (_, _) => ExitUser();
         DataContext = _viewModel;
-        //PageFrame.Content = new HomePatientPage();
+        PageFrame.Content = new HomePatientPage();
     }
 
     private void OpenSettings(object sender, RoutedEventArgs e)
