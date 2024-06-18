@@ -45,7 +45,7 @@
             <Separator Grid.Row="1" Background="#FFFFFF" Height="2" Margin="6, 0"/>
             <TreeView Grid.Row="2" FontFamily="{StaticResource Inter}" BorderThickness="0"  Background="{DynamicResource Focusing}">
                 <TreeViewItem Header="Главная" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Записи и направления" MouseUp="OpenHomePatient" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Записи и направления" MouseUp="OpenMakeAppointmentPatient" Foreground="#FFFFFF"/>
                     <TreeViewItem Header="Рецепты" Foreground="#FFFFFF"/>
                     <TreeViewItem Header="Диспансеризация" Foreground="#FFFFFF"/>
                 </TreeViewItem>
@@ -117,7 +117,6 @@
                         FontSize="22" 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Left" 
-                        Text="Запись" 
                         Foreground="{DynamicResource PrimaryForeground}"/>
                 </Grid>
             </Border>

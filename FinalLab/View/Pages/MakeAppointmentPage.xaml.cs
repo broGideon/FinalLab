@@ -6,12 +6,12 @@ using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
-public partial class HomePatientPage : Page
+public partial class MakeAppointmentPage : Page
 {
-    public HomePatientPage()
+    public MakeAppointmentPage()
     {
         InitializeComponent();
-        DataContext = new HomePatientViewModel();
+        DataContext = new MakeAppointmentViewModel();
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

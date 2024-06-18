@@ -9,7 +9,7 @@ using SecondLibPractice;
 
 namespace FinalLab.ViewModel.Pages;
 
-public class HomePatientViewModel : BindingHelper
+public class MakeAppointmentViewModel : BindingHelper
 {
     #region MyRegion
 
@@ -43,7 +43,7 @@ public class HomePatientViewModel : BindingHelper
     private DateOnly _selectionDateArchivesFrom = DateOnly.FromDateTime(DateTime.Now);
     private DateOnly _selectionDateArchivesTo = DateOnly.MaxValue;
 
-    public HomePatientViewModel()
+    public MakeAppointmentViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
         _oms = (window.PatientsComboBox.SelectedItem as Patient).Oms;

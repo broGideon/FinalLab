@@ -15,10 +15,15 @@ public partial class PatientWindow : Window
     {
         InitializeComponent();
         _viewModel = new PatientViewModel();
-        _viewModel.SwitchUsers += (sender, args) => OpenHomePatient(sender, args);
+        _viewModel.SwitchUsers += (sender, args) => OpenHomePatient();
         _viewModel.Close += (_, _) => ExitUser();
         DataContext = _viewModel;
-        PageFrame.Content = new HomePatientPage();
+        //PageFrame.Content = new MakeAppointmentPage();
+    }
+
+    private void OpenHomePatient()
+    {
+        PageFrame.Content = null;
     }
 
     private void OpenSettings(object sender, RoutedEventArgs e)
@@ -26,9 +31,9 @@ public partial class PatientWindow : Window
         PageFrame.Content = new ProfilePage(_viewModel);
     }
 
-    private void OpenHomePatient(object sender, EventArgs e)
+    private void OpenMakeAppointmentPatient(object sender, EventArgs e)
     {
-        PageFrame.Content = new HomePatientPage();
+        PageFrame.Content = new MakeAppointmentPage();
     }
 
     private void OpenAppointments(object sender, MouseButtonEventArgs e)
