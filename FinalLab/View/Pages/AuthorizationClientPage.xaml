@@ -3,49 +3,51 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-      Title="AuthorizationClientPage" 
+      Title="AuthorizationClientPage"
       Background="{DynamicResource PrimaryBackground}"
-      Height="Auto" 
+      Height="Auto"
       Width="Auto">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="27"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="26"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="27" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ui:TextBox 
-            Grid.Row="1" 
-            Margin="15, 0" 
-            Foreground="{DynamicResource PrimaryForeground}" 
-            Style="{DynamicResource ClearTextbox}" 
-            PlaceholderText="Номер полиса" 
+        <ui:TextBox
+            Grid.Row="1"
+            Margin="15, 0"
+            Foreground="{DynamicResource PrimaryForeground}"
+            Style="{DynamicResource ClearTextbox}"
             FontFamily="{StaticResource Inter}"
-            Text="{Binding Oms}"/>
+            PlaceholderText="Номер полиса"
+            Text="{Binding Oms}" />
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <ui:Button Grid.Column="0"  Width="177"  Style="{DynamicResource FocusingButton}" Content="Войти" FontSize="14" FontFamily="{StaticResource Inter}">
+            <ui:Button Grid.Column="0" Width="177" Style="{DynamicResource FocusingButton}" Content="Войти"
+                       FontFamily="{StaticResource Inter}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction
                             TargetObject="{Binding}"
-                            MethodName="AuthClient"/>
+                            MethodName="AuthClient" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ui:Button>
-            <ui:Button Grid.Column="1" Width="177" Style="{DynamicResource FocusingButton}" Content="Я врач" FontSize="14" FontFamily="{StaticResource Inter}">
+            <ui:Button IsEnabled="{Binding IsAddAccount}" Grid.Column="1" Width="177"
+                       Style="{DynamicResource FocusingButton}" Content="Я врач" FontFamily="{StaticResource Inter}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction
                             TargetObject="{Binding}"
-                            MethodName="SwitchPageMethod"/>
+                            MethodName="SwitchPageMethod" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ui:Button>
-        </Grid> 
+        </Grid>
     </Grid>
 </Page>

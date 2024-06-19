@@ -11,10 +11,10 @@ namespace FinalLab.ViewModel.Pages;
 
 public class AnalyseViewModel : BindingHelper
 {
-    #region MyRegion
-    
+    #region Variables
+
     private string _analyseName;
-    
+
     public string AnalyseName
     {
         get => _analyseName;
@@ -47,23 +47,27 @@ public class AnalyseViewModel : BindingHelper
         set => SetField(ref _elements, value);
     }
 
-    private long _oms;
+    private readonly long _oms;
 
     private int _id;
+
+    #endregion
+
+    #region Methods
 
     public AnalyseViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
         _oms = (window.PatientsComboBox.SelectedItem as Patient).Oms;
         window.WindowTextBlock.Text = "Анализы";
-        RTB = new();
+        RTB = new FlowDocument();
         LoadCards();
     }
-    #endregion
-    
+
     private void LoadCards()
     {
-        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.Oms == _oms).OrderBy(item => item.AppointmentDate);
+        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.Oms == _oms)
+            .OrderBy(item => item.AppointmentDate);
         foreach (var appointment in appointments)
         {
             var analysDocument =
@@ -71,7 +75,9 @@ public class AnalyseViewModel : BindingHelper
             if (analysDocument != null)
             {
                 var doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-                var card = new AnalyseControl(analysDocument.DocumentName, appointment.AppointmentDate.ToString("dd MMMM yyyy"), (int)analysDocument.IdAppointment!, doctor.WorkAddress);
+                var card = new AnalyseControl(analysDocument.DocumentName,
+                    appointment.AppointmentDate.ToString("dd MMMM yyyy"), (int)analysDocument.IdAppointment!,
+                    doctor.WorkAddress);
                 card.Click += (sender, args) => LoadInfo(sender, args);
                 Elements.Add(card);
             }
@@ -93,4 +99,6 @@ public class AnalyseViewModel : BindingHelper
         fs.Close();
         File.Delete("buffer.rtf");
     }
+
+    #endregion
 }

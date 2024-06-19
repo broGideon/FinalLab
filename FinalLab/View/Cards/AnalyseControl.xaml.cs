@@ -4,15 +4,10 @@ namespace FinalLab.View.Cards;
 
 public partial class AnalyseControl
 {
-    public string AnalyseName { get; set; }
-    
-    public string Date { get; set; }
-
     public string Address;
 
     public int IdAppointment;
 
-    public event EventHandler Click;
     public AnalyseControl(string analyseName, string date, int idAppointment, string address)
     {
         InitializeComponent();
@@ -22,6 +17,12 @@ public partial class AnalyseControl
         IdAppointment = idAppointment;
         Address = address;
     }
+
+    public string AnalyseName { get; set; }
+
+    public string Date { get; set; }
+
+    public event EventHandler Click;
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {

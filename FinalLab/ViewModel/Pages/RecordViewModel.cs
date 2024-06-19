@@ -10,41 +10,46 @@ namespace FinalLab.ViewModel.Pages;
 
 public class RecordViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     private ObservableCollection<SpecialtyDoctor> _specialCards = new();
-    
+
     public ObservableCollection<SpecialtyDoctor> SpecialCards
     {
         get => _specialCards;
         set => SetField(ref _specialCards, value);
     }
-    
+
     private ObservableCollection<SpecialtyDoctor> _specialitiesCards = new();
-    
+
     public ObservableCollection<SpecialtyDoctor> SpecialitesCards
     {
         get => _specialitiesCards;
         set => SetField(ref _specialitiesCards, value);
     }
-    
+
     private ObservableCollection<SpecialtyDoctor> _directionsCards = new();
-    
+
     public ObservableCollection<SpecialtyDoctor> DirectionsCards
     {
         get => _directionsCards;
         set => SetField(ref _directionsCards, value);
     }
-    
+
     private ObservableCollection<SpecialtyDoctor> _purposeCards = new();
-    
+
     public ObservableCollection<SpecialtyDoctor> PurposeCards
     {
         get => _purposeCards;
         set => SetField(ref _purposeCards, value);
     }
 
-    private long _oms;
+    private readonly long _oms;
+
+    #endregion
+
+    #region Methods
+
     public RecordViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -55,8 +60,6 @@ public class RecordViewModel : BindingHelper
         _ = LoadDirectionsCards();
         _ = LoadPurposeCards();
     }
-    
-    #endregion
 
     private async Task LoadSpecialsCards()
     {
@@ -73,7 +76,8 @@ public class RecordViewModel : BindingHelper
         var specialities = ApiHelper.Get<List<Speciality>>("Specialities");
         foreach (var speciality in specialities)
         {
-            SpecialtyDoctor specialtyDoctor = new SpecialtyDoctor(speciality.NumberImage.ToString(), speciality.NameSpecialities, (int)speciality.IdSpeciality!);
+            var specialtyDoctor = new SpecialtyDoctor(speciality.NumberImage.ToString(), speciality.NameSpecialities,
+                (int)speciality.IdSpeciality!);
             specialtyDoctor.Click += (sender, args) => Recording(sender, args);
             SpecialitesCards.Add(specialtyDoctor);
         }
@@ -85,7 +89,9 @@ public class RecordViewModel : BindingHelper
         var specialities = ApiHelper.Get<List<Speciality>>("Specialities");
         foreach (var item in directions!)
         {
-            SpecialtyDoctor specialtyDoctor = new SpecialtyDoctor(specialities![(int)(item.SpecialityId-1)!].NumberImage.ToString(), specialities[(int)(item.SpecialityId-1)!].NameSpecialities, (int)item.SpecialityId!);
+            var specialtyDoctor =
+                new SpecialtyDoctor(specialities![(int)(item.SpecialityId - 1)!].NumberImage.ToString(),
+                    specialities[(int)(item.SpecialityId - 1)!].NameSpecialities, (int)item.SpecialityId!);
             specialtyDoctor.Click += (sender, args) => Recording(sender, args);
             DirectionsCards.Add(specialtyDoctor);
         }
@@ -122,6 +128,9 @@ public class RecordViewModel : BindingHelper
     private void Recording(object sender, EventArgs args)
     {
         var card = sender as SpecialtyDoctor;
-        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content = new ChoosingDoctorPage(card!.IdSpeciality);
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content =
+            new ChoosingDoctorPage(card!.IdSpeciality);
     }
+
+    #endregion
 }

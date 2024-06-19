@@ -1,68 +1,67 @@
 ﻿<UserControl x:Class="FinalLab.View.Cards.ChoosingDoctorView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Height="63"
-      Width="349"
-      Background="{DynamicResource PrimaryBackground}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="63"
+             Width="349"
+             Background="{DynamicResource PrimaryBackground}">
     <UserControl.Resources>
         <Style x:Key="ClearButton" TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
         </Style>
     </UserControl.Resources>
     <Button Style="{StaticResource ClearButton}" Click="Selection">
         <Grid Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition/>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock 
-                    FontSize="14" 
-                    FontFamily="{StaticResource Inter}"
+                <TextBlock
                     TextAlignment="Center"
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource PrimaryForeground}"
-                    Text="{Binding FIO}"/>
+                    Text="{Binding FIO}" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock 
-                    Grid.Row="0" 
-                    Grid.Column="0" 
-                    FontSize="12" 
-                    FontFamily="{StaticResource Inter}"
-                    TextAlignment="Left" 
-                    Foreground="{DynamicResource SecondaryForeground}"
-                    Text="Ближайшая дата:"/>
-                <TextBlock 
-                    Grid.Row="1" 
-                    Grid.Column="0" 
-                    FontSize="12" 
-                    FontFamily="{StaticResource Inter}"
-                    TextAlignment="Left" 
-                    Foreground="{DynamicResource SecondaryForeground}"
-                    Text="{Binding Date}"/>
                 <TextBlock
-                    Grid.Row="0" 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="12"
+                    TextAlignment="Left"
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource SecondaryForeground}"
+                    Text="Ближайшая дата:" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="12"
+                    TextAlignment="Left"
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource SecondaryForeground}"
+                    Text="{Binding Date}" />
+                <TextBlock
+                    Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="1"
                     FontSize="12"
                     FontFamily="{StaticResource Inter}"
                     TextWrapping="Wrap"
-                    TextAlignment="Right" 
+                    TextAlignment="Right"
                     Foreground="{DynamicResource SecondaryForeground}"
-                    Text="{Binding Address}"/>
+                    Text="{Binding Address}" />
             </Grid>
         </Grid>
     </Button>

@@ -2,7 +2,18 @@
 
 public class Doctor
 {
-    public int IdDoctor { get; set; }
+    public Doctor(string surname, string firstName, string patronymic, int specialityId, string enterPassword,
+        string workAddress)
+    {
+        Surname = surname;
+        FirstName = firstName;
+        Patronymic = patronymic;
+        SpecialityId = specialityId;
+        EnterPassword = enterPassword;
+        WorkAddress = workAddress;
+    }
+
+    public int? IdDoctor { get; set; }
 
     public string Surname { get; set; } = null!;
 

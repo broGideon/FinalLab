@@ -2,8 +2,8 @@
 
 public class Appointment
 {
-
-    public Appointment(int idAppointment, DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId, int statusId)
+    public Appointment(int idAppointment, DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId,
+        int statusId)
     {
         IdAppointment = idAppointment;
         AppointmentDate = appointmentDate;
@@ -11,7 +11,7 @@ public class Appointment
         StatusId = statusId;
         DoctorId = doctorId;
     }
-    
+
     public Appointment(DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId, int statusId)
     {
         AppointmentDate = appointmentDate;
@@ -22,8 +22,8 @@ public class Appointment
 
     public Appointment()
     {
-        
     }
+
     public int? IdAppointment { get; set; }
 
     public DateOnly AppointmentDate { get; set; }

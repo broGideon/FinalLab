@@ -6,155 +6,155 @@
       MinHeight="600"
       Height="auto"
       Width="auto">
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="15"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="15" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="19"/>
-                <RowDefinition Height="6"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="4"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="18"/>
-                <RowDefinition Height="27"/>
-                <RowDefinition Height="13"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="9"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="9"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="27"/>
-                <RowDefinition Height="21"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="11"/>
-                <RowDefinition Height="325"/>
-                <RowDefinition Height="9"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="13"/>
-                <RowDefinition Height="420"/>
-                <RowDefinition Height="8"/>
-                <RowDefinition Height="28"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="28"/>
-                <RowDefinition Height="14"/>
+                <RowDefinition Height="12" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="19" />
+                <RowDefinition Height="6" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="13" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="9" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="9" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="21" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="11" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="9" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="13" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="14" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
                     FontSize="20"
-                    FontFamily="{StaticResource Inter}"
                     Text="Пациент: "
-                    Foreground="{DynamicResource PrimaryForeground}"/>
-                <TextBlock 
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground}" />
+                <TextBlock
                     Grid.Column="1"
                     FontSize="20"
                     FontFamily="{StaticResource Inter}"
                     Text="{Binding PatientFIO}"
-                    Foreground="{DynamicResource PrimaryForeground}"/>
+                    Foreground="{DynamicResource PrimaryForeground}" />
                 <TextBlock
                     Grid.Column="2"
                     FontSize="20"
                     FontFamily="{StaticResource Inter}"
                     Text="Номер полиса: "
-                    Foreground="{DynamicResource PrimaryForeground}"/>
-                <TextBlock 
+                    Foreground="{DynamicResource PrimaryForeground}" />
+                <TextBlock
                     Grid.Column="3"
                     FontSize="20"
                     FontFamily="{StaticResource Inter}"
                     Text="{Binding PatientOMS}"
-                    Foreground="{DynamicResource PrimaryForeground}"/>
+                    Foreground="{DynamicResource PrimaryForeground}" />
             </Grid>
-            <TextBlock 
-                Grid.Row="3" 
-                FontSize="16" 
+            <TextBlock
+                Grid.Row="3"
+                FontSize="16"
                 FontFamily="{StaticResource Inter}"
-                Text="Прием:" 
-                Foreground="{DynamicResource PrimaryForeground }"/>
-            <TextBlock 
-                Grid.Row="5"  
+                Text="Прием:"
+                Foreground="{DynamicResource PrimaryForeground }" />
+            <TextBlock
+                Grid.Row="5"
                 FontFamily="{StaticResource Inter}"
-                Text="Жалобы" 
-                Foreground="{DynamicResource SecondaryForeground }"/>
-            <ui:TextBox 
-                Grid.Row="6" 
+                Text="Жалобы"
+                Foreground="{DynamicResource SecondaryForeground }" />
+            <ui:TextBox
+                Grid.Row="6"
                 FontFamily="{StaticResource Inter}"
                 Text="{Binding Complaints}"
-                Style="{DynamicResource ClearTextbox}"/>
-            <TextBlock 
-                Grid.Row="8" 
+                Style="{DynamicResource ClearTextbox}" />
+            <TextBlock
+                Grid.Row="8"
                 FontFamily="{StaticResource Inter}"
-                Text="Общий осмотор" 
-                Foreground="{DynamicResource SecondaryForeground}"/>
-            <ui:TextBox 
-                Grid.Row="9" 
+                Text="Общий осмотор"
+                Foreground="{DynamicResource SecondaryForeground}" />
+            <ui:TextBox
+                Grid.Row="9"
                 FontFamily="{StaticResource Inter}"
                 Text="{Binding Osmotor}"
-                Style="{DynamicResource ClearTextbox}"/>
-            <ui:TextBox 
-                Grid.Row="11" 
+                Style="{DynamicResource ClearTextbox}" />
+            <ui:TextBox
+                Grid.Row="11"
                 FontFamily="{StaticResource Inter}"
-                PlaceholderText="Основной диагноз" 
+                PlaceholderText="Основной диагноз"
                 Text="{Binding PrimaryDiagnosis}"
-                Style="{DynamicResource ClearTextbox}"/>
-            <TextBlock 
-                Grid.Row="13" 
+                Style="{DynamicResource ClearTextbox}" />
+            <TextBlock
+                Grid.Row="13"
                 FontFamily="{StaticResource Inter}"
-                Text="Дополнения к основному диагнозу" 
-                Foreground="{DynamicResource SecondaryForeground}"/>
-            <ui:TextBox 
-                Grid.Row="14" 
+                Text="Дополнения к основному диагнозу"
+                Foreground="{DynamicResource SecondaryForeground}" />
+            <ui:TextBox
+                Grid.Row="14"
                 FontFamily="{StaticResource Inter}"
                 Text="{Binding SecondaryDiagnosis}"
-                Style="{DynamicResource ClearTextbox}"/>
-            <TextBlock 
-                Grid.Row="16" 
+                Style="{DynamicResource ClearTextbox}" />
+            <TextBlock
+                Grid.Row="16"
                 FontFamily="{StaticResource Inter}"
-                Text="Рекомендации" 
-                Foreground="{DynamicResource SecondaryForeground}"/>
-            <ui:TextBox 
-                Grid.Row="17" 
+                Text="Рекомендации"
+                Foreground="{DynamicResource SecondaryForeground}" />
+            <ui:TextBox
+                Grid.Row="17"
                 FontFamily="{StaticResource Inter}"
                 Text="{Binding Recommendations}"
-                Style="{DynamicResource ClearTextbox}"/>
-            <TextBlock 
-                Grid.Row="19" 
+                Style="{DynamicResource ClearTextbox}" />
+            <TextBlock
+                Grid.Row="19"
                 FontFamily="{StaticResource Inter}"
-                Text="Направления" 
+                Text="Направления"
                 VerticalAlignment="Bottom"
-                Foreground="{DynamicResource SecondaryForeground}"/>
+                Foreground="{DynamicResource SecondaryForeground}" />
             <Grid Grid.Row="20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ComboBox 
-                    x:Name="SpecialitiesComboBox" 
-                    Grid.Column="0" 
+                <ComboBox
+                    x:Name="SpecialitiesComboBox"
+                    Grid.Column="0"
                     FontFamily="{StaticResource Inter}"
-                    ItemsSource="{Binding Specialities}" 
-                    SelectedItem="{Binding SelectSpeciality}" 
-                    Style="{DynamicResource ClearComboBoxStyle}"/>
-                <ui:Button 
-                    Grid.Column="2" 
+                    ItemsSource="{Binding Specialities}"
+                    SelectedItem="{Binding SelectSpeciality}"
+                    Style="{DynamicResource ClearComboBoxStyle}" />
+                <ui:Button
+                    Grid.Column="2"
                     FontSize="16"
                     FontFamily="{StaticResource Inter}"
                     Content="Добавить направление"
@@ -163,48 +163,49 @@
                         <b:EventTrigger EventName="Click">
                             <b:CallMethodAction
                                 TargetObject="{Binding}"
-                                MethodName="AddDirections"/>
+                                MethodName="AddDirections" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </ui:Button>
             </Grid>
-            <Grid 
-                Grid.Row="22" 
+            <Grid
+                Grid.Row="22"
                 Background="{DynamicResource SecondaryBackground}">
-                <ItemsControl ItemsSource="{Binding Directions}"/>
+                <ItemsControl ItemsSource="{Binding Directions}" />
             </Grid>
             <Grid Grid.Row="24">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="24"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border 
+                <Border
                     Grid.Column="0"
-                    Height="Auto" 
+                    Height="Auto"
                     BorderBrush="{DynamicResource SecondaryBackground}"
                     BorderThickness="2">
-                    <CheckBox 
+                    <CheckBox
                         IsChecked="{Binding AnalyzeIsActive}"
                         BorderThickness="0"
-                        Background="Transparent"/>
+                        Background="Transparent" />
                 </Border>
-                <TextBlock 
-                    Grid.Column="2" 
+                <TextBlock
+                    Grid.Column="2"
                     FontSize="16"
                     FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground}"
                     VerticalAlignment="Center"
-                    Text="Анализ:"/>
+                    Text="Анализ:" />
                 <ui:TextBox
                     Grid.Column="3"
                     Style="{DynamicResource ClearTextbox}"
                     FontFamily="{StaticResource Inter}"
                     PlaceholderText="Наименование анализа"
                     Text="{Binding NameAnalyze}"
-                    IsEnabled="{Binding AnalyzeIsActive}"/>
+                    IsEnabled="{Binding AnalyzeIsActive}" />
             </Grid>
-            <RichTextBox 
+            <RichTextBox
                 Grid.Row="26"
                 BorderThickness="0"
                 FontFamily="{StaticResource Inter}"
@@ -212,38 +213,39 @@
                 Focusable="True"
                 AcceptsReturn="True"
                 AcceptsTab="True"
-                x:Name="AnalyzeRTB"/>
+                x:Name="AnalyzeRTB" />
             <Grid Grid.Row="28">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="24"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border 
+                <Border
                     Grid.Column="0"
                     BorderBrush="{DynamicResource SecondaryBackground}"
                     BorderThickness="2">
                     <CheckBox
                         IsChecked="{Binding ResearchIsActive}"
                         BorderThickness="0"
-                        Background="Transparent"/>
+                        Background="Transparent" />
                 </Border>
-                <TextBlock 
+                <TextBlock
                     Grid.Column="2"
                     FontSize="16"
                     FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground}"
                     VerticalAlignment="Center"
-                    Text="Иследование:"/>
+                    Text="Иследование:" />
                 <ui:TextBox
                     Grid.Column="3"
                     Style="{DynamicResource ClearTextbox}"
                     FontFamily="{StaticResource Inter}"
                     PlaceholderText="Наименование исследования"
                     Text="{Binding NameResearch}"
-                    IsEnabled="{Binding ResearchIsActive}"/>
+                    IsEnabled="{Binding ResearchIsActive}" />
             </Grid>
-            <RichTextBox 
+            <RichTextBox
                 Grid.Row="30"
                 BorderThickness="0"
                 IsEnabled="{Binding ResearchIsActive}"
@@ -251,9 +253,9 @@
                 Focusable="True"
                 AcceptsReturn="True"
                 AcceptsTab="True"
-                x:Name="ResearchRTB"/>
-            <ui:Button 
-                Grid.Row="32" 
+                x:Name="ResearchRTB" />
+            <ui:Button
+                Grid.Row="32"
                 IsEnabled="{Binding ResearchIsActive}"
                 FontFamily="{StaticResource Inter}"
                 FontSize="16"
@@ -263,12 +265,12 @@
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction
                             TargetObject="{Binding}"
-                            MethodName="AddDopFile"/>
+                            MethodName="AddDopFile" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ui:Button>
-            <ui:Button 
-                Grid.Row="34" 
+            <ui:Button
+                Grid.Row="34"
                 FontFamily="{StaticResource Inter}"
                 FontSize="16"
                 Content="Завершить прием"
@@ -277,7 +279,7 @@
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction
                             TargetObject="{Binding}"
-                            MethodName="Cancel"/>
+                            MethodName="Cancel" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ui:Button>

@@ -8,10 +8,10 @@ public class AppointmentDocument
         Rtf = rtf;
         DocumentName = documentName;
     }
-    
+
     public int? IdAppointment { get; set; }
 
     public string Rtf { get; set; } = null!;
-    
+
     public string DocumentName { get; set; } = null!;
 }

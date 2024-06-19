@@ -6,195 +6,194 @@
       Background="{DynamicResource PrimaryBackground}"
       Height="Auto"
       Width="Auto">
-
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <Grid MinWidth="1150">
                 <Grid.ColumnDefinitions>
-                      <ColumnDefinition/>
-                      <ColumnDefinition Width="25"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
-                    
                 <Grid Grid.Row="0" Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="367"/>
-                            <ColumnDefinition Width="16"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="367" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="28"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="28" />
                         </Grid.RowDefinitions>
                         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
                             <Grid Margin="0, 0, 0, 10" Background="{DynamicResource SecondaryBackground}">
                                 <ListBox ItemsSource="{Binding Doctors}">
                                     <ListBox.Resources>
                                         <Style TargetType="ListBoxItem">
-                                            <Setter Property="Margin" Value="0, 10"/>
-                                            <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Margin" Value="0, 10" />
+                                            <Setter Property="Padding" Value="0" />
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                         </Style>
                                     </ListBox.Resources>
                                 </ListBox>
                             </Grid>
                         </ScrollViewer>
-                        <ui:Button 
-                            Grid.Row="1" 
+                        <ui:Button
+                            Grid.Row="1"
                             FontFamily="{StaticResource Inter}"
-                            FontSize="16" Style="{DynamicResource FocusingButton}" 
+                            FontSize="16" Style="{DynamicResource FocusingButton}"
                             Content="Назад"
-                            Click="Back"/>
+                            Click="Back" />
                     </Grid>
                     <Grid Grid.Column="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="0.8*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="0.8*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="0.8*"/>
-                            <RowDefinition Height="0.4*"/>
-                            <RowDefinition Height="28"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0.8*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0.8*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0.8*" />
+                            <RowDefinition Height="0.4*" />
+                            <RowDefinition Height="28" />
                         </Grid.RowDefinitions>
-                        <ui:Button 
-                            Grid.Row="12" 
+                        <ui:Button
+                            Grid.Row="12"
                             FontSize="16"
-                            FontFamily="{StaticResource Inter}" 
-                            Style="{DynamicResource FocusingButton}" 
+                            FontFamily="{StaticResource Inter}"
+                            Style="{DynamicResource FocusingButton}"
                             Content="Записаться на прием">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:CallMethodAction
                                         TargetObject="{Binding}"
-                                        MethodName="MakeAppointment"/>
+                                        MethodName="MakeAppointment" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </ui:Button>
-                        <TextBlock 
+                        <TextBlock
                             Grid.Row="0"
-                            FontSize="20" 
+                            FontSize="20"
                             Text="{Binding FioDoctor}"
                             FontFamily="{StaticResource Inter}"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
-                        <TextBlock 
-                            Grid.Row="1" 
+                            Foreground="{DynamicResource PrimaryForeground}" />
+                        <TextBlock
+                            Grid.Row="1"
                             Margin="0, 5"
                             Text="Текущая неделя"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
+                            FontFamily="{StaticResource Inter}"
+                            Foreground="{DynamicResource PrimaryForeground}" />
                         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto">
                             <Grid Margin="0, 5">
-                                <ItemsControl 
+                                <ItemsControl
                                     ItemsSource="{Binding CurrentWeek}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <UniformGrid  Rows="1"/>
+                                            <UniformGrid Rows="1" />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemContainerStyle>
                                         <Style>
-                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
                                         </Style>
                                     </ItemsControl.ItemContainerStyle>
-                                </ItemsControl>   
+                                </ItemsControl>
                             </Grid>
                         </ScrollViewer>
-                        <TextBlock 
+                        <TextBlock
                             Grid.Row="3"
                             Text="Следующая неделя"
                             Margin="0, 5"
                             FontFamily="{StaticResource Inter}"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
+                            Foreground="{DynamicResource PrimaryForeground}" />
                         <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto">
                             <Grid Margin="0, 5">
-                                <ItemsControl 
+                                <ItemsControl
                                     ItemsSource="{Binding NextWeek}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <UniformGrid  Rows="1"/>
+                                            <UniformGrid Rows="1" />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemContainerStyle>
                                         <Style>
-                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
                                         </Style>
                                     </ItemsControl.ItemContainerStyle>
-                                </ItemsControl>   
+                                </ItemsControl>
                             </Grid>
                         </ScrollViewer>
-                        <TextBlock 
+                        <TextBlock
                             Grid.Row="5"
                             Text="Утро"
                             Margin="0, 5"
                             FontFamily="{StaticResource Inter}"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
+                            Foreground="{DynamicResource PrimaryForeground}" />
                         <Grid Grid.Row="6" Margin="0, 5">
-                            <ItemsControl 
+                            <ItemsControl
                                 ItemsSource="{Binding Morning}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid Columns="9"/>
+                                        <UniformGrid Columns="9" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemContainerStyle>
                                     <Style>
-                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
                                     </Style>
                                 </ItemsControl.ItemContainerStyle>
-                            </ItemsControl>   
+                            </ItemsControl>
                         </Grid>
-                        <TextBlock 
+                        <TextBlock
                             Grid.Row="7"
                             Text="День"
                             Margin="0, 5"
                             FontFamily="{StaticResource Inter}"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
+                            Foreground="{DynamicResource PrimaryForeground}" />
                         <Grid Grid.Row="8" Margin="0, 5">
-                            <ItemsControl 
+                            <ItemsControl
                                 ItemsSource="{Binding Day}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid Columns="9"/>
+                                        <UniformGrid Columns="9" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemContainerStyle>
                                     <Style>
-                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
                                     </Style>
                                 </ItemsControl.ItemContainerStyle>
-                            </ItemsControl>   
+                            </ItemsControl>
                         </Grid>
-                        <TextBlock 
+                        <TextBlock
                             Grid.Row="9"
                             Text="Вечер"
                             Margin="0, 5"
                             FontFamily="{StaticResource Inter}"
-                            Foreground="{DynamicResource PrimaryForeground}"/>
+                            Foreground="{DynamicResource PrimaryForeground}" />
                         <ScrollViewer Grid.Row="10" HorizontalScrollBarVisibility="Auto">
                             <Grid Margin="0, 5">
-                                <ItemsControl 
+                                <ItemsControl
                                     ItemsSource="{Binding Evening}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <UniformGrid Columns="9"/>
+                                            <UniformGrid Columns="9" />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemContainerStyle>
                                         <Style>
-                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
                                         </Style>
                                     </ItemsControl.ItemContainerStyle>
-                                </ItemsControl>   
+                                </ItemsControl>
                             </Grid>
                         </ScrollViewer>
                     </Grid>

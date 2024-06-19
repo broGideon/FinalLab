@@ -10,8 +10,10 @@ namespace FinalLab.ViewModel.Windows;
 
 public class PatientViewModel : BindingHelper
 {
-    public List<string> Themes { get; set; } = new List<string> { "Светлая", "Темная"};
-    
+    #region Variables
+
+    public List<string> Themes { get; set; } = new() { "Светлая", "Темная" };
+
     public event EventHandler SwitchUsers;
 
     private ObservableCollection<Patient> _patients = null!;
@@ -39,7 +41,11 @@ public class PatientViewModel : BindingHelper
     }
 
     public event EventHandler Close;
-    
+
+    #endregion
+
+    #region Methods
+
     public PatientViewModel()
     {
         Patients = JsonConvert.DeserializeObject<ObservableCollection<Patient>>(Settings.Default.CurrentUsers)!;
@@ -52,10 +58,10 @@ public class PatientViewModel : BindingHelper
 
     public void SelectionPatient(object sender, SelectionChangedEventArgs e)
     {
-        CurrentPatient = (((sender as ComboBox)!).SelectedItem as Patient)!;
+        CurrentPatient = ((sender as ComboBox)!.SelectedItem as Patient)!;
         SwitchUsers(this, EventArgs.Empty);
     }
-    
+
     public void SelectionTheme(object sender, SelectionChangedEventArgs e)
     {
         if (CurrentTheme == "Светлая")
@@ -68,7 +74,7 @@ public class PatientViewModel : BindingHelper
     {
         if (Patients.Count == 1)
         {
-            Settings.Default.CurrentUsers = String.Empty;   
+            Settings.Default.CurrentUsers = string.Empty;
             Settings.Default.Save();
             Close(this, EventArgs.Empty);
             return;
@@ -97,4 +103,6 @@ public class PatientViewModel : BindingHelper
     {
         CurrentPatient.LivingAddress = CurrentPatient.AddressPatient;
     }
+
+    #endregion
 }

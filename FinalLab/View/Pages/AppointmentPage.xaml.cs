@@ -4,7 +4,8 @@ namespace FinalLab.View.Pages;
 
 public partial class AppointmentPage
 {
-    private AppointmentViewModel _viewModel;
+    private readonly AppointmentViewModel _viewModel;
+
     public AppointmentPage()
     {
         InitializeComponent();
@@ -12,5 +13,4 @@ public partial class AppointmentPage
         DataContext = _viewModel;
         RTB.Document = _viewModel.RTB;
     }
-    
 }

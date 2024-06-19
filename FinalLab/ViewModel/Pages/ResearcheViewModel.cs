@@ -13,9 +13,9 @@ namespace FinalLab.ViewModel.Pages;
 
 public class ResearcheViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
-    private bool _downloadEnable = false;
+    private bool _downloadEnable;
 
     public bool DownloadEnable
     {
@@ -24,7 +24,7 @@ public class ResearcheViewModel : BindingHelper
     }
 
     private string _researchName;
-    
+
     public string ResearchName
     {
         get => _researchName;
@@ -65,19 +65,22 @@ public class ResearcheViewModel : BindingHelper
         set => SetField(ref _elements, value);
     }
 
-    private long _oms;
+    private readonly long _oms;
 
     private int _id;
+
+    #endregion
+
+    #region Methods
 
     public ResearcheViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
         _oms = (window.PatientsComboBox.SelectedItem as Patient).Oms;
         window.WindowTextBlock.Text = "Исследования";
-        RTB = new();
+        RTB = new FlowDocument();
         LoadCards();
     }
-    #endregion
 
     public void DownloadFile()
     {
@@ -90,8 +93,8 @@ public class ResearcheViewModel : BindingHelper
 
         if (result == true)
         {
-            MemoryStream ms = new MemoryStream(ApiHelper.Get<ResearchDocument>("ResearchDocuments", _id)!.Attachment!);
-            Image image = Image.FromStream(ms);
+            var ms = new MemoryStream(ApiHelper.Get<ResearchDocument>("ResearchDocuments", _id)!.Attachment!);
+            var image = Image.FromStream(ms);
             try
             {
                 image.Save(dialog.FileName);
@@ -100,13 +103,15 @@ public class ResearcheViewModel : BindingHelper
             {
                 Console.WriteLine(e);
             }
+
             ms.Dispose();
         }
     }
 
     private void LoadCards()
     {
-        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.Oms == _oms).OrderBy(item => item.AppointmentDate).ToList();
+        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.Oms == _oms)
+            .OrderBy(item => item.AppointmentDate).ToList();
         foreach (var appointment in appointments)
         {
             var researchDocument =
@@ -114,7 +119,10 @@ public class ResearcheViewModel : BindingHelper
             if (researchDocument != null)
             {
                 var doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-                var card = new Appointments_Control(researchDocument.DocumentName, $"{doctor!.Surname} {doctor.FirstName.Substring(0, 1)}. {doctor.Patronymic.Substring(0, 1)}.", appointment.AppointmentDate.ToString("dd MMMM yyyy"), doctor.WorkAddress, (int)appointment.IdAppointment);
+                var card = new Appointments_Control(researchDocument.DocumentName,
+                    $"{doctor!.Surname} {doctor.FirstName.Substring(0, 1)}. {doctor.Patronymic.Substring(0, 1)}.",
+                    appointment.AppointmentDate.ToString("dd MMMM yyyy"), doctor.WorkAddress,
+                    (int)appointment.IdAppointment);
                 card.Click += (sender, args) => LoadInfo(sender, args);
                 Elements.Add(card);
             }
@@ -138,4 +146,6 @@ public class ResearcheViewModel : BindingHelper
         fs.Close();
         File.Delete("buffer.rtf");
     }
+
+    #endregion
 }

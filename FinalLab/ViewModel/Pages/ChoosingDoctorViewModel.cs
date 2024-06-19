@@ -12,8 +12,8 @@ namespace FinalLab.ViewModel.Pages;
 
 public class ChoosingDoctorViewModel : BindingHelper
 {
-    #region MyRegion
-    
+    #region Variables
+
     private ObservableCollection<ToggleButton> _currentWeek = new();
 
     public ObservableCollection<ToggleButton> CurrentWeek
@@ -21,7 +21,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         get => _currentWeek;
         set => SetField(ref _currentWeek, value);
     }
-    
+
     private ObservableCollection<ToggleButton> _nextWeek = new();
 
     public ObservableCollection<ToggleButton> NextWeek
@@ -37,7 +37,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         get => _fioDoctor;
         set => SetField(ref _fioDoctor, value);
     }
-    
+
     private ObservableCollection<ChoosingDoctorView> _doctors = new();
 
     public ObservableCollection<ChoosingDoctorView> Doctors
@@ -53,7 +53,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         get => _morning;
         set => SetField(ref _morning, value);
     }
-    
+
     private ObservableCollection<ToggleButton> _day = new();
 
     public ObservableCollection<ToggleButton> Day
@@ -61,7 +61,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         get => _day;
         set => SetField(ref _day, value);
     }
-    
+
     private ObservableCollection<ToggleButton> _evening = new();
 
     public ObservableCollection<ToggleButton> Evening
@@ -71,19 +71,25 @@ public class ChoosingDoctorViewModel : BindingHelper
     }
 
     private int _idDoctor;
-    
-    private int _idAppointment;
 
-    private long _oms;
+    private readonly int _idAppointment;
+
+    private readonly long _oms;
 
     private ToggleButton _selectedDay = new();
-    
+
     private ToggleButton _selectedTime = new();
+
+    #endregion
+
+    #region Methods
+
     public ChoosingDoctorViewModel(int idSpeciality, int idDoctor, int idAppointment)
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
         _oms = (window.PatientsComboBox.SelectedItem as Patient).Oms;
-        window.WindowTextBlock.Text = $"Выбор специалиста - {ApiHelper.Get<Speciality>("Specialities", idSpeciality)!.NameSpecialities}";
+        window.WindowTextBlock.Text =
+            $"Выбор специалиста - {ApiHelper.Get<Speciality>("Specialities", idSpeciality)!.NameSpecialities}";
         _idDoctor = idDoctor;
         _idAppointment = idAppointment;
         LoadDoctorsCards(idSpeciality);
@@ -95,13 +101,13 @@ public class ChoosingDoctorViewModel : BindingHelper
         }
     }
 
-    #endregion
     public void LoadDoctorsCards(int idSpeciality)
     {
         var doctors = ApiHelper.Get<List<Doctor>>("Doctors")!.Where(item => item.SpecialityId == idSpeciality).ToList();
         foreach (var doctor in doctors)
         {
-            var card = new ChoosingDoctorView($"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}", "Сегодня", doctor.WorkAddress, doctor.IdDoctor);
+            var card = new ChoosingDoctorView($"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}", "Сегодня",
+                doctor.WorkAddress, (int)doctor.IdDoctor!);
             card.SelectionDoctor += (sender, args) => SelectionDoctor(sender, args);
             Doctors.Add(card);
         }
@@ -112,18 +118,21 @@ public class ChoosingDoctorViewModel : BindingHelper
         var card = sender as ChoosingDoctorView;
         _idDoctor = card!.IdDoctor;
         FioDoctor = card!.FIO;
-        CurrentWeek = new();
-        NextWeek = new();
+        CurrentWeek = new ObservableCollection<ToggleButton>();
+        NextWeek = new ObservableCollection<ToggleButton>();
+        Morning = new ObservableCollection<ToggleButton>();
+        Day = new ObservableCollection<ToggleButton>();
+        Evening = new ObservableCollection<ToggleButton>();
         LoadDateToggleButton();
     }
 
     private void LoadDateToggleButton()
     {
-        DateOnly today = DateOnly.FromDateTime(DateTime.Today);
-        
-        int daysOfWeek = 7 - (int)today.DayOfWeek;
-        
-        for (int i = 1; i <= daysOfWeek; i++)
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        var daysOfWeek = 7 - (int)today.DayOfWeek;
+
+        for (var i = 1; i <= daysOfWeek; i++)
         {
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
@@ -131,8 +140,8 @@ public class ChoosingDoctorViewModel : BindingHelper
             button.Click += (sender, args) => SelectionDay(sender, args);
             CurrentWeek.Add(button);
         }
-        
-        for (int i = 1 + daysOfWeek; i <= 7 + daysOfWeek; i++)
+
+        for (var i = 1 + daysOfWeek; i <= 7 + daysOfWeek; i++)
         {
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
@@ -144,59 +153,61 @@ public class ChoosingDoctorViewModel : BindingHelper
 
     private void LoadTimeToggleButton()
     {
-        DateOnly currentDate = DateOnly.FromDateTime(DateTime.ParseExact(_selectedDay.Content.ToString()!, "dd MMMM, ddd", new CultureInfo("ru-RU")));
-        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.AppointmentDate == currentDate && item.DoctorId == _idDoctor).OrderBy(item => item.AppointmentTime).ToList();
-        int indexAppointment = 0;
-        TimeOnly defTime = new TimeOnly(7, 50);
-        for (int i = 0; i < 25; i++)
+        var currentDate = DateOnly.FromDateTime(DateTime.ParseExact(_selectedDay.Content.ToString()!, "dd MMMM, ddd",
+            new CultureInfo("ru-RU")));
+        var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!
+            .Where(item => item.AppointmentDate == currentDate && item.DoctorId == _idDoctor)
+            .OrderBy(item => item.AppointmentTime).ToList();
+        var indexAppointment = 0;
+        var defTime = new TimeOnly(7, 50);
+        for (var i = 0; i < 25; i++)
         {
             defTime = defTime.AddMinutes(10);
             if (appointments.Count != 0)
-            {
                 if (appointments.Count != indexAppointment && appointments[indexAppointment].AppointmentTime == defTime)
                 {
                     indexAppointment++;
                     continue;
                 }
-            }
+
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
-            button.Click += (sender, args) => SelectionTime(sender, args); 
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
+            button.Click += (sender, args) => SelectionTime(sender, args);
             Morning.Add(button);
         }
-        for (int i = 0; i < 30; i++)
+
+        for (var i = 0; i < 30; i++)
         {
             defTime = defTime.AddMinutes(10);
             if (appointments.Count != 0)
-            {
                 if (appointments.Count != indexAppointment && appointments[indexAppointment].AppointmentTime == defTime)
                 {
                     indexAppointment++;
                     continue;
                 }
-            }
+
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
-            button.Click += (sender, args) => SelectionTime(sender, args); 
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
+            button.Click += (sender, args) => SelectionTime(sender, args);
             Day.Add(button);
         }
-        for (int i = 0; i < 18; i++)
+
+        for (var i = 0; i < 18; i++)
         {
             defTime = defTime.AddMinutes(10);
             if (appointments.Count != 0)
-            {
                 if (appointments.Count != indexAppointment && appointments[indexAppointment].AppointmentTime == defTime)
                 {
                     indexAppointment++;
                     continue;
                 }
-            }
+
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
-            button.Click += (sender, args) => SelectionTime(sender, args); 
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
+            button.Click += (sender, args) => SelectionTime(sender, args);
             Evening.Add(button);
         }
     }
@@ -204,9 +215,9 @@ public class ChoosingDoctorViewModel : BindingHelper
     private void SelectionDay(object sender, RoutedEventArgs e)
     {
         var item = sender as ToggleButton;
-        Morning = new();
-        Day = new();
-        Evening = new();
+        Morning = new ObservableCollection<ToggleButton>();
+        Day = new ObservableCollection<ToggleButton>();
+        Evening = new ObservableCollection<ToggleButton>();
         if (item.IsChecked == true)
         {
             _selectedDay.IsChecked = false;
@@ -214,7 +225,9 @@ public class ChoosingDoctorViewModel : BindingHelper
             LoadTimeToggleButton();
         }
         else
-            _selectedDay = new();
+        {
+            _selectedDay = new ToggleButton();
+        }
     }
 
     private void SelectionTime(object sender, RoutedEventArgs e)
@@ -226,39 +239,45 @@ public class ChoosingDoctorViewModel : BindingHelper
             _selectedTime = item;
         }
         else
-            _selectedTime = new();
+        {
+            _selectedTime = new ToggleButton();
+        }
     }
 
     public void MakeAppointment()
     {
-        if (string.IsNullOrEmpty(_selectedDay.Content.ToString()) && string.IsNullOrEmpty(_selectedTime.Content.ToString()) && _idDoctor != -1)
+        if (string.IsNullOrEmpty(_selectedDay.Content.ToString()) &&
+            string.IsNullOrEmpty(_selectedTime.Content.ToString()) && _idDoctor != -1)
             return;
         var currentDate = DateOnly.FromDateTime(DateTime.ParseExact(_selectedDay.Content.ToString()!, "dd MMMM, ddd",
             new CultureInfo("ru-RU")));
         var currentTime =
-            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!, "hh:mm",
+            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!, "HH:mm",
                 new CultureInfo("ru-RU")));
-        bool result = false;
-        
+        var result = false;
+
         if (_idAppointment != -1)
         {
-            string json = JsonConvert.SerializeObject(new Appointment(_idAppointment, currentDate, currentTime, _oms, _idDoctor, 1));
+            var json = JsonConvert.SerializeObject(new Appointment(_idAppointment, currentDate, currentTime, _oms,
+                _idDoctor, 1));
             result = ApiHelper.Put(json, "Appointments", _idAppointment);
         }
         else
         {
-            string json = JsonConvert.SerializeObject(new Appointment(currentDate, currentTime, _oms, _idDoctor, 1));
+            var json = JsonConvert.SerializeObject(new Appointment(currentDate, currentTime, _oms, _idDoctor, 1));
             result = ApiHelper.Post(json, "Appointments");
         }
 
         if (result)
         {
-            CurrentWeek = new();
-            NextWeek = new();
-            Morning = new();
-            Day = new();
-            Evening = new();
+            CurrentWeek = new ObservableCollection<ToggleButton>();
+            NextWeek = new ObservableCollection<ToggleButton>();
+            Morning = new ObservableCollection<ToggleButton>();
+            Day = new ObservableCollection<ToggleButton>();
+            Evening = new ObservableCollection<ToggleButton>();
             LoadDateToggleButton();
         }
     }
+
+    #endregion
 }

@@ -2,10 +2,14 @@
 
 public class Admin
 {
-    public Admin()
+    public Admin(string surnameAdmin, string firstName, string patronymic, string enterPassword)
     {
-        
+        SurnameAdmin = surnameAdmin;
+        FirstName = firstName;
+        Patronymic = patronymic;
+        EnterPassword = enterPassword;
     }
+
     public int? IdAdmin { get; set; }
 
     public string SurnameAdmin { get; set; } = null!;

@@ -7,11 +7,11 @@ namespace FinalLab.ViewModel;
 
 public class AdministratorViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     public event EventHandler SwitchForm;
 
-    private List<string> _items = new List<string>(){ "Пользователь", "Доктор", "Администратор"};
+    private List<string> _items = new() { "Пользователь", "Доктор", "Администратор" };
 
     private List<Speciality>? _specialities;
 
@@ -20,6 +20,7 @@ public class AdministratorViewModel : BindingHelper
         get => _specialities;
         set => SetField(ref _specialities, value);
     }
+
     public List<string> Items
     {
         get => _items;
@@ -49,7 +50,7 @@ public class AdministratorViewModel : BindingHelper
         get => _adminItem;
         set => SetField(ref _adminItem, value);
     }
-    
+
     private Patient _patientItem;
 
     public Patient PatientItem
@@ -57,7 +58,7 @@ public class AdministratorViewModel : BindingHelper
         get => _patientItem;
         set => SetField(ref _patientItem, value);
     }
-    
+
     private Doctor _doctorItem;
 
     public Doctor DoctorItem
@@ -73,57 +74,68 @@ public class AdministratorViewModel : BindingHelper
         get => _obj;
         set => SetField(ref _obj, value);
     }
+
     #endregion
+
+    #region Methods
+
     public AdministratorViewModel()
     {
         SelectedRole = "Пользователь";
-        Obj = ApiHelper.Get<List<Object>>("Patients");
+        Obj = ApiHelper.Get<List<object>>("Patients");
         Specialities = ApiHelper.Get<List<Speciality>>("Specialities");
     }
 
     public void SelectionRole()
     {
         if (SelectedRole == "Пользователь")
-            Obj = ApiHelper.Get<List<Object>>("Patients");
+            Obj = ApiHelper.Get<List<object>>("Patients");
         else if (SelectedRole == "Доктор")
-            Obj = ApiHelper.Get<List<Object>>("Doctors");
+            Obj = ApiHelper.Get<List<object>>("Doctors");
         else
-            Obj = ApiHelper.Get<List<Object>>("Admins");
-        
+            Obj = ApiHelper.Get<List<object>>("Admins");
+
         SwitchForm(this, EventArgs.Empty);
     }
 
     public void SelectionDataGrid(object sender, SelectionChangedEventArgs e)
     {
-        if (((sender as DataGrid)!).SelectedItem == null)
+        if ((sender as DataGrid)!.SelectedItem == null)
             return;
         if (SelectedRole == "Пользователь")
+        {
             PatientItem = JsonConvert.DeserializeObject<Patient>((sender as DataGrid).SelectedItem.ToString());
+        }
         else if (SelectedRole == "Доктор")
         {
             DoctorItem = JsonConvert.DeserializeObject<Doctor>((sender as DataGrid).SelectedItem.ToString());
             IdSpeciality = (int)DoctorItem.SpecialityId - 1;
         }
         else
+        {
             AdminItem = JsonConvert.DeserializeObject<Admin>((sender as DataGrid).SelectedItem.ToString());
+        }
     }
 
     public void Add()
     {
-        bool result = false;
+        var result = false;
         if (SelectedRole == "Пользователь")
         {
-            string json = JsonConvert.SerializeObject(PatientItem);
+            var json = JsonConvert.SerializeObject(PatientItem);
             result = ApiHelper.Post(json, "Patients");
         }
         else if (SelectedRole == "Доктор")
         {
-            string json = JsonConvert.SerializeObject(DoctorItem);
+            var json = JsonConvert.SerializeObject(new Doctor(DoctorItem.Surname, DoctorItem.FirstName,
+                DoctorItem.Patronymic, (int)DoctorItem.SpecialityId!, DoctorItem.EnterPassword,
+                DoctorItem.WorkAddress));
             result = ApiHelper.Post(json, "Doctors");
         }
         else
         {
-            string json = JsonConvert.SerializeObject(AdminItem);
+            var json = JsonConvert.SerializeObject(new Admin(AdminItem.SurnameAdmin, AdminItem.FirstName,
+                AdminItem.Patronymic, AdminItem.EnterPassword));
             result = ApiHelper.Post(json, "Admins");
         }
 
@@ -133,20 +145,20 @@ public class AdministratorViewModel : BindingHelper
 
     public void Update()
     {
-        bool result = false;
+        var result = false;
         if (SelectedRole == "Пользователь")
         {
-            string json = JsonConvert.SerializeObject(PatientItem);
+            var json = JsonConvert.SerializeObject(PatientItem);
             result = ApiHelper.Put(json, "Patients", PatientItem.Oms);
         }
         else if (SelectedRole == "Доктор")
         {
-            string json = JsonConvert.SerializeObject(DoctorItem);
+            var json = JsonConvert.SerializeObject(DoctorItem);
             result = ApiHelper.Put(json, "Doctors", (long)DoctorItem.IdDoctor!);
         }
         else
         {
-            string json = JsonConvert.SerializeObject(AdminItem);
+            var json = JsonConvert.SerializeObject(AdminItem);
             result = ApiHelper.Put(json, "Admins", (long)AdminItem.IdAdmin!);
         }
 
@@ -155,21 +167,17 @@ public class AdministratorViewModel : BindingHelper
 
     public void Delete()
     {
-        bool result = false;
+        var result = false;
         if (SelectedRole == "Пользователь")
-        {
-            result = ApiHelper.Delete( "Patients", PatientItem.Oms);
-        }
+            result = ApiHelper.Delete("Patients", PatientItem.Oms);
         else if (SelectedRole == "Доктор")
-        {
             result = ApiHelper.Delete("Doctors", (long)DoctorItem.IdDoctor!);
-        }
         else
-        {
-            result = ApiHelper.Delete( "Admins", (long)AdminItem.IdAdmin!);
-        }
+            result = ApiHelper.Delete("Admins", (long)AdminItem.IdAdmin!);
 
         if (result)
             SelectionRole();
     }
+
+    #endregion
 }
