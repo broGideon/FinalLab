@@ -10,6 +10,8 @@ namespace FinalLab.ViewModel.Windows;
 
 public class PatientViewModel : BindingHelper
 {
+    #region Variables
+    
     public List<string> Themes { get; set; } = new List<string> { "Светлая", "Темная"};
     
     public event EventHandler SwitchUsers;
@@ -39,6 +41,10 @@ public class PatientViewModel : BindingHelper
     }
 
     public event EventHandler Close;
+    
+    #endregion
+
+    #region Methods
     
     public PatientViewModel()
     {
@@ -97,4 +103,6 @@ public class PatientViewModel : BindingHelper
     {
         CurrentPatient.LivingAddress = CurrentPatient.AddressPatient;
     }
+    
+    #endregion
 }

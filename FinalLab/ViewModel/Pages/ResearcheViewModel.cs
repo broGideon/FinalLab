@@ -13,7 +13,7 @@ namespace FinalLab.ViewModel.Pages;
 
 public class ResearcheViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     private bool _downloadEnable = false;
 
@@ -69,6 +69,10 @@ public class ResearcheViewModel : BindingHelper
 
     private int _id;
 
+    #endregion
+
+    #region Methods
+    
     public ResearcheViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -77,7 +81,6 @@ public class ResearcheViewModel : BindingHelper
         RTB = new();
         LoadCards();
     }
-    #endregion
 
     public void DownloadFile()
     {
@@ -138,4 +141,5 @@ public class ResearcheViewModel : BindingHelper
         fs.Close();
         File.Delete("buffer.rtf");
     }
+    #endregion
 }

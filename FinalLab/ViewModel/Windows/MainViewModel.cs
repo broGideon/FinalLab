@@ -1,18 +1,15 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json.Nodes;
-using System.Windows;
+﻿using System.Windows;
 using FinalLab.Model;
 using FinalLab.Properties;
 using Newtonsoft.Json;
 using SecondLibPractice;
 using Wpf.Ui.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace FinalLab.ViewModel;
 
 public class MainViewModel : BindingHelper
 {
-    #region ParamApp
+    #region Variables
 
     public event EventHandler OpenClientWindow; 
     public event EventHandler OpenDoctorWindow; 
@@ -22,14 +19,6 @@ public class MainViewModel : BindingHelper
     private string _password;
 
     private string _oms;
-
-    private string _error;
-
-    public string Error
-    {
-        get => _error;
-        set => SetField(ref _error, value);
-    }
 
     public string Oms
     {
@@ -52,21 +41,17 @@ public class MainViewModel : BindingHelper
     
     #endregion
 
+    #region Methods
+    
     public void AuthClient()
     {
         long oms;
         if (!long.TryParse(Oms, out oms))
-        {
-            Error = "Неверный формат ОМС";
             return;
-        }
         
         Patient? client = ApiHelper.Get<Patient>("Patients", oms);
         if (client == null)
-        {
-            Error = "Такого аккаунта нет";
             return;
-        }
         else
         {
             if (string.IsNullOrEmpty(Settings.Default.CurrentUsers))
@@ -87,14 +72,13 @@ public class MainViewModel : BindingHelper
     {
         long login;
         if (!long.TryParse(Login, out login))
-        {
-            Error = "Номер это число";
             return;
-        }
         
         Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", login);
         if (doctor != null && doctor.EnterPassword == _password)
         {
+            Settings.Default.CurrentDoctor = (int)doctor.IdDoctor!;
+            Settings.Default.Save();
             OpenDoctorWindow(this, EventArgs.Empty);
             return;
         }
@@ -102,15 +86,18 @@ public class MainViewModel : BindingHelper
         Admin? admin = ApiHelper.Get<Admin>("Admins", login);
         if (admin != null && admin.EnterPassword == _password)
         {
+            Settings.Default.CurrentAdmin = (int)admin.IdAdmin!;
+            Settings.Default.Save();
             OpenAdminWindow(this, EventArgs.Empty);
             return;
         }
 
-        Error = "Такаго аккаунта нет";
     }
 
     public void SwitchPageMethod()
     {
         SwitchPage(this, EventArgs.Empty);
     }
+    
+    #endregion
 }

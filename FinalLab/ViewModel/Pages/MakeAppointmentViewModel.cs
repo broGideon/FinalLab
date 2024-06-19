@@ -11,7 +11,7 @@ namespace FinalLab.ViewModel.Pages;
 
 public class MakeAppointmentViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     private ObservableCollection<SpecialtyDoctor> _specialtyDoctorCards = new();
 
@@ -43,6 +43,10 @@ public class MakeAppointmentViewModel : BindingHelper
     private DateOnly _selectionDateArchivesFrom = DateOnly.FromDateTime(DateTime.Now);
     private DateOnly _selectionDateArchivesTo = DateOnly.MaxValue;
 
+    #endregion
+
+    #region Methods
+    
     public MakeAppointmentViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -52,8 +56,7 @@ public class MakeAppointmentViewModel : BindingHelper
         _ = LoadCurrentAppointments();
         _ = LoadArchivesAppointments();
     }
-    #endregion
-
+    
     private async Task LoadSpecialities()
     {
         var directions = ApiHelper.Get<List<Direction>>("Directions");
@@ -215,4 +218,6 @@ public class MakeAppointmentViewModel : BindingHelper
         _selectionDateArchivesTo = DateOnly.FromDateTime((DateTime)((sender as DatePicker)!).SelectedDate!);
         await LoadArchivesAppointments();
     }
+    
+    #endregion
 }

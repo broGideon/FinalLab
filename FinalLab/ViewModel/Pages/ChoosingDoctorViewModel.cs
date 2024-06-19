@@ -12,7 +12,7 @@ namespace FinalLab.ViewModel.Pages;
 
 public class ChoosingDoctorViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
     
     private ObservableCollection<ToggleButton> _currentWeek = new();
 
@@ -79,6 +79,11 @@ public class ChoosingDoctorViewModel : BindingHelper
     private ToggleButton _selectedDay = new();
     
     private ToggleButton _selectedTime = new();
+
+    #endregion
+
+    #region Methods
+    
     public ChoosingDoctorViewModel(int idSpeciality, int idDoctor, int idAppointment)
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -94,8 +99,7 @@ public class ChoosingDoctorViewModel : BindingHelper
             FioDoctor = $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}";
         }
     }
-
-    #endregion
+    
     public void LoadDoctorsCards(int idSpeciality)
     {
         var doctors = ApiHelper.Get<List<Doctor>>("Doctors")!.Where(item => item.SpecialityId == idSpeciality).ToList();
@@ -161,7 +165,7 @@ public class ChoosingDoctorViewModel : BindingHelper
             }
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
             button.Click += (sender, args) => SelectionTime(sender, args); 
             Morning.Add(button);
         }
@@ -178,7 +182,7 @@ public class ChoosingDoctorViewModel : BindingHelper
             }
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
             button.Click += (sender, args) => SelectionTime(sender, args); 
             Day.Add(button);
         }
@@ -195,7 +199,7 @@ public class ChoosingDoctorViewModel : BindingHelper
             }
             var button = new ToggleButton();
             button.Style = (Style)Application.Current.Resources["ClearToggleButton"];
-            button.Content = defTime.ToString("hh:mm", new CultureInfo("ru-RU"));
+            button.Content = defTime.ToString("HH:mm", new CultureInfo("ru-RU"));
             button.Click += (sender, args) => SelectionTime(sender, args); 
             Evening.Add(button);
         }
@@ -236,7 +240,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         var currentDate = DateOnly.FromDateTime(DateTime.ParseExact(_selectedDay.Content.ToString()!, "dd MMMM, ddd",
             new CultureInfo("ru-RU")));
         var currentTime =
-            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!, "hh:mm",
+            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!, "HH:mm",
                 new CultureInfo("ru-RU")));
         bool result = false;
         
@@ -261,4 +265,6 @@ public class ChoosingDoctorViewModel : BindingHelper
             LoadDateToggleButton();
         }
     }
+    
+    #endregion
 }

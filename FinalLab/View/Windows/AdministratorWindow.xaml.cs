@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using FinalLab.Properties;
 using FinalLab.View.Pages;
 using FinalLab.ViewModel;
 
@@ -53,6 +54,8 @@ public partial class AdministratorWindow : Window
 
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
+        Settings.Default.CurrentAdmin = -1;
+        Settings.Default.Save();
         MainWindow window = new MainWindow();
         window.Show();
         Close();

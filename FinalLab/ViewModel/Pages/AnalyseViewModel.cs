@@ -11,7 +11,7 @@ namespace FinalLab.ViewModel.Pages;
 
 public class AnalyseViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
     
     private string _analyseName;
     
@@ -51,6 +51,10 @@ public class AnalyseViewModel : BindingHelper
 
     private int _id;
 
+    #endregion
+
+    #region Methods
+    
     public AnalyseViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -59,8 +63,6 @@ public class AnalyseViewModel : BindingHelper
         RTB = new();
         LoadCards();
     }
-    #endregion
-    
     private void LoadCards()
     {
         var appointments = ApiHelper.Get<List<Appointment>>("Appointments")!.Where(item => item.Oms == _oms).OrderBy(item => item.AppointmentDate);
@@ -93,4 +95,6 @@ public class AnalyseViewModel : BindingHelper
         fs.Close();
         File.Delete("buffer.rtf");
     }
+    
+    #endregion
 }

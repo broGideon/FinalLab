@@ -45,5 +45,29 @@ namespace FinalLab.Properties {
                 this["CurrentUsers"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CurrentAdmin {
+            get {
+                return ((int)(this["CurrentAdmin"]));
+            }
+            set {
+                this["CurrentAdmin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CurrentDoctor {
+            get {
+                return ((int)(this["CurrentDoctor"]));
+            }
+            set {
+                this["CurrentDoctor"] = value;
+            }
+        }
     }
 }

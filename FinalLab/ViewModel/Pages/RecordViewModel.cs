@@ -10,7 +10,7 @@ namespace FinalLab.ViewModel.Pages;
 
 public class RecordViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     private ObservableCollection<SpecialtyDoctor> _specialCards = new();
     
@@ -45,6 +45,11 @@ public class RecordViewModel : BindingHelper
     }
 
     private long _oms;
+    
+    #endregion
+
+    #region Methods
+    
     public RecordViewModel()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
@@ -56,8 +61,6 @@ public class RecordViewModel : BindingHelper
         _ = LoadPurposeCards();
     }
     
-    #endregion
-
     private async Task LoadSpecialsCards()
     {
         var orvi = new SpecialtyDoctor("1", "Дежурный врач по ОРВИ", 1);
@@ -124,4 +127,6 @@ public class RecordViewModel : BindingHelper
         var card = sender as SpecialtyDoctor;
         Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.PageFrame.Content = new ChoosingDoctorPage(card!.IdSpeciality);
     }
+    
+    #endregion
 }

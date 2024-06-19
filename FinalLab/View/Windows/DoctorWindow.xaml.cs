@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using FinalLab.Properties;
 using FinalLab.View.Windows;
 using FinalLab.ViewModel;
 using Wpf.Ui.Controls;
@@ -61,6 +62,8 @@ public partial class DoctorWindow : Window
 
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
+        Settings.Default.CurrentDoctor = -1;
+        Settings.Default.Save();
         MainWindow window = new MainWindow();
         window.Show();
         Close();

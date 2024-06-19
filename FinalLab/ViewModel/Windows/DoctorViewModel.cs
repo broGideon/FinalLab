@@ -21,7 +21,7 @@ namespace FinalLab.ViewModel;
 
 public class DoctorViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     public event EventHandler ReloadPage;
     public FlowDocument AnalyzeRTB { get; set; }
@@ -177,6 +177,9 @@ public class DoctorViewModel : BindingHelper
 
     private ClientsView _currentClientView;
     #endregion
+
+    #region Methods
+    
     public void AddDirections()
     {
         if (SelectSpeciality != null)
@@ -195,19 +198,16 @@ public class DoctorViewModel : BindingHelper
     public void SelectedDate(object? sender, SelectionChangedEventArgs e)
     {
         _currentDate = DateOnly.FromDateTime((DateTime)(sender as DatePicker).SelectedDate);
-        List<Appointment>? listAppointments = ApiHelper.Get<List<Appointment>>("Appointments");
+        List<Appointment> listAppointments = ApiHelper.Get<List<Appointment>>("Appointments").Where(item => item.DoctorId == _idDoctor && item.AppointmentDate == _currentDate && item.StatusId != 4).OrderBy(time => time.AppointmentTime).ToList();
         Appointments.Clear();
         foreach (var item in listAppointments)
         {
-            if (item.AppointmentDate == _currentDate && item.DoctorId == _idDoctor && item.StatusId != 4)
-            {
-                Patient patient = ApiHelper.Get<Patient>("Patients", (long)item.Oms);
-                ClientsView clientsView = new ClientsView($"{patient!.Surname} {patient.FirstName} {patient.Patronymic}", 
-                    item.AppointmentTime.ToString(), (long)item.Oms, (int)item.IdAppointment!);
-                clientsView.StartReception += (sender, args) => Start(sender, args);
-                clientsView.CancelRecception += (sender, args) => CancelRecception(sender, args);
-                Appointments.Add(clientsView);
-            }
+            Patient patient = ApiHelper.Get<Patient>("Patients", (long)item.Oms);
+            ClientsView clientsView = new ClientsView($"{patient!.Surname} {patient.FirstName} {patient.Patronymic}", 
+                item.AppointmentTime.ToString(), (long)item.Oms, (int)item.IdAppointment!);
+            clientsView.StartReception += (sender, args) => Start(sender, args);
+            clientsView.CancelRecception += (sender, args) => CancelRecception(sender, args);
+            Appointments.Add(clientsView);
         }
     }
 
@@ -388,4 +388,6 @@ public class DoctorViewModel : BindingHelper
             ApiHelper.Post(json, "Directions");
         }
     }
+    
+    #endregion
 }

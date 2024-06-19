@@ -24,6 +24,16 @@ public partial class MainWindow : Window
             OpenPatient();
             return;
         }
+        else if (Settings.Default.CurrentDoctor != -1 && !addAccount)
+        {
+            OpenDoctor();
+            return;
+        }
+        else if (Settings.Default.CurrentAdmin != -1 && !addAccount)
+        {
+            OpenAdmin();
+            return;
+        }
         _viewModel = new MainViewModel();
         DataContext = _viewModel;
         PageFrame.Content = new AuthorizationClientPage(_viewModel);
