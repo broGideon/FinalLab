@@ -1,12 +1,21 @@
 ﻿<Application x:Class="FinalLab.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Themes;component/Light.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Window">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+            </Style>
+            <Style TargetType="Page">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+            </Style>
+            <Style TargetType="UserControl">
+                <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

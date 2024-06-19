@@ -1,0 +1,170 @@
+﻿<Page x:Class="FinalLab.View.Pages.MakeAppointmentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+      Background="{DynamicResource PrimaryBackground}"
+      Title="HomePatientPage"
+      Height="Auto"
+      Width="Auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="25" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13" />
+                <RowDefinition Height="116" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="21" />
+                <RowDefinition Height="28" />
+                <RowDefinition Height="11" />
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <Grid Background="{DynamicResource SecondaryBackground}">
+                    <ItemsControl
+                        Margin="0, 15"
+                        ItemsSource="{Binding SpecialtyDoctorCards}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.Margin" Value="17,0" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+                </Grid>
+            </ScrollViewer>
+            <Grid Grid.Row="2" Margin="0, 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Text="Действующие записи"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground }" />
+                <DatePicker
+                    Grid.Column="1"
+                    Tag="Записи c:"
+                    FontFamily="{StaticResource Inter}"
+                    Style="{DynamicResource ClearDatePicker}"
+                    Margin="10,0,0,0">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectedDateChanged">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="SelectedDateCurrentFrom" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </DatePicker>
+                <DatePicker
+                    Grid.Column="2"
+                    Tag="Записи по:"
+                    FontFamily="{StaticResource Inter}"
+                    Style="{DynamicResource ClearDatePicker}"
+                    Margin="10,0,0,0">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectedDateChanged">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="SelectedDateCurrentTo" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </DatePicker>
+            </Grid>
+            <Grid Grid.Row="3" Background="{DynamicResource PrimaryBackground}">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding CurrentRecords}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.Margin" Value="5,0" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="4" Margin="0, 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Text="Архивные записи"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="{DynamicResource PrimaryForeground }" />
+                <DatePicker
+                    Grid.Column="1"
+                    FontFamily="{StaticResource Inter}"
+                    Tag="Записи c:"
+                    Style="{DynamicResource ClearDatePicker}"
+                    Margin="10,0,0,0">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectedDateChanged">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="SelectedDateArchivesFrom" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </DatePicker>
+                <DatePicker
+                    Grid.Column="2"
+                    FontFamily="{StaticResource Inter}"
+                    Tag="Запись по"
+                    Style="{DynamicResource ClearDatePicker}"
+                    Margin="10,0,0,0">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectedDateChanged">
+                            <b:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="SelectedDateArchivesTo" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </DatePicker>
+            </Grid>
+            <Grid Grid.Row="5" Background="{DynamicResource PrimaryBackground}">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding ArchivedRecords }">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.Margin" Value="5,0" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <ui:Button
+                Grid.Row="7"
+                Style="{DynamicResource FocusingButton}"
+                FontFamily="{StaticResource Inter}"
+                Content="Записаться на прием"
+                FontSize="16"
+                Click="ButtonBase_OnClick" />
+        </Grid>
+    </Grid>
+</Page>

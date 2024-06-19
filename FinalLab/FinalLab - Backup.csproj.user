@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="View\Cards\Appointments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Update="View\Cards\ChoosingDoctorView.xaml.cs">
+=======
+    <Compile Update="View\Cards\BankCard.xaml.cs">
+>>>>>>> origin/dev
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Cards\ClientsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Cards\Data.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Cards\RecordsArchive.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Cards\ReferralView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Cards\SpecialtyDoctor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="View\Cards\Appointments.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+<<<<<<< HEAD
+    <Page Update="View\Cards\ChoosingDoctorView.xaml">
+=======
+    <Page Update="View\Cards\BankCard.xaml">
+>>>>>>> origin/dev
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\ClientsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\Data.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\RecordsArchive.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\ReferralView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Cards\SpecialtyDoctor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

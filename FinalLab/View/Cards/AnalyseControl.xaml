@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="FinalLab.View.Cards.AnalyseControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="63"
+             Width="349"
+             Background="{DynamicResource PrimaryBackground}">
+    <UserControl.Resources>
+        <Style x:Key="ClearButton" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    <Button Style="{StaticResource ClearButton}" Click="ButtonBase_OnClick">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                FontFamily="{StaticResource Inter}"
+                Foreground="{DynamicResource PrimaryForeground}"
+                TextWrapping="Wrap"
+                TextAlignment="Center"
+                VerticalAlignment="Center"
+                Text="{Binding AnalyseName}" />
+            <TextBlock
+                Grid.Row="1"
+                FontFamily="{StaticResource Inter}"
+                Foreground="{DynamicResource SecondaryForeground}"
+                FontSize="12"
+                TextAlignment="Center"
+                VerticalAlignment="Center"
+                Text="{Binding Date}" />
+        </Grid>
+    </Button>
+</UserControl>

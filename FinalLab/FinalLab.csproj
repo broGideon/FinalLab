@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <ApplicationIcon>AppIcon.ico</ApplicationIcon>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
@@ -9,38 +10,141 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Mpt.10labThemes" Version="1.2.5" />
-      <PackageReference Include="Mpt.BindingHelper" Version="1.0.1" />
-      <PackageReference Include="WPF-UI" Version="3.0.4" />
+        <PackageReference Include="FreeSpire.Office" Version="8.2.0"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122"/>
+        <PackageReference Include="Mpt.10labThemes" Version="1.3.9"/>
+        <PackageReference Include="Mpt.BindingHelper" Version="1.0.1"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1"/>
+        <PackageReference Include="WPF-UI" Version="3.0.4"/>
     </ItemGroup>
 
-    
 
     <ItemGroup>
-      <Compile Update="Properties\Settings.Designer.cs">
-        <DesignTimeSharedInput>True</DesignTimeSharedInput>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Settings.settings</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Properties\Settings.settings">
-        <Generator>SettingsSingleFileGenerator</Generator>
-        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      </None>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Model\" />
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+        <None Update="Document\Document1.docx">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Document\Document2.docx">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="View\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="View\Windows\AdministratorWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Windows\DoctorWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Windows\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Windows\PatientWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\Pages\DortorPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Model\Images\settings.png"/>
+        <Resource Include="Model\Images\settings.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\AppIcon.ico"/>
+        <None Remove="AppIcon.ico"/>
+        <Resource Include="AppIcon.ico">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\covid.png"/>
+        <Resource Include="Model\Images\covid.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\dentist.png"/>
+        <None Remove="Model\Images\doctor.png"/>
+        <None Remove="Model\Images\document.png"/>
+        <Resource Include="Model\Images\document.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\emergency.png"/>
+        <Resource Include="Model\Images\emergency.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\gynecologist.png"/>
+        <None Remove="Model\Images\ophthalmologist.png"/>
+        <None Remove="Model\Images\otorhinolaryngologist.png"/>
+        <None Remove="Model\Images\surgeon.png"/>
+        <None Remove="Model\Images\traumatologist.png"/>
+        <None Remove="Model\Images\vaccine.png"/>
+        <Resource Include="Model\Images\vaccine.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\cardiologist.png"/>
+        <None Remove="Model\Images\oncologist.png"/>
+        <None Remove="Model\Images\psychologist.png"/>
+        <None Remove="Model\Images\10.png"/>
+        <Resource Include="Model\Images\10.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\9.png"/>
+        <Resource Include="Model\Images\9.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\8.png"/>
+        <Resource Include="Model\Images\8.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\7.png"/>
+        <Resource Include="Model\Images\7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\6.png"/>
+        <Resource Include="Model\Images\6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\5.png"/>
+        <Resource Include="Model\Images\5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\4.png"/>
+        <Resource Include="Model\Images\4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\3.png"/>
+        <Resource Include="Model\Images\3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\2.png"/>
+        <Resource Include="Model\Images\2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Model\Images\1.png"/>
+        <Resource Include="Model\Images\1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
     </ItemGroup>
 
 </Project>
