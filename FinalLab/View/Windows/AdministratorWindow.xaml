@@ -9,8 +9,10 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"
         Background="{DynamicResource PrimaryBackground}"
-        Height="450"
-        Width="970">
+        Height="700"
+        Width="1200"
+        MinHeight="476"
+        MinWidth="718">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="0"
@@ -58,7 +60,7 @@
         
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <Grid MinHeight="420" MinWidth="970">
+                <Grid MinWidth="970">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="300"/>

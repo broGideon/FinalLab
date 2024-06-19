@@ -12,6 +12,7 @@ public partial class ProfilePage
     public ProfilePage(PatientViewModel viewModel)
     {
         InitializeComponent();
+        Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault()!.WindowTextBlock.Text = "Профиль";
         DataContext = viewModel;
     }
 

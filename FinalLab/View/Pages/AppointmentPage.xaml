@@ -76,6 +76,7 @@
             </Grid>
             <ui:RichTextBox 
                 Grid.Row="4"
+                FontFamily="{StaticResource Inter}"
                 x:Name="RTB"
                 IsReadOnly="True"/>
         </Grid>

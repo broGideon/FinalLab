@@ -6,7 +6,6 @@
       Background="{DynamicResource PrimaryBackground}"
       Height="Auto"
       Width="Auto">
-
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <Grid MinWidth="1150">
@@ -18,7 +17,6 @@
                     <RowDefinition/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                    
                 <Grid Grid.Row="0" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="367"/>
@@ -91,6 +89,7 @@
                             Grid.Row="1" 
                             Margin="0, 5"
                             Text="Текущая неделя"
+                            FontFamily="{StaticResource Inter}"
                             Foreground="{DynamicResource PrimaryForeground}"/>
                         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto">
                             <Grid Margin="0, 5">

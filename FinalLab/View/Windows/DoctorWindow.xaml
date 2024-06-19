@@ -6,8 +6,10 @@
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource PrimaryBackground}"
         ResizeMode="CanResize"
-        Height="600"
-        Width="1000">
+        Height="700"
+        Width="1200"
+        MinHeight="476"
+        MinWidth="718">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="0"
@@ -79,6 +81,7 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Tag="Рассписание: "
+                        FontFamily="{StaticResource Inter}"
                         Style="{DynamicResource ClearDatePicker}">
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="SelectedDateChanged">
@@ -107,6 +110,7 @@
                         Height="30" 
                         VerticalAlignment="Top" 
                         FontSize="16"
+                        FontFamily="{StaticResource Inter}"
                         Style="{DynamicResource AttentionButton}" 
                         Content="Выйти из аккаунта" 
                         Click="CloseWindow"/>
