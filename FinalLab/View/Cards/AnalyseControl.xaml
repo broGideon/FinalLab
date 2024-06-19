@@ -24,7 +24,6 @@
                 Grid.Row="0"
                 FontFamily="{StaticResource Inter}" 
                 Foreground="{DynamicResource PrimaryForeground}"
-                FontSize="14" 
                 TextWrapping="Wrap" 
                 TextAlignment="Center" 
                 VerticalAlignment="Center" 

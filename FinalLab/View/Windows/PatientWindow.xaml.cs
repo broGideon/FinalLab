@@ -23,6 +23,7 @@ public partial class PatientWindow : Window
     private void OpenHomePatient()
     {
         PageFrame.Content = null;
+        WindowTextBlock.Text = string.Empty;
     }
 
     private void OpenSettings(object sender, RoutedEventArgs e)

@@ -22,9 +22,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <TextBlock 
-                    FontSize="14" 
-                    FontFamily="{StaticResource Inter}"
                     TextAlignment="Center"
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource PrimaryForeground}"
                     Text="{Binding FIO}"/>
             </Grid>
@@ -41,16 +40,16 @@
                     Grid.Row="0" 
                     Grid.Column="0" 
                     FontSize="12" 
-                    FontFamily="{StaticResource Inter}"
                     TextAlignment="Left" 
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource SecondaryForeground}"
                     Text="Ближайшая дата:"/>
                 <TextBlock 
                     Grid.Row="1" 
                     Grid.Column="0" 
                     FontSize="12" 
-                    FontFamily="{StaticResource Inter}"
                     TextAlignment="Left" 
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource SecondaryForeground}"
                     Text="{Binding Date}"/>
                 <TextBlock
