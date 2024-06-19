@@ -198,7 +198,7 @@ public class DoctorViewModel : BindingHelper
         var listAppointments = ApiHelper.Get<List<Appointment>>("Appointments")
             .Where(item => item.DoctorId == _idDoctor && item.AppointmentDate == _currentDate && item.StatusId != 4)
             .OrderBy(time => time.AppointmentTime).ToList();
-        Appointments.Clear();
+        Appointments = new();
         foreach (var item in listAppointments)
         {
             var patient = ApiHelper.Get<Patient>("Patients", (long)item.Oms);
