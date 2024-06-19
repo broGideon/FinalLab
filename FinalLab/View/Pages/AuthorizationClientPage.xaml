@@ -37,7 +37,7 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </ui:Button>
-            <ui:Button Grid.Column="1" Width="177" Style="{DynamicResource FocusingButton}" Content="Я врач" FontFamily="{StaticResource Inter}">
+            <ui:Button IsEnabled="{Binding IsAddAccount}" Grid.Column="1" Width="177" Style="{DynamicResource FocusingButton}" Content="Я врач" FontFamily="{StaticResource Inter}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction

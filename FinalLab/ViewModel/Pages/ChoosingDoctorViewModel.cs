@@ -118,6 +118,9 @@ public class ChoosingDoctorViewModel : BindingHelper
         FioDoctor = card!.FIO;
         CurrentWeek = new();
         NextWeek = new();
+        Morning = new();
+        Day = new();
+        Evening = new();
         LoadDateToggleButton();
     }
 

@@ -34,7 +34,7 @@ public partial class MainWindow : Window
             OpenAdmin();
             return;
         }
-        _viewModel = new MainViewModel();
+        _viewModel = new MainViewModel(addAccount);
         DataContext = _viewModel;
         PageFrame.Content = new AuthorizationClientPage(_viewModel);
         _viewModel.OpenAdminWindow += (_, _) => OpenAdmin();
@@ -86,7 +86,7 @@ public partial class MainWindow : Window
     
     private void OpenDoctor()
     {
-        DoctorWindow window = new DoctorWindow(Convert.ToInt32(_viewModel.Login));
+        DoctorWindow window = new DoctorWindow(Settings.Default.CurrentDoctor);
         window.Show();
         Close();
     }

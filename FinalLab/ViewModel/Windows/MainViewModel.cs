@@ -10,7 +10,8 @@ namespace FinalLab.ViewModel;
 public class MainViewModel : BindingHelper
 {
     #region Variables
-
+    
+    public bool IsAddAccount { get; set; }
     public event EventHandler OpenClientWindow; 
     public event EventHandler OpenDoctorWindow; 
     public event EventHandler OpenAdminWindow; 
@@ -42,6 +43,11 @@ public class MainViewModel : BindingHelper
     #endregion
 
     #region Methods
+
+    public MainViewModel(bool isAddAccount)
+    {
+        IsAddAccount = !isAddAccount;
+    }
     
     public void AuthClient()
     {

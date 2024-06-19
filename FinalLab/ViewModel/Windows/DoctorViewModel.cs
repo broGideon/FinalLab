@@ -160,6 +160,15 @@ public class DoctorViewModel : BindingHelper
 
     private Doctor _doctor;
 
+    private DateOnly _currentDate;
+
+    private byte[] _image;
+
+    private ClientsView _currentClientView;
+    #endregion
+
+    #region Methods
+    
     public DoctorViewModel(int idDoctor)
     {
         _idDoctor = idDoctor;
@@ -170,15 +179,6 @@ public class DoctorViewModel : BindingHelper
         User = $"{_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}";
         Directions = new();
     }
-
-    private DateOnly _currentDate;
-
-    private byte[] _image;
-
-    private ClientsView _currentClientView;
-    #endregion
-
-    #region Methods
     
     public void AddDirections()
     {
