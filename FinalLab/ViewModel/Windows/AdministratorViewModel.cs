@@ -7,7 +7,7 @@ namespace FinalLab.ViewModel;
 
 public class AdministratorViewModel : BindingHelper
 {
-    #region MyRegion
+    #region Variables
 
     public event EventHandler SwitchForm;
 
@@ -74,6 +74,9 @@ public class AdministratorViewModel : BindingHelper
         set => SetField(ref _obj, value);
     }
     #endregion
+
+    #region Methods
+    
     public AdministratorViewModel()
     {
         SelectedRole = "Пользователь";
@@ -118,12 +121,12 @@ public class AdministratorViewModel : BindingHelper
         }
         else if (SelectedRole == "Доктор")
         {
-            string json = JsonConvert.SerializeObject(DoctorItem);
+            string json = JsonConvert.SerializeObject(new Doctor(DoctorItem.Surname, DoctorItem.FirstName, DoctorItem.Patronymic, (int)DoctorItem.SpecialityId!, DoctorItem.EnterPassword, DoctorItem.WorkAddress));
             result = ApiHelper.Post(json, "Doctors");
         }
         else
         {
-            string json = JsonConvert.SerializeObject(AdminItem);
+            string json = JsonConvert.SerializeObject(new Admin(AdminItem.SurnameAdmin, AdminItem.FirstName, AdminItem.Patronymic, AdminItem.EnterPassword));
             result = ApiHelper.Post(json, "Admins");
         }
 
@@ -172,4 +175,5 @@ public class AdministratorViewModel : BindingHelper
         if (result)
             SelectionRole();
     }
+    #endregion
 }

@@ -101,7 +101,7 @@ public class ChoosingDoctorViewModel : BindingHelper
         var doctors = ApiHelper.Get<List<Doctor>>("Doctors")!.Where(item => item.SpecialityId == idSpeciality).ToList();
         foreach (var doctor in doctors)
         {
-            var card = new ChoosingDoctorView($"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}", "Сегодня", doctor.WorkAddress, doctor.IdDoctor);
+            var card = new ChoosingDoctorView($"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}", "Сегодня", doctor.WorkAddress, (int)doctor.IdDoctor!);
             card.SelectionDoctor += (sender, args) => SelectionDoctor(sender, args);
             Doctors.Add(card);
         }

@@ -78,11 +78,11 @@ public class MakeAppointmentViewModel : BindingHelper
         foreach (var appointment in appointments!)
         {
             Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-            string speciality = ApiHelper.Get<Speciality>("Specialities", doctor!.IdDoctor)!.NameSpecialities;
+            string speciality = ApiHelper.Get<Speciality>("Specialities", (int)doctor!.IdDoctor!)!.NameSpecialities;
             if (month == appointment.AppointmentDate.Month)
             {
                 var elem = new Appointments(speciality, $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",
-                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor,
+                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, (int)doctor.IdDoctor,
                     (int)appointment.IdAppointment!);
                 monthAppointments.Add(elem);
                 elem.Delete += (sender, args) => Delete(sender, args);
@@ -95,7 +95,7 @@ public class MakeAppointmentViewModel : BindingHelper
                         new ObservableCollection<Appointments>(monthAppointments)));
                 monthAppointments.Clear();
                 var elem = new Appointments(speciality, $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",
-                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor,
+                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, (int)doctor.IdDoctor,
                     (int)appointment.IdAppointment!);
                 monthAppointments.Add(elem);
                 elem.Delete += (sender, args) => Delete(sender, args);
@@ -119,11 +119,11 @@ public class MakeAppointmentViewModel : BindingHelper
         foreach (var appointment in appointments!)
         {
             Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-            string speciality = ApiHelper.Get<Speciality>("Specialities", doctor!.IdDoctor)!.NameSpecialities;
+            string speciality = ApiHelper.Get<Speciality>("Specialities", (long)doctor!.IdDoctor!)!.NameSpecialities;
             if (month == appointment.AppointmentDate.Month)
             {
                 var elem = new RecordsArchive(speciality, $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",
-                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor,
+                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, (int)doctor.IdDoctor,
                     (int)appointment.IdAppointment!);
                 recordsArchives.Add(elem);
                 elem.Delete += (sender, args) => Delete(sender, args);
@@ -136,7 +136,7 @@ public class MakeAppointmentViewModel : BindingHelper
                 recordsArchives.Clear();
                 var elem = new RecordsArchive(speciality,
                     $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",
-                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, doctor.IdDoctor,
+                    appointment.AppointmentDate.ToString("dd MMMM"), doctor.WorkAddress, (int)doctor.IdDoctor,
                     (int)appointment.IdAppointment!);
                 recordsArchives.Add(elem);
                 elem.Delete += (sender, args) => Delete(sender, args);
