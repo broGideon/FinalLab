@@ -47,6 +47,7 @@
             SelectedIndex="{Binding IdSpeciality }" 
             ItemsSource="{Binding Specialities}" 
             Style="{DynamicResource ClearComboBoxStyle}" 
+            FontSize="14"
             Margin="0, 2" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
