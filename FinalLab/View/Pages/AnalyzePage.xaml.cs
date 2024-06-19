@@ -4,7 +4,8 @@ namespace FinalLab.View.Pages;
 
 public partial class AnalyzePage
 {
-    private AnalyseViewModel _viewModel;
+    private readonly AnalyseViewModel _viewModel;
+
     public AnalyzePage()
     {
         InitializeComponent();

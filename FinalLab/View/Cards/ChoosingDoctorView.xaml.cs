@@ -1,18 +1,11 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 
 namespace FinalLab.View.Cards;
+
 public partial class ChoosingDoctorView
 {
-    public string FIO { get; set; }
-    
-    public string Date { get; set; }
-    
-    public string Address { get; set; }
-
     public int IdDoctor;
 
-    public event EventHandler SelectionDoctor;
     public ChoosingDoctorView(string fio, string date, string address, int idDoctor)
     {
         InitializeComponent();
@@ -21,6 +14,14 @@ public partial class ChoosingDoctorView
         Address = address;
         IdDoctor = idDoctor;
     }
+
+    public string FIO { get; set; }
+
+    public string Date { get; set; }
+
+    public string Address { get; set; }
+
+    public event EventHandler SelectionDoctor;
 
     private void Selection(object sender, RoutedEventArgs e)
     {

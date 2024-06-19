@@ -7,20 +7,20 @@
       Background="{DynamicResource PrimaryBackground}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="25" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="{DynamicResource SecondaryBackground}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListBox ItemsSource="{Binding Elements}">
                     <ListBox.Resources>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="Margin" Value="0, 6"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="0, 6" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListBox.Resources>
                 </ListBox>
@@ -28,48 +28,48 @@
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="20" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Grid.Row="0" 
-                    Grid.Column="0" 
-                    TextAlignment="Left" 
-                    FontFamily="{StaticResource Inter}" 
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    TextAlignment="Left"
+                    FontFamily="{StaticResource Inter}"
                     Foreground="{DynamicResource PrimaryForeground}"
-                    FontSize="20" 
+                    FontSize="20"
                     TextWrapping="Wrap"
-                    Text="{Binding AnalyseName}"/>
+                    Text="{Binding AnalyseName}" />
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <TextBlock 
-                        Grid.Row="0" 
-                        TextAlignment="Right" 
-                        FontFamily="{StaticResource Inter}" 
+                    <TextBlock
+                        Grid.Row="0"
+                        TextAlignment="Right"
+                        FontFamily="{StaticResource Inter}"
                         Foreground="{DynamicResource PrimaryForeground}"
-                        Text="{Binding Address}"/>
-                    <TextBlock 
-                        Grid.Row="1" 
-                        TextAlignment="Right" 
-                        FontFamily="{StaticResource Inter}" 
+                        Text="{Binding Address}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        TextAlignment="Right"
+                        FontFamily="{StaticResource Inter}"
                         Foreground="{DynamicResource PrimaryForeground}"
-                        Text="{Binding Date}"/>
+                        Text="{Binding Date}" />
                 </Grid>
             </Grid>
-            <ui:RichTextBox 
+            <ui:RichTextBox
                 x:Name="RTB"
                 IsReadOnly="True"
                 Grid.Row="2"
-                FontFamily="{StaticResource Inter}"/>
+                FontFamily="{StaticResource Inter}" />
         </Grid>
-        </Grid>
+    </Grid>
 </Page>

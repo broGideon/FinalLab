@@ -1,21 +1,21 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using FinalLab.Model;
 using FinalLab.Properties;
 using FinalLab.View;
 using FinalLab.View.Pages;
 using FinalLab.ViewModel;
+
 namespace FinalLab;
 
 public partial class MainWindow : Window
 {
-    private MainViewModel _viewModel;
+    private readonly MainViewModel _viewModel;
 
-    public MainWindow() : this(false) 
+    public MainWindow() : this(false)
     {
-        
     }
+
     public MainWindow(bool addAccount = false)
     {
         InitializeComponent();
@@ -24,16 +24,19 @@ public partial class MainWindow : Window
             OpenPatient();
             return;
         }
-        else if (Settings.Default.CurrentDoctor != -1 && !addAccount)
+
+        if (Settings.Default.CurrentDoctor != -1 && !addAccount)
         {
             OpenDoctor();
             return;
         }
-        else if (Settings.Default.CurrentAdmin != -1 && !addAccount)
+
+        if (Settings.Default.CurrentAdmin != -1 && !addAccount)
         {
             OpenAdmin();
             return;
         }
+
         _viewModel = new MainViewModel(addAccount);
         DataContext = _viewModel;
         PageFrame.Content = new AuthorizationClientPage(_viewModel);
@@ -51,10 +54,7 @@ public partial class MainWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            this.DragMove();
-        }
+        if (e.LeftButton == MouseButtonState.Pressed) DragMove();
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -72,21 +72,21 @@ public partial class MainWindow : Window
 
     private void OpenPatient()
     {
-        PatientWindow window = new PatientWindow();
+        var window = new PatientWindow();
         window.Show();
         Close();
     }
-    
+
     private void OpenAdmin()
     {
-        AdministratorWindow window = new AdministratorWindow();
+        var window = new AdministratorWindow();
         window.Show();
         Close();
     }
-    
+
     private void OpenDoctor()
     {
-        DoctorWindow window = new DoctorWindow(Settings.Default.CurrentDoctor);
+        var window = new DoctorWindow(Settings.Default.CurrentDoctor);
         window.Show();
         Close();
     }
@@ -98,7 +98,7 @@ public partial class MainWindow : Window
         else
             PageFrame.Content = new AuthorizationClientPage(_viewModel);
     }
-    
+
     private void BeginAnimation()
     {
         var opacityAnim = new DoubleAnimation();

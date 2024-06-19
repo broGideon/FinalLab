@@ -4,6 +4,7 @@ namespace FinalLab.Model;
 
 public class Patient : BindingHelper
 {
+    private string? _livingAddress;
     public long Oms { get; set; }
 
     public string Surname { get; set; } = null!;
@@ -16,11 +17,9 @@ public class Patient : BindingHelper
 
     public string AddressPatient { get; set; } = null!;
 
-    private string? _livingAddress;
-
     public string? LivingAddress
     {
-        get => _livingAddress; 
+        get => _livingAddress;
         set => SetField(ref _livingAddress, value);
     }
 

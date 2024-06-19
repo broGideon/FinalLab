@@ -1,21 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace FinalLab.View.Cards;
 
 public partial class Appointments
 {
-    public string NameDoctor { get; set; }
-    public string FIO { get; set; }
-    public string Day { get; set; }
-    public string Address { get; set; }
+    public int IdAppointment;
 
     public int IdDoctor;
 
-    public int IdAppointment;
-
-    public event EventHandler Move;
-    public event EventHandler Delete;
     public Appointments(string nameDoctor, string fio, string day, string address, int idDoctor, int idAppointment)
     {
         InitializeComponent();
@@ -27,6 +19,14 @@ public partial class Appointments
         IdAppointment = idAppointment;
         IdDoctor = idDoctor;
     }
+
+    public string NameDoctor { get; set; }
+    public string FIO { get; set; }
+    public string Day { get; set; }
+    public string Address { get; set; }
+
+    public event EventHandler Move;
+    public event EventHandler Delete;
 
     private void MoveClick(object sender, RoutedEventArgs e)
     {

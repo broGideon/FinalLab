@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using FinalLab.Properties;
 using FinalLab.View.Pages;
@@ -9,7 +8,8 @@ namespace FinalLab.View;
 
 public partial class AdministratorWindow : Window
 {
-    private AdministratorViewModel _viewModel;
+    private readonly AdministratorViewModel _viewModel;
+
     public AdministratorWindow()
     {
         InitializeComponent();
@@ -18,7 +18,7 @@ public partial class AdministratorWindow : Window
         PageFrame.Content = new UserForm(_viewModel);
         _viewModel.SwitchForm += (_, _) => SwitchRole();
     }
-    
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Close();
@@ -56,7 +56,7 @@ public partial class AdministratorWindow : Window
     {
         Settings.Default.CurrentAdmin = -1;
         Settings.Default.Save();
-        MainWindow window = new MainWindow();
+        var window = new MainWindow();
         window.Show();
         Close();
     }

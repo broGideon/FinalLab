@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -10,12 +9,9 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using SecondLibPractice;
 using Spire.Doc;
-using Image = System.Drawing.Image;
 using Spire.Doc.Documents;
+using Image = System.Drawing.Image;
 using HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment;
-using Paragraph = Spire.Doc.Documents.Paragraph;
-using Section = Spire.Doc.Section;
-using Table = Spire.Doc.Table;
 
 namespace FinalLab.ViewModel;
 
@@ -27,8 +23,8 @@ public class DoctorViewModel : BindingHelper
     public FlowDocument AnalyzeRTB { get; set; }
 
     public FlowDocument ResearchRTB { get; set; }
-    
-    private ObservableCollection<ClientsView> _appointments = new ObservableCollection<ClientsView>();
+
+    private ObservableCollection<ClientsView> _appointments = new();
 
     public ObservableCollection<ClientsView> Appointments
     {
@@ -60,7 +56,7 @@ public class DoctorViewModel : BindingHelper
         set => SetField(ref _directions, value);
     }
 
-    private int _idDoctor;
+    private readonly int _idDoctor;
 
     private string _complaints;
 
@@ -133,7 +129,7 @@ public class DoctorViewModel : BindingHelper
         get => _researchIsActive;
         set => SetField(ref _researchIsActive, value);
     }
-    
+
     private bool _analyzeIsActive;
 
     public bool AnalyzeIsActive
@@ -149,7 +145,7 @@ public class DoctorViewModel : BindingHelper
         get => _nameAnalyze;
         set => SetField(ref _nameAnalyze, value);
     }
-    
+
     private string _nameResearch;
 
     public string NameResearch
@@ -158,33 +154,34 @@ public class DoctorViewModel : BindingHelper
         set => SetField(ref _nameResearch, value);
     }
 
-    private Doctor _doctor;
+    private readonly Doctor _doctor;
 
     private DateOnly _currentDate;
 
     private byte[] _image;
 
     private ClientsView _currentClientView;
+
     #endregion
 
     #region Methods
-    
+
     public DoctorViewModel(int idDoctor)
     {
         _idDoctor = idDoctor;
         Specialities = ApiHelper.Get<List<Speciality>>("Specialities");
-        AnalyzeRTB = new();
-        ResearchRTB = new();
+        AnalyzeRTB = new FlowDocument();
+        ResearchRTB = new FlowDocument();
         _doctor = ApiHelper.Get<Doctor>("Doctors", idDoctor);
         User = $"{_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}";
-        Directions = new();
+        Directions = new ObservableCollection<ReferralView>();
     }
-    
+
     public void AddDirections()
     {
         if (SelectSpeciality != null)
         {
-            ReferralView referralView = new ReferralView((int)SelectSpeciality.IdSpeciality!, SelectSpeciality.NameSpecialities);
+            var referralView = new ReferralView((int)SelectSpeciality.IdSpeciality!, SelectSpeciality.NameSpecialities);
             referralView.DeleteSpeciality += (sender, args) => DeleteSpeciality(sender, args);
             Directions.Add(referralView);
         }
@@ -198,12 +195,14 @@ public class DoctorViewModel : BindingHelper
     public void SelectedDate(object? sender, SelectionChangedEventArgs e)
     {
         _currentDate = DateOnly.FromDateTime((DateTime)(sender as DatePicker).SelectedDate);
-        List<Appointment> listAppointments = ApiHelper.Get<List<Appointment>>("Appointments").Where(item => item.DoctorId == _idDoctor && item.AppointmentDate == _currentDate && item.StatusId != 4).OrderBy(time => time.AppointmentTime).ToList();
+        var listAppointments = ApiHelper.Get<List<Appointment>>("Appointments")
+            .Where(item => item.DoctorId == _idDoctor && item.AppointmentDate == _currentDate && item.StatusId != 4)
+            .OrderBy(time => time.AppointmentTime).ToList();
         Appointments.Clear();
         foreach (var item in listAppointments)
         {
-            Patient patient = ApiHelper.Get<Patient>("Patients", (long)item.Oms);
-            ClientsView clientsView = new ClientsView($"{patient!.Surname} {patient.FirstName} {patient.Patronymic}", 
+            var patient = ApiHelper.Get<Patient>("Patients", (long)item.Oms);
+            var clientsView = new ClientsView($"{patient!.Surname} {patient.FirstName} {patient.Patronymic}",
                 item.AppointmentTime.ToString(), (long)item.Oms, (int)item.IdAppointment!);
             clientsView.StartReception += (sender, args) => Start(sender, args);
             clientsView.CancelRecception += (sender, args) => CancelRecception(sender, args);
@@ -213,14 +212,14 @@ public class DoctorViewModel : BindingHelper
 
     public void AddDopFile()
     {
-        CommonOpenFileDialog dialog = new CommonOpenFileDialog { Title = "Open in Image" };
+        var dialog = new CommonOpenFileDialog { Title = "Open in Image" };
         dialog.Filters.Add(new CommonFileDialogFilter("Image Files", "*.jpg;*.jpeg;*.png;*.bmp;"));
         var result = dialog.ShowDialog();
 
         if (result == CommonFileDialogResult.Ok)
         {
-            Image image = Image.FromFile(dialog.FileName);
-            MemoryStream memoryStream = new MemoryStream();
+            var image = Image.FromFile(dialog.FileName);
+            var memoryStream = new MemoryStream();
             image.Save(memoryStream, image.RawFormat);
             _image = memoryStream.ToArray();
             memoryStream.Dispose();
@@ -231,23 +230,17 @@ public class DoctorViewModel : BindingHelper
     {
         var currentAppointment = ApiHelper.Get<Appointment>("Appointments", _currentClientView.IdAppointment);
         _ = AddAppointmentDocument(currentAppointment.IdAppointment);
-        
-        if (AnalyzeIsActive)
-        {
-            _ = AddAnalysDocument(currentAppointment.IdAppointment);
-        }
 
-        if (ResearchIsActive)
-        {
-            _ = AddResearchDocuments(currentAppointment.IdAppointment);
-        }
-        
+        if (AnalyzeIsActive) _ = AddAnalysDocument(currentAppointment.IdAppointment);
+
+        if (ResearchIsActive) _ = AddResearchDocuments(currentAppointment.IdAppointment);
+
         currentAppointment.StatusId = 4;
-        string jsonAppointment = JsonConvert.SerializeObject(currentAppointment);
+        var jsonAppointment = JsonConvert.SerializeObject(currentAppointment);
         ApiHelper.Put(jsonAppointment, "Appointments", (long)currentAppointment.IdAppointment);
-        
+
         await AddPatientDirections();
-        
+
         _currentClientView.Cancel();
         ClearPage();
     }
@@ -277,20 +270,21 @@ public class DoctorViewModel : BindingHelper
 
     private void CancelRecception(object sender, EventArgs args)
     {
-        var clientsView = sender as ClientsView; 
-        string json = JsonConvert.SerializeObject(new Appointment(clientsView.IdAppointment, _currentDate, TimeOnly.Parse(clientsView.Time), clientsView.OMS, _idDoctor, 4));
+        var clientsView = sender as ClientsView;
+        var json = JsonConvert.SerializeObject(new Appointment(clientsView.IdAppointment, _currentDate,
+            TimeOnly.Parse(clientsView.Time), clientsView.OMS, _idDoctor, 4));
         ApiHelper.Put(json, "Appointments", clientsView.IdAppointment);
         ClearPage();
     }
 
     private void ClearPage()
     {
-        AnalyzeRTB = new();
-        ResearchRTB = new();
+        AnalyzeRTB = new FlowDocument();
+        ResearchRTB = new FlowDocument();
         AnalyzeIsActive = false;
         ResearchIsActive = false;
         Complaints = string.Empty;
-        Osmotor = String.Empty;
+        Osmotor = string.Empty;
         PrimaryDiagnosis = string.Empty;
         SecondaryDiagnosis = string.Empty;
         Recommendations = string.Empty;
@@ -306,20 +300,21 @@ public class DoctorViewModel : BindingHelper
 
     private async Task AddAppointmentDocument(int? id)
     {
-        Document doc = new Document();
-        Section section = doc.AddSection();
-        
-        Paragraph title = section.AddParagraph();
-        title.AppendText($"Дата: {_currentDate}\nПолис ОМС: {PatientOMS}\nМедицинское учреждение: ГБУЗ ДКЦ 1 ДЗМ\nСпециализация: {Specialities[_idDoctor-1].NameSpecialities}\nФИО: {_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}\n");
+        var doc = new Document();
+        var section = doc.AddSection();
 
-        Paragraph inspection = section.AddParagraph();
-        inspection.AppendText($"Осмотр {Specialities[_idDoctor-1].NameSpecialities}а");
+        var title = section.AddParagraph();
+        title.AppendText(
+            $"Дата: {_currentDate}\nПолис ОМС: {PatientOMS}\nМедицинское учреждение: ГБУЗ ДКЦ 1 ДЗМ\nСпециализация: {Specialities[_idDoctor - 1].NameSpecialities}\nФИО: {_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}\n");
+
+        var inspection = section.AddParagraph();
+        inspection.AppendText($"Осмотр {Specialities[_idDoctor - 1].NameSpecialities}а");
         inspection.Format.HorizontalAlignment = HorizontalAlignment.Center;
         inspection.BreakCharacterFormat.Bold = true;
 
-        Table table = section.AddTable();
-        int rowCount = 4;
-        int colCount = 2;
+        var table = section.AddTable();
+        var rowCount = 4;
+        var colCount = 2;
         table.ResetCells(rowCount, colCount);
 
         table.Rows[0].Cells[0].AddParagraph().AppendText("Жалобы: ");
@@ -347,11 +342,12 @@ public class DoctorViewModel : BindingHelper
         table.Rows[3].Cells[1].CellFormat.Borders.Top.BorderType = BorderStyle.Single;
 
         doc.SaveToFile("receptionBuffer.rtf", FileFormat.Rtf);
-        string reception = File.ReadAllText("receptionBuffer.rtf");
+        var reception = File.ReadAllText("receptionBuffer.rtf");
         File.Delete("receptionBuffer.rtf");
-        
-        var appointmentDocument = new AppointmentDocument(id, reception, $"Осмотр {Specialities[_idDoctor-1].NameSpecialities}");
-        string jsonAppointmentDocument = JsonConvert.SerializeObject(appointmentDocument);
+
+        var appointmentDocument =
+            new AppointmentDocument(id, reception, $"Осмотр {Specialities[_idDoctor - 1].NameSpecialities}");
+        var jsonAppointmentDocument = JsonConvert.SerializeObject(appointmentDocument);
         ApiHelper.Post(jsonAppointmentDocument, "AppointmentDocuments");
     }
 
@@ -361,9 +357,9 @@ public class DoctorViewModel : BindingHelper
         var fs = new FileStream("analyzeBuffer.rtf", FileMode.Create);
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
-        string analyze =  File.ReadAllText("analyzeBuffer.rtf");
+        var analyze = File.ReadAllText("analyzeBuffer.rtf");
         var analysDocument = new AnalysDocument((int)id, analyze, NameAnalyze);
-        string jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
+        var jsonAnalysDocument = JsonConvert.SerializeObject(analysDocument);
         ApiHelper.Post(jsonAnalysDocument, "AnalysDocuments");
         File.Delete("analyzeBuffer.rtf");
     }
@@ -374,8 +370,9 @@ public class DoctorViewModel : BindingHelper
         var fs = new FileStream("researchBuffer.rtf", FileMode.Create);
         range.Save(fs, DataFormats.Rtf);
         fs.Close();
-        string research =  File.ReadAllText("researchBuffer.rtf");
-        string jsonResearchDocument = JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch, _image));
+        var research = File.ReadAllText("researchBuffer.rtf");
+        var jsonResearchDocument =
+            JsonConvert.SerializeObject(new ResearchDocument(id, research, NameResearch, _image));
         ApiHelper.Post(jsonResearchDocument, "ResearchDocuments");
         File.Delete("researchBuffer.rtf");
     }
@@ -384,10 +381,10 @@ public class DoctorViewModel : BindingHelper
     {
         foreach (var direction in Directions)
         {
-            string json = JsonConvert.SerializeObject(new Direction(direction.IdSpeciality, Convert.ToInt64(PatientOMS)));
+            var json = JsonConvert.SerializeObject(new Direction(direction.IdSpeciality, Convert.ToInt64(PatientOMS)));
             ApiHelper.Post(json, "Directions");
         }
     }
-    
+
     #endregion
 }

@@ -5,14 +5,14 @@ namespace FinalLab;
 
 public partial class App : Application
 {
+    private static string _theme;
+
     public App()
     {
         InitializeComponent();
         Theme = Settings.Default.Theme;
     }
 
-    private static string _theme;
-    
     public static string Theme
     {
         get => _theme;

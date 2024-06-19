@@ -1,16 +1,14 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using FinalLab.View.Pages;
-using FinalLab.ViewModel;
 using FinalLab.ViewModel.Windows;
 
 namespace FinalLab.View;
 
 public partial class PatientWindow : Window
 {
-    private PatientViewModel _viewModel;
-    
+    private readonly PatientViewModel _viewModel;
+
     public PatientWindow()
     {
         InitializeComponent();
@@ -58,7 +56,7 @@ public partial class PatientWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        this.DragMove();
+        DragMove();
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -73,11 +71,11 @@ public partial class PatientWindow : Window
     {
         WindowState = WindowState.Minimized;
     }
-    
+
     private void ExitUser()
     {
         var window = Application.Current.Windows.OfType<PatientWindow>().FirstOrDefault();
-        MainWindow mainWindow = new MainWindow();
+        var mainWindow = new MainWindow();
         mainWindow.Show();
         window.Close();
     }

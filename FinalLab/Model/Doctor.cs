@@ -2,7 +2,8 @@
 
 public class Doctor
 {
-    public Doctor(string surname, string firstName, string patronymic, int specialityId, string enterPassword, string workAddress)
+    public Doctor(string surname, string firstName, string patronymic, int specialityId, string enterPassword,
+        string workAddress)
     {
         Surname = surname;
         FirstName = firstName;
@@ -11,6 +12,7 @@ public class Doctor
         EnterPassword = enterPassword;
         WorkAddress = workAddress;
     }
+
     public int? IdDoctor { get; set; }
 
     public string Surname { get; set; } = null!;

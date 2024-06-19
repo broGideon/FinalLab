@@ -14,151 +14,158 @@
             CaptionHeight="0"
             ResizeBorderThickness="5"
             GlassFrameThickness="0"
-            CornerRadius="0"/>
+            CornerRadius="0" />
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="{DynamicResource Focusing}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Border Background="Transparent" MouseLeftButtonDown="MoveWindow">
-                    <Grid  Margin="0, 8">
+                    <Grid Margin="0, 8">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Grid.Column="0" 
-                            Text=" ЕМИАС" 
-                            Foreground="#FFFFFF" 
-                            FontSize="16" 
-                            VerticalAlignment="Center" 
-                            FontFamily="{StaticResource Inter}" 
-                            FontWeight="Bold" 
-                            Margin="14,0,0,0"/>
-                        <TextBlock 
-                            Grid.Column="1" 
-                            Text="в. 1.0 " 
-                            Foreground="#FFFFFF" 
-                            FontSize="16" 
-                            HorizontalAlignment="Right" 
+                        <TextBlock
+                            Grid.Column="0"
+                            Text=" ЕМИАС"
+                            Foreground="#FFFFFF"
+                            FontSize="16"
                             VerticalAlignment="Center"
-                            FontFamily="{StaticResource Inter}" 
-                            FontWeight="Bold" 
-                            Margin="0,0,16,0"/>
+                            FontFamily="{StaticResource Inter}"
+                            FontWeight="Bold"
+                            Margin="14,0,0,0" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="в. 1.0 "
+                            Foreground="#FFFFFF"
+                            FontSize="16"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource Inter}"
+                            FontWeight="Bold"
+                            Margin="0,0,16,0" />
                     </Grid>
                 </Border>
             </Grid>
-            <Separator 
+            <Separator
                 Grid.Row="1"
                 Background="#FFFFFF"
                 Height="2"
-                Margin="6, 0"/>
-            <TreeView Grid.Row="2" FontFamily="{StaticResource Inter}" BorderThickness="0"  Background="{DynamicResource Focusing}">
+                Margin="6, 0" />
+            <TreeView Grid.Row="2" FontFamily="{StaticResource Inter}" BorderThickness="0"
+                      Background="{DynamicResource Focusing}">
                 <TreeViewItem Header="Главная" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Записи и направления" MouseUp="OpenMakeAppointmentPatient" Foreground="#FFFFFF"/>
-                    <TreeViewItem Header="Рецепты" Foreground="#FFFFFF"/>
-                    <TreeViewItem Header="Диспансеризация" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Записи и направления" MouseUp="OpenMakeAppointmentPatient"
+                                  Foreground="#FFFFFF" />
+                    <TreeViewItem Header="Рецепты" Foreground="#FFFFFF" />
+                    <TreeViewItem Header="Диспансеризация" Foreground="#FFFFFF" />
                 </TreeViewItem>
                 <TreeViewItem Header="Медкарта" Foreground="#FFFFFF">
-                    <TreeViewItem Header="Приёмы" MouseUp="OpenAppointments" Foreground="#FFFFFF"/>
-                    <TreeViewItem Header="Анализы" MouseUp="OpenAnalyzes" Foreground="#FFFFFF"/>
-                    <TreeViewItem Header="Исследования" MouseUp="OpenResearches" Foreground="#FFFFFF"/>
+                    <TreeViewItem Header="Приёмы" MouseUp="OpenAppointments" Foreground="#FFFFFF" />
+                    <TreeViewItem Header="Анализы" MouseUp="OpenAnalyzes" Foreground="#FFFFFF" />
+                    <TreeViewItem Header="Исследования" MouseUp="OpenResearches" Foreground="#FFFFFF" />
                 </TreeViewItem>
             </TreeView>
-            <Separator 
-                Grid.Row="3" 
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Stretch" 
+            <Separator
+                Grid.Row="3"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Stretch"
                 Background="#FFFFFF"
                 Height="2"
-                Margin="6, 0"/>
+                Margin="6, 0" />
             <Grid Grid.Row="4" Margin="20, 10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Grid.Column="0" 
-                    VerticalAlignment="Center" 
-                    Text="Полис ОМС: " 
-                    FontFamily="{StaticResource Inter}" 
-                    Foreground="#FFFFFF"/>
-                <ComboBox 
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Полис ОМС: "
+                    FontFamily="{StaticResource Inter}"
+                    Foreground="#FFFFFF" />
+                <ComboBox
                     x:Name="PatientsComboBox"
-                    Grid.Column="1" 
+                    Grid.Column="1"
                     ItemsSource="{Binding Patients}"
                     SelectedItem="{Binding CurrentPatient}"
                     Style="{DynamicResource MenuComboBox}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock FontFamily="{StaticResource Inter}" Foreground="#FFFFFF" Margin="2" Text="{Binding FirstName}"/>
+                            <TextBlock FontFamily="{StaticResource Inter}" Foreground="#FFFFFF" Margin="2"
+                                       Text="{Binding FirstName}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="SelectionChanged">
                             <b:CallMethodAction
                                 TargetObject="{Binding}"
-                                MethodName="SelectionPatient"/>
+                                MethodName="SelectionPatient" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </ComboBox>
-                <ui:Button Grid.Column="2" HorizontalAlignment="Right" Foreground="#FFFFFF" Style="{DynamicResource ButtonBar}" Click="OpenSettings">
-                    <Image Width="24" Source="../../../Model/Images/settings.png"/>
+                <ui:Button Grid.Column="2" HorizontalAlignment="Right" Foreground="#FFFFFF"
+                           Style="{DynamicResource ButtonBar}" Click="OpenSettings">
+                    <Image Width="24" Source="../../../Model/Images/settings.png" />
                 </ui:Button>
-                
+
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Background="Transparent" BorderThickness="0" MouseLeftButtonDown="MoveWindow">
                 <Grid Margin="16, 4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                        <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
-                            <ui:SymbolIcon Symbol="LineHorizontal120"/>
+                        <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}"
+                                   Click="RollUpButton_Click">
+                            <ui:SymbolIcon Symbol="LineHorizontal120" />
                         </ui:Button>
-                        <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
-                            <ui:SymbolIcon Symbol="Maximize20"/>
+                        <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource ButtonBar}"
+                                   Click="UnwrapButton_Click">
+                            <ui:SymbolIcon Symbol="Maximize20" />
                         </ui:Button>
-                        <ui:Button Foreground="{DynamicResource PrimaryForeground}" Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
-                            <ui:SymbolIcon Symbol="Dismiss48"/>
+                        <ui:Button Foreground="{DynamicResource PrimaryForeground}"
+                                   Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
+                            <ui:SymbolIcon Symbol="Dismiss48" />
                         </ui:Button>
                     </StackPanel>
                     <TextBlock
-                        Grid.Column="0" 
+                        Grid.Column="0"
                         Margin="10, 0"
                         x:Name="WindowTextBlock"
-                        FontSize="22" 
+                        FontSize="22"
                         FontFamily="{StaticResource Inter}"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Left" 
-                        Foreground="{DynamicResource PrimaryForeground}"/>
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="{DynamicResource PrimaryForeground}" />
                 </Grid>
             </Border>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                    <Frame x:Name="PageFrame"/>
+                    <Frame x:Name="PageFrame" />
                 </ScrollViewer>
             </Grid>
         </Grid>

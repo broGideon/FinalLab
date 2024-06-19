@@ -9,6 +9,7 @@ public class Admin
         Patronymic = patronymic;
         EnterPassword = enterPassword;
     }
+
     public int? IdAdmin { get; set; }
 
     public string SurnameAdmin { get; set; } = null!;

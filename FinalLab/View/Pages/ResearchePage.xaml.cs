@@ -1,11 +1,11 @@
-﻿using FinalLab.View.Cards;
-using FinalLab.ViewModel.Pages;
+﻿using FinalLab.ViewModel.Pages;
 
 namespace FinalLab.View.Pages;
 
 public partial class ResearchePage
 {
-    private ResearcheViewModel _viewModel;
+    private readonly ResearcheViewModel _viewModel;
+
     public ResearchePage()
     {
         InitializeComponent();

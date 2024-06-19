@@ -10,13 +10,13 @@ namespace FinalLab.ViewModel;
 public class MainViewModel : BindingHelper
 {
     #region Variables
-    
+
     public bool IsAddAccount { get; set; }
-    public event EventHandler OpenClientWindow; 
-    public event EventHandler OpenDoctorWindow; 
-    public event EventHandler OpenAdminWindow; 
-    public event EventHandler SwitchPage; 
-    
+    public event EventHandler OpenClientWindow;
+    public event EventHandler OpenDoctorWindow;
+    public event EventHandler OpenAdminWindow;
+    public event EventHandler SwitchPage;
+
     private string _password;
 
     private string _oms;
@@ -34,12 +34,12 @@ public class MainViewModel : BindingHelper
         get => _login;
         set => SetField(ref _login, value);
     }
-    
+
     public void PasswordChanged(object sender, RoutedEventArgs e)
     {
         _password = (sender as PasswordBox).Password;
     }
-    
+
     #endregion
 
     #region Methods
@@ -48,39 +48,39 @@ public class MainViewModel : BindingHelper
     {
         IsAddAccount = !isAddAccount;
     }
-    
+
     public void AuthClient()
     {
         long oms;
         if (!long.TryParse(Oms, out oms))
             return;
-        
-        Patient? client = ApiHelper.Get<Patient>("Patients", oms);
-        if (client == null)
-            return;
+
+        var client = ApiHelper.Get<Patient>("Patients", oms);
+        if (client == null) return;
+
+        if (string.IsNullOrEmpty(Settings.Default.CurrentUsers))
+        {
+            Settings.Default.CurrentUsers = JsonConvert.SerializeObject(new List<Patient> { client });
+        }
         else
         {
-            if (string.IsNullOrEmpty(Settings.Default.CurrentUsers))
-                Settings.Default.CurrentUsers = JsonConvert.SerializeObject(new List<Patient>{client});
-            else
-            {
-                var users = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers);
-                if (!users.Exists(item => item.Oms == oms))
-                    users!.Add(client);
-                Settings.Default.CurrentUsers = JsonConvert.SerializeObject(users);
-            }
-            Settings.Default.Save();
-            OpenClientWindow(this, EventArgs.Empty);
+            var users = JsonConvert.DeserializeObject<List<Patient>>(Settings.Default.CurrentUsers);
+            if (!users.Exists(item => item.Oms == oms))
+                users!.Add(client);
+            Settings.Default.CurrentUsers = JsonConvert.SerializeObject(users);
         }
+
+        Settings.Default.Save();
+        OpenClientWindow(this, EventArgs.Empty);
     }
-    
+
     public void AuthPersonal()
     {
         long login;
         if (!long.TryParse(Login, out login))
             return;
-        
-        Doctor? doctor = ApiHelper.Get<Doctor>("Doctors", login);
+
+        var doctor = ApiHelper.Get<Doctor>("Doctors", login);
         if (doctor != null && doctor.EnterPassword == _password)
         {
             Settings.Default.CurrentDoctor = (int)doctor.IdDoctor!;
@@ -89,21 +89,19 @@ public class MainViewModel : BindingHelper
             return;
         }
 
-        Admin? admin = ApiHelper.Get<Admin>("Admins", login);
+        var admin = ApiHelper.Get<Admin>("Admins", login);
         if (admin != null && admin.EnterPassword == _password)
         {
             Settings.Default.CurrentAdmin = (int)admin.IdAdmin!;
             Settings.Default.Save();
             OpenAdminWindow(this, EventArgs.Empty);
-            return;
         }
-
     }
 
     public void SwitchPageMethod()
     {
         SwitchPage(this, EventArgs.Empty);
     }
-    
+
     #endregion
 }

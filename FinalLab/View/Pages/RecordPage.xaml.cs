@@ -9,5 +9,4 @@ public partial class RecordPage
         InitializeComponent();
         DataContext = new RecordViewModel();
     }
-    
 }

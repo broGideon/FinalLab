@@ -15,71 +15,71 @@
             CaptionHeight="0"
             ResizeBorderThickness="5"
             GlassFrameThickness="0"
-            CornerRadius="0"/>
+            CornerRadius="0" />
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{DynamicResource Focusing}" MouseLeftButtonDown="MoveWindow" Padding="3">
             <Grid>
                 <Grid HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Column="0"
-                        Text="{Binding User}" 
-                        VerticalAlignment="Center" 
-                        Foreground="#FFFFFF" 
+                        Text="{Binding User}"
+                        VerticalAlignment="Center"
+                        Foreground="#FFFFFF"
                         FontSize="20"
                         FontFamily="{StaticResource Inter}"
-                        FontWeight="Bold" 
-                        Margin="6, 0"/>
+                        FontWeight="Bold"
+                        Margin="6, 0" />
                     <ui:Button Style="{StaticResource ButtonBar}" Grid.Column="1" Click="SwitchTheme">
-                        <ui:SymbolIcon Name="IconTheme" Symbol="WeatherMoon28"/>
+                        <ui:SymbolIcon Name="IconTheme" Symbol="WeatherMoon28" />
                     </ui:Button>
                 </Grid>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="15, 0">
                     <ui:Button Style="{DynamicResource ButtonBar}" Click="RollUpButton_Click">
-                        <ui:SymbolIcon Symbol="LineHorizontal120"/>
+                        <ui:SymbolIcon Symbol="LineHorizontal120" />
                     </ui:Button>
                     <ui:Button Style="{DynamicResource ButtonBar}" Click="UnwrapButton_Click">
-                        <ui:SymbolIcon Symbol="Maximize20"/>
+                        <ui:SymbolIcon Symbol="Maximize20" />
                     </ui:Button>
                     <ui:Button Style="{DynamicResource CloseButton}" Click="CloseButton_Click">
-                        <ui:SymbolIcon Symbol="Dismiss48"/>
+                        <ui:SymbolIcon Symbol="Dismiss48" />
                     </ui:Button>
                 </StackPanel>
             </Grid>
         </Border>
-            <Grid Grid.Row="1" Background="{DynamicResource PrimaryBackground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="330"/>
-                    <ColumnDefinition Width="15"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid Background="{DynamicResource SecondaryBackground}">
+        <Grid Grid.Row="1" Background="{DynamicResource PrimaryBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="330" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid Background="{DynamicResource SecondaryBackground}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="15" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="13"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="66"/>
-                        <RowDefinition Height="28"/>
-                        <RowDefinition Height="9"/>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="13" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="66" />
+                        <RowDefinition Height="28" />
+                        <RowDefinition Height="9" />
                     </Grid.RowDefinitions>
-                    <DatePicker 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
+                    <DatePicker
+                        Grid.Row="1"
+                        Grid.Column="1"
                         Tag="Рассписание: "
                         FontFamily="{StaticResource Inter}"
                         Style="{DynamicResource ClearDatePicker}">
@@ -87,38 +87,38 @@
                             <b:EventTrigger EventName="SelectedDateChanged">
                                 <b:CallMethodAction
                                     TargetObject="{Binding}"
-                                    MethodName="SelectedDate"/>
+                                    MethodName="SelectedDate" />
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </DatePicker>
                     <ScrollViewer Grid.Column="1" Grid.Row="3">
-                        <ListBox  ItemsSource="{Binding Appointments}">
+                        <ListBox ItemsSource="{Binding Appointments}">
                             <ListBox.Resources>
                                 <Style TargetType="ListBoxItem">
-                                    <Setter Property="Margin" Value="0, 10"/>
-                                    <Setter Property="Padding" Value="0"/>
-                                    <Setter Property="Height" Value="55"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0, 10" />
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Height" Value="55" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
                                 </Style>
                             </ListBox.Resources>
                         </ListBox>
                     </ScrollViewer>
                     <ui:Button
-                        Grid.Row="5" 
+                        Grid.Row="5"
                         Grid.Column="1"
-                        Height="30" 
-                        VerticalAlignment="Top" 
+                        Height="30"
+                        VerticalAlignment="Top"
                         FontSize="16"
                         FontFamily="{StaticResource Inter}"
-                        Style="{DynamicResource AttentionButton}" 
-                        Content="Выйти из аккаунта" 
-                        Click="CloseWindow"/>
+                        Style="{DynamicResource AttentionButton}"
+                        Content="Выйти из аккаунта"
+                        Click="CloseWindow" />
                 </Grid>
-                </Grid>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2" >
-                    <Frame Name="PageFrame"/>
-                </ScrollViewer>
             </Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2">
+                <Frame Name="PageFrame" />
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

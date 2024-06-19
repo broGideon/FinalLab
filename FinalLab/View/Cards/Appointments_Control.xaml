@@ -6,59 +6,59 @@
              Width="349">
     <UserControl.Resources>
         <Style x:Key="ClearButton" TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
         </Style>
     </UserControl.Resources>
-    <Button  Style="{DynamicResource ClearButton}" Click="ButtonBase_OnClick">
+    <Button Style="{DynamicResource ClearButton}" Click="ButtonBase_OnClick">
         <Grid Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock 
-                Grid.Row="0" 
+            <TextBlock
+                Grid.Row="0"
                 Text="{Binding NameResearch}"
-                Foreground="{DynamicResource PrimaryForeground}" 
+                Foreground="{DynamicResource PrimaryForeground}"
                 FontFamily="{StaticResource Inter}"
                 FontSize="12"
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center"/>
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" />
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.4*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock 
+                <TextBlock
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{Binding FIO}"
-                    Foreground="{DynamicResource SecondaryForeground }" 
+                    Foreground="{DynamicResource SecondaryForeground }"
                     FontFamily="{StaticResource Inter}"
-                    FontSize="12"/>
-                <TextBlock 
+                    FontSize="12" />
+                <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
                     Text="{Binding Date}"
-                    Foreground="{DynamicResource SecondaryForeground }" 
+                    Foreground="{DynamicResource SecondaryForeground }"
                     FontFamily="{StaticResource Inter}"
-                    FontSize="12"/>
-                <TextBlock 
+                    FontSize="12" />
+                <TextBlock
                     Grid.Row="0"
-                    Grid.Column="1" 
+                    Grid.Column="1"
                     Grid.RowSpan="2"
                     TextAlignment="Right"
                     TextWrapping="Wrap"
                     Text="{Binding Address}"
-                    Foreground="{DynamicResource SecondaryForeground }" 
+                    Foreground="{DynamicResource SecondaryForeground }"
                     FontFamily="{StaticResource Inter}"
                     FontSize="12" />
             </Grid>

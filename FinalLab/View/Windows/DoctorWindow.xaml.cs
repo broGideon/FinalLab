@@ -9,7 +9,7 @@ namespace FinalLab.View;
 
 public partial class DoctorWindow : Window
 {
-    private DoctorViewModel _viewModel;
+    private readonly DoctorViewModel _viewModel;
 
     public DoctorWindow(int id)
     {
@@ -30,7 +30,7 @@ public partial class DoctorWindow : Window
 
     private void MoveWindow(object sender, MouseButtonEventArgs e)
     {
-        this.DragMove();
+        DragMove();
     }
 
     private void UnwrapButton_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ public partial class DoctorWindow : Window
     {
         Settings.Default.CurrentDoctor = -1;
         Settings.Default.Save();
-        MainWindow window = new MainWindow();
+        var window = new MainWindow();
         window.Show();
         Close();
     }
