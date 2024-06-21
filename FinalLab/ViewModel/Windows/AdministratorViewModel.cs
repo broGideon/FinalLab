@@ -43,7 +43,7 @@ public class AdministratorViewModel : BindingHelper
         set => SetField(ref _selectedRole, value);
     }
 
-    private Admin _adminItem;
+    private Admin _adminItem = new();
 
     public Admin AdminItem
     {
@@ -51,7 +51,7 @@ public class AdministratorViewModel : BindingHelper
         set => SetField(ref _adminItem, value);
     }
 
-    private Patient _patientItem;
+    private Patient _patientItem = new();
 
     public Patient PatientItem
     {
@@ -59,7 +59,7 @@ public class AdministratorViewModel : BindingHelper
         set => SetField(ref _patientItem, value);
     }
 
-    private Doctor _doctorItem;
+    private Doctor _doctorItem = new();
 
     public Doctor DoctorItem
     {
