@@ -228,6 +228,7 @@ public class DoctorViewModel : BindingHelper
 
     public async void Cancel()
     {
+        if (_currentClientView == null) return;
         var currentAppointment = ApiHelper.Get<Appointment>("Appointments", _currentClientView.IdAppointment);
         _ = AddAppointmentDocument(currentAppointment.IdAppointment);
 
@@ -293,6 +294,7 @@ public class DoctorViewModel : BindingHelper
         PatientFIO = string.Empty;
         PatientOMS = string.Empty;
         SelectSpeciality = null;
+        _currentClientView = null;
         _image = null;
         Directions.Clear();
         ReloadPage(this, EventArgs.Empty);
