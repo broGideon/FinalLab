@@ -127,8 +127,9 @@ public class AdministratorViewModel : BindingHelper
         }
         else if (SelectedRole == "Доктор")
         {
+            
             var json = JsonConvert.SerializeObject(new Doctor(DoctorItem.Surname, DoctorItem.FirstName,
-                DoctorItem.Patronymic, (int)DoctorItem.SpecialityId!, DoctorItem.EnterPassword,
+                DoctorItem.Patronymic, IdSpeciality+1, DoctorItem.EnterPassword,
                 DoctorItem.WorkAddress));
             result = ApiHelper.Post(json, "Doctors");
         }
