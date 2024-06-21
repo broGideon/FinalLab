@@ -9,6 +9,8 @@ public class Admin
         Patronymic = patronymic;
         EnterPassword = enterPassword;
     }
+    
+    public Admin(){}
 
     public int? IdAdmin { get; set; }
 

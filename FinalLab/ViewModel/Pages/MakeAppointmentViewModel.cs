@@ -80,12 +80,14 @@ public class MakeAppointmentViewModel : BindingHelper
                 item.AppointmentDate >= _selectionDateCurrentFrom && item.Oms == _oms)
             .OrderBy(item => item.AppointmentDate)
             .ToList();
+        if (appointments.Count == 0)
+            return;
         ObservableCollection<Appointments> monthAppointments = new();
         var month = appointments[0].AppointmentDate.Month;
         foreach (var appointment in appointments!)
         {
             var doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-            var speciality = ApiHelper.Get<Speciality>("Specialities", (int)doctor!.IdDoctor!)!.NameSpecialities;
+            var speciality = ApiHelper.Get<Speciality>("Specialities", (int)doctor!.SpecialityId!)!.NameSpecialities;
             if (month == appointment.AppointmentDate.Month)
             {
                 var elem = new Appointments(speciality, $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",
@@ -123,12 +125,14 @@ public class MakeAppointmentViewModel : BindingHelper
                 (int)item.StatusId! == 4 && item.AppointmentDate <= _selectionDateArchivesTo &&
                 item.AppointmentDate >= _selectionDateArchivesFrom && item.Oms == _oms)
             .OrderBy(item => item.AppointmentDate).ToList();
+        if (appointments.Count == 0)
+            return;
         ObservableCollection<RecordsArchive> recordsArchives = new();
         var month = appointments[0].AppointmentDate.Month;
         foreach (var appointment in appointments!)
         {
             var doctor = ApiHelper.Get<Doctor>("Doctors", (long)appointment.DoctorId!);
-            var speciality = ApiHelper.Get<Speciality>("Specialities", (long)doctor!.IdDoctor!)!.NameSpecialities;
+            var speciality = ApiHelper.Get<Speciality>("Specialities", (long)doctor!.SpecialityId!)!.NameSpecialities;
             if (month == appointment.AppointmentDate.Month)
             {
                 var elem = new RecordsArchive(speciality, $"{doctor.Surname} {doctor.FirstName} {doctor.Patronymic}",

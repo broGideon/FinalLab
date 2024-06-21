@@ -310,7 +310,8 @@ public class DoctorViewModel : BindingHelper
             $"Дата: {_currentDate}\nПолис ОМС: {PatientOMS}\nМедицинское учреждение: ГБУЗ ДКЦ 1 ДЗМ\nСпециализация: {Specialities[_idDoctor - 1].NameSpecialities}\nФИО: {_doctor.Surname} {_doctor.FirstName} {_doctor.Patronymic}\n");
 
         var inspection = section.AddParagraph();
-        inspection.AppendText($"Осмотр {Specialities[_idDoctor - 1].NameSpecialities}а");
+        var idSpecialities = (int)ApiHelper.Get<Doctor>("Doctors", _idDoctor)!.SpecialityId!;
+        inspection.AppendText($"Осмотр {Specialities[idSpecialities - 1].NameSpecialities}а");
         inspection.Format.HorizontalAlignment = HorizontalAlignment.Center;
         inspection.BreakCharacterFormat.Bold = true;
 
