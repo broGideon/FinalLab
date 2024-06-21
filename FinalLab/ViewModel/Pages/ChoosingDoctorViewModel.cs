@@ -270,6 +270,8 @@ public class ChoosingDoctorViewModel : BindingHelper
 
         if (result)
         {
+            _selectedDay = new();
+            _selectedTime = new();
             CurrentWeek = new ObservableCollection<ToggleButton>();
             NextWeek = new ObservableCollection<ToggleButton>();
             Morning = new ObservableCollection<ToggleButton>();
