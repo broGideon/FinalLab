@@ -7,6 +7,7 @@ public class Appointment
     {
         IdAppointment = idAppointment;
         AppointmentDate = appointmentDate;
+        AppointmentTime = appointmentTime;
         Oms = oms;
         StatusId = statusId;
         DoctorId = doctorId;
@@ -15,14 +16,13 @@ public class Appointment
     public Appointment(DateOnly appointmentDate, TimeOnly appointmentTime, long oms, int doctorId, int statusId)
     {
         AppointmentDate = appointmentDate;
+        AppointmentTime = appointmentTime;
         Oms = oms;
         StatusId = statusId;
         DoctorId = doctorId;
     }
-
-    public Appointment()
-    {
-    }
+    
+    public Appointment(){}
 
     public int? IdAppointment { get; set; }
 

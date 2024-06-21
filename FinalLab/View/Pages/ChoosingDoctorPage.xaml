@@ -142,7 +142,7 @@
                                 ItemsSource="{Binding Morning}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid Columns="9" />
+                                        <UniformGrid Columns="9" Margin="10"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemContainerStyle>
