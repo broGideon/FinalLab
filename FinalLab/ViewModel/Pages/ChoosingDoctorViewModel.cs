@@ -246,16 +246,16 @@ public class ChoosingDoctorViewModel : BindingHelper
 
     public void MakeAppointment()
     {
-        if (string.IsNullOrEmpty(_selectedDay.Content.ToString()) &&
-            string.IsNullOrEmpty(_selectedTime.Content.ToString()) && _idDoctor != -1)
+        if (_selectedDay.Content == null ||
+            _selectedTime.Content == null || _idDoctor == -1)
             return;
         var currentDate = DateOnly.FromDateTime(DateTime.ParseExact(_selectedDay.Content.ToString()!, "dd MMMM, ddd",
             new CultureInfo("ru-RU")));
         var currentTime =
-            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!, "HH:mm",
+            TimeOnly.FromDateTime(DateTime.ParseExact(_selectedTime.Content.ToString()!+":00", "HH:mm:ss",
                 new CultureInfo("ru-RU")));
         var result = false;
-
+        
         if (_idAppointment != -1)
         {
             var json = JsonConvert.SerializeObject(new Appointment(_idAppointment, currentDate, currentTime, _oms,
