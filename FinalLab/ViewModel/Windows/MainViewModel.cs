@@ -52,7 +52,7 @@ public class MainViewModel : BindingHelper
     public void AuthClient()
     {
         long oms;
-        if (!long.TryParse(Oms, out oms))
+        if (!long.TryParse(Oms, out oms) || Oms == "0")
             return;
 
         var client = ApiHelper.Get<Patient>("Patients", oms);
@@ -77,7 +77,7 @@ public class MainViewModel : BindingHelper
     public void AuthPersonal()
     {
         long login;
-        if (!long.TryParse(Login, out login))
+        if (!long.TryParse(Login, out login) || Login == "0")
             return;
 
         var doctor = ApiHelper.Get<Doctor>("Doctors", login);

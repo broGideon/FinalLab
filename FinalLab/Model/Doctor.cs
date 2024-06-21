@@ -12,6 +12,8 @@ public class Doctor
         EnterPassword = enterPassword;
         WorkAddress = workAddress;
     }
+    
+    public Doctor(){}
 
     public int? IdDoctor { get; set; }
 
